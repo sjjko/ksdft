@@ -63,7 +63,7 @@ double sdOptimizer::optimize(const int Niterations,std::shared_ptr<arma::cx_mat>
             E=getE(this->_Op,this->_Param,*Wi,this->_Vdual);
             cout << "" << endl;
             cout << "====================================" << endl;
-            cout << "sd: step" << n << " of " << Niterations << endl;
+            cout << "sd: step " << n << " of " << Niterations << endl;
             cout << "sd: energy is:" << E << endl;
             cout << "sd: energy change is:" << (E-E0)/E0 << endl;
             cout << "====================================" << endl;

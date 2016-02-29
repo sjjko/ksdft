@@ -363,7 +363,6 @@ inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat 
 
     for(int i=0;i<epsilonVector.n_elem;i++)
     {
-        cout << "getPsi: " << + epsilonVector(i) << endl;
         verbosity(P,"getPsi: eigenvalue "+std::to_string(i)+" is ",2,__FILE__,__LINE__);
     }
 

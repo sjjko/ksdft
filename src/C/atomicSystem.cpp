@@ -150,11 +150,11 @@ verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 _pccg->myLatexClass->commentMyFunction();
 finalEnergy=_pccg->optimize(_W);
 _pccg->myLatexClass->commentMyFunction();
-verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
+//verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 //verbosity(_Pa,"atomic: pccg optimized system to an energy of "+std::to_string(finalEnergy)+" hartree!",0,__FILE__,__LINE__);
-verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
-verbosity(_Pa,"atomic: finished optimization",0,__FILE__,__LINE__);
-verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
+cout << "====================================" << endl;
+cout << "atomic: finished optimization" << endl;
+cout << "====================================" << endl;
 
 return 0;
 }
@@ -352,12 +352,8 @@ int atomicSystem::postPsi()
         std::shared_ptr<arma::mat> Epsilon(new arma::mat(_Pa.number_of_wavefunctions,1));
         gnuPlotPlotting *gpL;
 
-       if(getPsi(_Op,_Pa,*_W,_Vdual,Psi,Epsilon))
-        {
-            cout << "succesfully extracted eigenvalues and eigenvectors from the final solution W!" << std::endl;
-             cout << "schroedinger: returnEpsilon " << Epsilon->col(0) << endl;
+        myFunctions::cassert(getPsi(_Op,_Pa,*_W,_Vdual,Psi,Epsilon),ISCRITICAL,"failed extracting eigenvalues and eigenvectors from final solution W!",__FILE__,__LINE__);
 
-        }
         _ltX->newLine("The electron states have the following energies:");
 
         arma::mat dat(Psi->n_rows,1);

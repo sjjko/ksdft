@@ -53,7 +53,7 @@ double pccgOptimizer::optimize(const int Niterations,std::shared_ptr<arma::cx_ma
             g_nm1=g_n;
             d_nm1=d_n;
             cout << "====================================" << endl;
-            cout << "pccg: step" << n << endl;
+            cout << "pccg: step " << n << " of " << Niterations << endl;
             cout << "pccg: energy is:" << Energy_at_this_level << endl;
             cout << "pccg: energy change is:" << (Energy_at_this_level-E0)/E0 << endl;
             cout << "====================================" << endl;
