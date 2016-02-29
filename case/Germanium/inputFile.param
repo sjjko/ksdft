@@ -1,0 +1,18 @@
+[physical]
+Z=4
+f=2
+atomic coordinates filename=./atoms.param
+[geometry]
+Nx=48
+Ny=48
+Nz=48
+Rx=10.7
+Ry=10.7
+Rz=10.7
+[numerical]
+alpha=3e-5
+no. iterations steepest descent=50
+no. iterations conjugate gradient=200
+number of electrons (wavefunctions)=16
+[general]
+VerbosityLevel=0
