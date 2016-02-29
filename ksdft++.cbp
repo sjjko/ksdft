@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ksdft++" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ksdft++" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="harmonicOscillator" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+					<Add directory="src/H" />
+				</Compiler>
+				<Linker>
+					<Add library="dl" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ksdft++" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+					<Add directory="src/H" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="src/H" />
+		</Compiler>
+		<Unit filename="src/C/L.cpp" />
+		<Unit filename="src/C/Linv.cpp" />
+		<Unit filename="src/C/O.cpp" />
+		<Unit filename="src/C/atomicSystem.cpp" />
+		<Unit filename="src/C/cI.cpp" />
+		<Unit filename="src/C/cIdag.cpp" />
+		<Unit filename="src/C/cJ.cpp" />
+		<Unit filename="src/C/cJdag.cpp" />
+		<Unit filename="src/C/gnuPlotPlotting.cpp" />
+		<Unit filename="src/C/inputParser.cpp" />
+		<Unit filename="src/C/ionicPotentialClass.cpp" />
+		<Unit filename="src/C/latexComment.cpp">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="src/C/main.cpp" />
+		<Unit filename="src/C/openCVPlotting.cpp" />
+		<Unit filename="src/C/pccgOptimizer.cpp" />
+		<Unit filename="src/C/sdOptimizer.cpp" />
+		<Unit filename="src/C/testingClass.cpp" />
+		<Unit filename="src/H/H.h" />
+		<Unit filename="src/H/Hatoms.h" />
+		<Unit filename="src/H/L.h" />
+		<Unit filename="src/H/Linv.h" />
+		<Unit filename="src/H/O.h">
+			<Option weight="34" />
+		</Unit>
+		<Unit filename="src/H/atomicSystem.h" />
+		<Unit filename="src/H/cI.h">
+			<Option weight="40" />
+		</Unit>
+		<Unit filename="src/H/cIdag.h" />
+		<Unit filename="src/H/cJ.h" />
+		<Unit filename="src/H/cJdag.h" />
+		<Unit filename="src/H/customAssert.h" />
+		<Unit filename="src/H/dft_functions.h" />
+		<Unit filename="src/H/excVWN.h" />
+		<Unit filename="src/H/excpVWN.h" />
+		<Unit filename="src/H/fdtest.h" />
+		<Unit filename="src/H/fft_minidft.h" />
+		<Unit filename="src/H/gnuPlotPlotting.h" />
+		<Unit filename="src/H/inputArguments.h" />
+		<Unit filename="src/H/inputParser.h" />
+		<Unit filename="src/H/ionicPotentialClass.h" />
+		<Unit filename="src/H/latexComment.h" />
+		<Unit filename="src/H/main.h" />
+		<Unit filename="src/H/openCVPlotting.h" />
+		<Unit filename="src/H/optimizerBase.h" />
+		<Unit filename="src/H/pccgOptimizer.h" />
+		<Unit filename="src/H/plotting.h" />
+		<Unit filename="src/H/poisson.h" />
+		<Unit filename="src/H/ppm.h" />
+		<Unit filename="src/H/registryClass.h" />
+		<Unit filename="src/H/schroedinger.h" />
+		<Unit filename="src/H/sdOptimizer.h" />
+		<Unit filename="src/H/setup.h" />
+		<Unit filename="src/H/slice.h" />
+		<Unit filename="src/H/smooth.h" />
+		<Unit filename="src/H/structs.h" />
+		<Unit filename="src/H/testingClass.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
