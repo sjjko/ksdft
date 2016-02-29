@@ -1,4 +1,5 @@
 In short:
+
 	  ksdft++ simple code to compute electronic energies in atomic systems
 	  by S.Konzett-Stoffl - 2015/16
 	  after lecture by T.Arias (see http://dft.physics.cornell.edu/old-website/minicourse/dft.pdf)
@@ -43,6 +44,7 @@ Installation:
 	  
 	  0.) pull the github repository:  
 	      git pull https://github.com/sjjko/ksdft.git master
+	      
 	  
 	  1.) install armadillo, boost, fftw libraries in their development versions:
 	  sudo apt-get install libblas-dev
@@ -56,17 +58,22 @@ Installation:
 	  INC = -I src/H -I /usr/local/include/armadillo_bits -I /usr/include 
 	  for the include paths
 	  
-	  3.) make debug OR make release
+	  3.) do a bash setup.sh - should invoke make command and link script files
 	  if make runs through without errors you should find binaries in /bin/Debug or/and /bin/Release respectively
-	  
-	  4.) make a soft link to script run.sh in script directory
-	  
+	  	  
 Running:
 
 	  run ksdft++ by evoking script run.sh in script folder:
 	  this script: 1.) cleans the directory
 		       2.) runs ksdft++
 		       3.) does postprocessing - generates images and converts latex output to pdf file
+		       
+Results:
+
+	  After running you should find 
+			  
+			    a pdf file documenting what ksdft++ has done in doc/ksdft++.pdf
+			    images of wavefunctions and densities as computed in POSTPROCESSING/EPS folder
 	  
 Modification:
 
