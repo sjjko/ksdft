@@ -1,11 +1,28 @@
 /** \brief density functional theory code
  * devised after T. Arias lecture on dft for matlab
  * by Stefan Konzett Stoffl
- * 02-2016
+ * 2015-2016
+
+ uses following external libraries:
+
+      for matrix algebra:
+ 	  armadillo (http://arma.sourceforge.net/) by Conrad Sanderson,[released under MPL], see below:
+	  (
+	  Conrad Sanderson.
+	  Armadillo: An Open Source C++ Linear Algebra Library for Fast Prototyping and Computationally Intensive Experiments.
+	  Technical Report, NICTA, 2010.
+	  )
+
+	  for the fast fourier transform:
+	  fftw (http://www.fftw.org)
+	  [released under the GNU General Public License]
  */
+
 #include "main.h"
 #ifdef WITH_TEX
+ #ifdef USE_EXTERNAL_LIB_TEXCALLER
     #include <texcaller.h>
+#endif // USE_EXTERNAL_LIB_TEXCALLER
     //include to generate the image folder structure
     #include <sys/types.h>
     #include <sys/stat.h>

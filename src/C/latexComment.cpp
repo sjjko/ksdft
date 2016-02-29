@@ -136,6 +136,7 @@ int latexComment::closeString()
 return 0;
 }
 
+ #ifdef USE_EXTERNAL_LIB_TEXCALLER
 int latexComment::writeTheLatexDocument(string DocumentName)
 {
         #ifdef WITH_TEX
@@ -162,6 +163,7 @@ try {
 #endif
 return 0;
 }
+#endif // USE_EXTERNAL_LIB_TEXCALLER
 
 #ifdef INCLUDE_PICTURE_IN_LATEX
 

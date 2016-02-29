@@ -9,7 +9,9 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "customAssert.h"
+ #ifdef USE_EXTERNAL_LIB_TEXCALLER
 #include <texcaller.h>
+#endif
 //include to generate the image folder structure
 #include <sys/types.h>
 #include <sys/stat.h>

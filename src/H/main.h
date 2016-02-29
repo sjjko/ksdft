@@ -66,6 +66,7 @@
 #include "customAssert.h"
 
 #define WITH_TEX
+#undef USE_EXTERNAL_LIB_TEXCALLER // use external library texcaller - obsolete
 
 #define WITH_BOOST
 
@@ -79,16 +80,6 @@
 #endif
 
 #define PLOT_WITH_CV //!< plot with cv_open library!
-
-//#include "registryClass.h"
-//#include "src/H/O.h"
-//#include "L.h"
-//#include "errorClass.h"
-
-//#include "autoPtr.h"
-//#include "error.h"
-//#include "registryClass.h"
-//#include "io.h"
 
 #define PI arma::datum::pi
 
