@@ -38,12 +38,6 @@ void latexComment::insertImage(const std::string imageName,const std::string cap
         this->_latex += " \\caption{"+captionString+"} ";
         this->_latex += " \\end{center} ";
         this->_latex += " \\end{figure} ";
-//        myFunctions::verbosity("insertImage: now create an eps alias file which will be replaced after running plotScript.sh!",2,__FILE__,__LINE__);
-//        mkdir("./POSTPROCESSING", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-//        mkdir("./POSTPROCESSING/EPS", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-//        std::ofstream tmpEps("./POSTPROCESSING/EPS/"+imageName+".eps");
-//        tmpEps << this->_epsTemplateString << endl;
-//        tmpEps.close();
    #endif
 }
 

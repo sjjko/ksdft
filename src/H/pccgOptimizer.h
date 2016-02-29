@@ -16,7 +16,7 @@ class pccgOptimizer:public optimizeBase
     {
     public:
         latexComment *myLatexClass; //!< public latex class, to be initialized in construction - used to give latex output stream
-        pccgOptimizer(const operatorStruct Operator,const paramStruct Parameter,const arma::vec Vreal,const arma::mat G2Input,latexComment *ltX);
+        pccgOptimizer(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vdual,const arma::mat G2Input,latexComment *ltX);
 //        ~pccgOptimizer();
 		//! Laplace operator for input of values
 		/*!

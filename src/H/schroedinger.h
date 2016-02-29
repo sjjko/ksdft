@@ -8,7 +8,7 @@ verbosity("schroedinger: define the oscillator potential",2,__FILE__,__LINE__);
 #define SCHROEDINGER_PREPROCESSING
 #ifdef SCHROEDINGER_PREPROCESSING
 double omega=2.;
-arma::mat Vosci(dr.n_rows,1);
+arma::mat Vosci(Pa.prodS,1);
 Vosci=0.5*pow(omega,2)*(dr%dr);
 
 string imgName=gpL.plotAMatrixSlice("schroedinger_Vosci",Vosci,Pa.S,0);
@@ -39,8 +39,6 @@ verbosity("schroedinger: compute density and plot",2,__FILE__,__LINE__);
 
 //check if W is normalized W=Y=W*U^⁻1/2
 verbosity("schroedinger: check if W is normalized W=Y=W*U^⁻1/2",2,__FILE__,__LINE__);
-
-
 
 cx_mat Ui=Uinvers(Op,Pa,*W.get());
 mat density(computeDensityFromWavefuncs(Op,Pa,*W.get(),Ui));

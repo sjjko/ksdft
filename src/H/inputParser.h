@@ -19,8 +19,6 @@ class inputParser
         int parseInput();
         arma::mat readAtomicCoordinates();
         int writeSampleAtomicCoordinateFile();
-
-    protected:
         int readInput();
         int writeTemplateInputFile();
 

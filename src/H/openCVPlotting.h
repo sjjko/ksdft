@@ -7,13 +7,14 @@
 #include <opencv2/contrib/contrib.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include "structs.h"
 
 class openCVPlotting: public plotImplementationBase
 {
     public:
         openCVPlotting();
         virtual ~openCVPlotting();
-        int plotMatrix(std::string title,arma::mat matrixToPlot);
+        int plotMatrix(paramStruct Pa,std::string title,arma::mat matrixToPlot);
 
 };
 

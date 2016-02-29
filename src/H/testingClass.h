@@ -19,9 +19,10 @@ class testingClass
 
     private:
         latexComment *_myLatexPtr;
+        paramStruct _myP;
 
     public:
-        testingClass(latexComment *latX);
+        testingClass(latexComment *latX,paramStruct P);
         virtual ~testingClass();
         bool IJtest(const operatorStruct O,const paramStruct P,arma::Col<double> Sgrid);
         bool IJtestMultiColumn(const operatorStruct O,const paramStruct P,arma::Col<double> Sgrid);
@@ -103,7 +104,7 @@ class testingClass
         b.set_imag(randn<mat>(15,3));
 
         //! check for maximal element in the two approaches
-        std::complex<double> maxV=as_scalar(max(diagvec(a*b.t())-diagOuter(a,b)));
+        std::complex<double> maxV=as_scalar(max(diagvec(a*b.t())-diagOuter(_myP,a,b)));
         const std::complex<double> bound(1.0e-5,1.0e-05);
         if(std::real(maxV*std::conj(maxV))<std::real(bound*std::conj(bound))){testPassed=true;}
 

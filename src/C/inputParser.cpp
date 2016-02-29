@@ -23,7 +23,7 @@ inputParser::inputParser(const string inputFilename,struct paramStruct *paramete
         std::cout << "input file does not exist! - write a template one!" << std::endl;
         if(!this->writeTemplateInputFile())
         {
-        verbosity("could not write template file - EXIT!",0,__FILE__,__LINE__);
+        verbosity(*this->_inputStruct,"could not write template file - EXIT!",0,__FILE__,__LINE__);
         }
     }
 }
@@ -39,6 +39,8 @@ int inputParser::writeTemplateInputFile()
 ofstream myfile("inputFile.param");
   if (myfile.is_open())
   {
+    myfile << "[case]\n";
+    myfile << "caseName=\"Hatom\"\n";
     myfile << "[physical]\n";
     myfile << "Z=1\n";
     myfile << "f=2\n";
@@ -98,12 +100,12 @@ int inputParser::writeSampleAtomicCoordinateFile()
     _coordFilename="atoms.param";
     ofstream outfile(_coordFilename);
 
-    verbosity("we write an atom file for two single atoms system",1,__FILE__,__LINE__);
+    verbosity(*this->_inputStruct,"we write an atom file for two single atoms system",1,__FILE__,__LINE__);
     outfile << "0,0,0" << endl;
     outfile << "1,0,0" << endl;
     outfile.close();
 
-    verbosity("finished writing - exit",1,__FILE__,__LINE__);
+    verbosity(*this->_inputStruct,"finished writing - exit",1,__FILE__,__LINE__);
     return 1;
 
 }
@@ -120,12 +122,15 @@ int inputParser::readInput()
     for (auto& section : pt)
     {
         std::cout << '[' << section.first << "]\n";
-        //for (auto& key : section.second)
-        //    std::cout << key.first << "=" << key.second.get_value<std::string>() << "\n";
+
+        verbosity(*this->_inputStruct,"inputParser::readInput read section " + section.first,2,__FILE__,__LINE__);
+
         if(section.first=="physical")
         {
         for (auto& key : section.second)
             {
+            verbosity(*this->_inputStruct,"inputParser::readInput read key " + key.first,2,__FILE__,__LINE__);
+
             if(key.first=="Z") this->_inputStruct->Z=key.second.get_value<double>();
             else if(key.first=="f") this->_inputStruct->f=key.second.get_value<double>();
             else if(key.first=="atomic coordinates filename") this->_coordFilename=key.second.get_value<std::string>();
@@ -135,6 +140,7 @@ int inputParser::readInput()
         {
         for (auto& key : section.second)
             {
+            verbosity(*this->_inputStruct,"inputParser::readInput read key " + key.first,2,__FILE__,__LINE__);
             if(key.first=="alpha") this->_inputStruct->alpha=key.second.get_value<double>();
             else if(key.first=="no. iterations steepest descent") this->_inputStruct->sdNit=key.second.get_value<int>();
             else if(key.first=="no. iterations conjugate gradient") this->_inputStruct->pccgNit=key.second.get_value<int>();
@@ -147,19 +153,24 @@ int inputParser::readInput()
         this->_inputStruct->S=arma::vec(3,fill::zeros);
         for (auto& key : section.second)
             {
+            verbosity(*this->_inputStruct,"inputParser::readInput read key " + key.first,2,__FILE__,__LINE__);
             if(key.first=="Nx") this->_inputStruct->S(0)=key.second.get_value<double>();
-            if(key.first=="Ny") this->_inputStruct->S(1)=key.second.get_value<int>();
-            if(key.first=="Nz") this->_inputStruct->S(2)=key.second.get_value<int>();
+            if(key.first=="Ny") this->_inputStruct->S(1)=key.second.get_value<double>();
+            if(key.first=="Nz") this->_inputStruct->S(2)=key.second.get_value<double>();
             if(key.first=="Rx") this->_inputStruct->R(0,0)=key.second.get_value<double>();
-            if(key.first=="Ry") this->_inputStruct->R(1,1)=key.second.get_value<int>();
-            if(key.first=="Rz") this->_inputStruct->R(2,2)=key.second.get_value<int>();
+            if(key.first=="Ry") this->_inputStruct->R(1,1)=key.second.get_value<double>();
+            if(key.first=="Rz") this->_inputStruct->R(2,2)=key.second.get_value<double>();
             }
         }
         else if(section.first=="general")
         {
         for (auto& key : section.second)
             {
-            if(key.first=="VerbosityLevel") this->_inputStruct->globalVL=key.second.get_value<int>();
+            verbosity(*this->_inputStruct,"inputParser::readInput read key " + key.first,2,__FILE__,__LINE__);
+            if(key.first=="VerbosityLevel")
+                {
+                this->_inputStruct->globalVL=key.second.get_value<int>();
+                }
             }
         }
     this->_inputStruct->prodS=arma::prod(this->_inputStruct->S);

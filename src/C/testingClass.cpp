@@ -5,9 +5,10 @@
 using namespace myFunctions;
 using namespace arma;
 
-testingClass::testingClass(latexComment *latX)
+testingClass::testingClass(latexComment *latX,paramStruct P)
 {
     _myLatexPtr=latX;
+    _myP=P;
 }
 
 testingClass::~testingClass()
@@ -33,8 +34,8 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
         _myLatexPtr->subSection("Solve the Schroedinger equation using an oscillator potential");
         _myLatexPtr->subsubSection("define an oscillator potential");
         _myLatexPtr->newLine(" $V(\\mathbf{r})={1 \\over 2} \\omega^{2} d\\mathbf{r}^{2}$ ");
-        verbosity("schroedinger: solve the schroedinger equation",2,__FILE__,__LINE__);
-        verbosity("schroedinger: define the oscillator potential",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: solve the schroedinger equation",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: define the oscillator potential",2,__FILE__,__LINE__);
         #define SCHROEDINGER_PREPROCESSING
         #ifdef SCHROEDINGER_PREPROCESSING
         double omega=2.;
@@ -43,12 +44,12 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
         Vosci=0.5*pow(omega,2)*(dr%dr);
 
         gnuPlotPlotting gpL;
-        string imgName=gpL.plotAMatrixSlice("schroedinger_Vosci",Vosci,Pa.S,0);
+        string imgName=gpL.plotAMatrixSlice(_myP,"schroedinger_Vosci",Vosci,Pa.S,0);
         _myLatexPtr->newLine("A parabolic potential is assumed with the following shape:");
         _myLatexPtr->insertImage(imgName,"parabolic ion potential for which Schroedinger equation is solved.");
 
-        verbosity("schroedinger: the oscillator potential has dimension "+std::to_string(Vosci.n_rows),2,__FILE__,__LINE__);
-        verbosity("schroedinger: initialize wavefunction W",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: the oscillator potential has dimension "+std::to_string(Vosci.n_rows),2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: initialize wavefunction W",2,__FILE__,__LINE__);
         _myLatexPtr->subsubSection("Preparation of the wavefunction");
         //arma::cx_mat Wm(prodS,Pa.number_of_wavefunctions);
         _myLatexPtr->newLine(" Initialize wavefunctions randomĺy : ");
@@ -61,38 +62,39 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
         #endif
         #define SCHROEDINGER_DO_SD
         #ifdef SCHROEDINGER_DO_SD
-        verbosity("schroedinger: create optimizer sd",2,__FILE__,__LINE__);
-        sdOptimizer sd(Op,Pa,Vosci,_myLatexPtr);
+        verbosity(_myP,"schroedinger: create optimizer sd",2,__FILE__,__LINE__);
+        arma::mat Vdual=getVdual(Op,Vosci);
+        sdOptimizer sd(Op,Pa,Vdual,_myLatexPtr);
 
         sd.myLatexClass->commentMyFunction();
-        verbosity("schroedinger: prepare sd optimizer",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: prepare sd optimizer",2,__FILE__,__LINE__);
         sd.setup(W);
-        verbosity("schroedinger: compute density and plot",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: compute density and plot",2,__FILE__,__LINE__);
 
         //check if W is normalized W=Y=W*U^⁻1/2
-        verbosity("schroedinger: check if W is normalized W=Y=W*U^⁻1/2",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: check if W is normalized W=Y=W*U^⁻1/2",2,__FILE__,__LINE__);
 
         cx_mat Ui=Uinvers(Op,Pa,*W.get());
         mat density(computeDensityFromWavefuncs(Op,Pa,*W.get(),Ui));
-        gpL.plotMatrix3Slices("schroedinger_initialDensity",density,Pa.S);
+        gpL.plotMatrix3Slices(_myP,"schroedinger_initialDensity",density,Pa.S);
 
         _myLatexPtr->newLine("The following image shows the initial density computed using the initial state of random wavefunction.");
 
         _myLatexPtr->insertImage("schroedinger_initialDensity_xy","density after initialization of the wavefunctions");
 
         sd.myLatexClass->commentMyFunction();
-        verbosity("====================================",2,__FILE__,__LINE__);
-        verbosity("schroedinger: optimize using sd",2,__FILE__,__LINE__);
-        verbosity("====================================",2,__FILE__,__LINE__);
+        verbosity(_myP,"====================================",2,__FILE__,__LINE__);
+        verbosity(_myP,"schroedinger: optimize using sd",2,__FILE__,__LINE__);
+        verbosity(_myP,"====================================",2,__FILE__,__LINE__);
 
         sd.optimize(50,W);
 
-        pccgOptimizer pcg(Op,Pa,Vosci,G2,_myLatexPtr);
+        pccgOptimizer pcg(Op,Pa,Vdual,G2,_myLatexPtr);
         pcg.orthogonalizeWfunc(W);
         double finalEnergy=pcg.optimize(250,W);
 
         sd.myLatexClass->commentMyFunction();
-        verbosity("now get the wavefunction",2,__FILE__,__LINE__);
+        verbosity(_myP,"now get the wavefunction",2,__FILE__,__LINE__);
         // Psi as a pointer to the wavefunction
         std::shared_ptr<arma::cx_mat> Psi(new arma::cx_mat(*W));
         // Epsilon points to the eigenvalues (real vector)
@@ -123,9 +125,9 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
             std::cout << "=== State " << st << ", has energy = " << Epsilon->row(st) << " === " << std::endl;
             _myLatexPtr->newLine("=== state " + std::to_string(st) + " has energy " + std::to_string(as_scalar(Epsilon->row(st)))+ "hartree ===");
 
-            verbosity("now we get the square of the wavefunction for output",2,__FILE__,__LINE__);
+            verbosity(_myP,"now we get the square of the wavefunction for output",2,__FILE__,__LINE__);
             dat=real(pow(*Op.I*Psi->col(st),2));
-            verbosity("print three slices of result to as ppm / gnuplot",2,__FILE__,__LINE__);
+            verbosity(_myP,"print three slices of result to as ppm / gnuplot",2,__FILE__,__LINE__);
             #ifdef PLOT_RESULT
             for(int k=0; k<3; k++)
             {
@@ -133,14 +135,14 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
                 if(k==0) {plane="yz";}
                 else if(k==1) {plane="xz";}
                 else if(k==2) {plane="xy";}
-                verbosity("now take a slice of data at plane "+plane,2,__FILE__,__LINE__);
+                verbosity(_myP,"now take a slice of data at plane "+plane,2,__FILE__,__LINE__);
                 arma::mat sl;
-                verbosity("take a slice "+plane,2,__FILE__,__LINE__);
-                sl=myFunctions::slice(dat,Pa.S,(int) Pa.S(k)/2.,k);
+                verbosity(_myP,"take a slice "+plane,2,__FILE__,__LINE__);
+                sl=myFunctions::slice(Pa,dat,Pa.S,(int) Pa.S(k)/2.,k);
                 #ifdef PLOT_PPM
-                verbosity("get name for ppm file "+plane,2,__FILE__,__LINE__);
+                verbosity(_myP,"get name for ppm file "+plane,2,__FILE__,__LINE__);
                 name="psi"+std::to_string(st)+"d_m_"+plane; //std::to_string(k)
-                verbosity("write ppt file "+name,2,__FILE__,__LINE__);
+                verbosity(_myP,"write ppt file "+name,2,__FILE__,__LINE__);
                 ppm(name,sl*0.3,sl,sl,&latX);
                 #endif
                 #ifdef PLOT_GNUPLOT
@@ -148,7 +150,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
                 if(k==0)
                 {
                     name="schroedinger_psi_"+std::to_string(st);
-                    string imageName=gpL.plotAMatrixSlice(name,dat,Pa.S,k);
+                    string imageName=gpL.plotAMatrixSlice(Pa,name,dat,Pa.S,k);
                     string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
                     _myLatexPtr->insertImage(imageName,caption);
                 }
@@ -160,7 +162,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
 
         Ui=Uinvers(Op,Pa,*W.get());
         density=computeDensityFromWavefuncs(Op,Pa,*W.get(),Ui);
-        imgName=gpL.plotAMatrixSlice("schroedinger_density_final",density,Pa.S,0);
+        imgName=gpL.plotAMatrixSlice(Pa,"schroedinger_density_final",density,Pa.S,0);
         _myLatexPtr->newLine("Finally a density distribution as shown in the next image is computed.");
         _myLatexPtr->insertImage(imgName,"final result of Schroedinger equation: density");
 
@@ -282,13 +284,13 @@ const double sigma1=0.25;
 
 _myLatexPtr->newLine(" charge distribution 1 as: $g_{1}=Z{\\exp(-{dr^{2} \\over 2 \sigma_{1})^{2}}) \\over 2 \\pi \\sigma_{1}^{3}}$");
 
-verbosity("compute g1",2,__FILE__,__LINE__);
+verbosity(_myP,"compute g1",2,__FILE__,__LINE__);
 
 arma::cx_mat g1(dr.n_rows,1,arma::fill::zeros);
 g1.set_real(P.Z*arma::exp(-(dr%dr)/(2.*pow(sigma1,2)))/sqrt(pow(2.*arma::datum::pi*sigma1*sigma1,3)));
 
-verbosity("sum dr = "+std::to_string(arma::as_scalar(arma::sum(arma::sum(dr)))),2,__FILE__,__LINE__);
-verbosity("sum g1 = "+std::to_string(arma::as_scalar(real(arma::sum(arma::sum(g1))))),2,__FILE__,__LINE__);
+verbosity(_myP,"sum dr = "+std::to_string(arma::as_scalar(arma::sum(arma::sum(dr)))),2,__FILE__,__LINE__);
+verbosity(_myP,"sum g1 = "+std::to_string(arma::as_scalar(real(arma::sum(arma::sum(g1))))),2,__FILE__,__LINE__);
 
 cassert(!dr.has_inf(),ISCRITICAL,"dr has inf",__FILE__,__LINE__);
 cassert(!dr.has_nan(),ISCRITICAL,"dr has nan",__FILE__,__LINE__);
@@ -299,7 +301,7 @@ cassert(!g1.has_nan(),ISCRITICAL,"g1 has nan",__FILE__,__LINE__);
 
 //arma::cx_mat n(g1.n_elem,1);
 //n.fill(0);
-verbosity("now extract density by applying the charge distribution to all the fields using the structure function Sf",2,__FILE__,__LINE__);
+verbosity(_myP,"now extract density by applying the charge distribution to all the fields using the structure function Sf",2,__FILE__,__LINE__);
 
 _myLatexPtr->newLine(" charge density n is $n=g_{2}-g_{1}$");
 
@@ -323,17 +325,17 @@ arma::mat nreal=real(nc);
 
 //gpL.plotMatrix3Slices("nreal",nreal,S);
 
-verbosity("ewald: compute density distribution using structure function Sf",2,__FILE__,__LINE__);
+verbosity(_myP,"ewald: compute density distribution using structure function Sf",2,__FILE__,__LINE__);
 
-verbosity("max nc = "+std::to_string(arma::as_scalar(real(arma::max(arma::max(nc))))),2,__FILE__,__LINE__);
-verbosity("min nc = "+std::to_string(arma::as_scalar(real(arma::min(arma::min(nc))))),2,__FILE__,__LINE__);
+verbosity(_myP,"max nc = "+std::to_string(arma::as_scalar(real(arma::max(arma::max(nc))))),2,__FILE__,__LINE__);
+verbosity(_myP,"min nc = "+std::to_string(arma::as_scalar(real(arma::min(arma::min(nc))))),2,__FILE__,__LINE__);
 
-verbosity("max nreal = "+std::to_string(arma::as_scalar(arma::max(arma::max(nreal)))),2,__FILE__,__LINE__);
-verbosity("min nreal = "+std::to_string(arma::as_scalar(arma::min(arma::min(nreal)))),2,__FILE__,__LINE__);
+verbosity(_myP,"max nreal = "+std::to_string(arma::as_scalar(arma::max(arma::max(nreal)))),2,__FILE__,__LINE__);
+verbosity(_myP,"min nreal = "+std::to_string(arma::as_scalar(arma::min(arma::min(nreal)))),2,__FILE__,__LINE__);
 
 ////for(int dir=0;dir<3;dir++)
 ////{
-////    verbosity("ewald: nreal nrow "+std::to_string(nreal.n_rows)+" ncols "+std::to_string(nreal.n_cols),2,__FILE__,__LINE__);
+////    verbosity(_myP,"ewald: nreal nrow "+std::to_string(nreal.n_rows)+" ncols "+std::to_string(nreal.n_cols),2,__FILE__,__LINE__);
 ////
 ////    TmpMat=myFunctions::slice(nreal,S,S(dir)/2.,dir);
 ////
@@ -350,8 +352,8 @@ verbosity("min nreal = "+std::to_string(arma::as_scalar(arma::min(arma::min(nrea
 ////    of.close();
 ////
 ////    //TmpMat=sliceIt(nreal,S,S(dir)/2.,dir);
-////    verbosity("ewald: TmpMat nrow "+std::to_string(TmpMat.n_rows)+" ncols "+std::to_string(TmpMat.n_cols),2,__FILE__,__LINE__);
-////    verbosity("ewald: SmoothedMat nrow "+std::to_string(SmoothedMat.n_rows)+" ncols "+std::to_string(SmoothedMat.n_cols),2,__FILE__,__LINE__);
+////    verbosity(_myP,"ewald: TmpMat nrow "+std::to_string(TmpMat.n_rows)+" ncols "+std::to_string(TmpMat.n_cols),2,__FILE__,__LINE__);
+////    verbosity(_myP,"ewald: SmoothedMat nrow "+std::to_string(SmoothedMat.n_rows)+" ncols "+std::to_string(SmoothedMat.n_cols),2,__FILE__,__LINE__);
 ////
 ////    //#ifdef PLOT_WITH_CV
 ////    //    openCVPlotting* pL(new openCVPlotting);
@@ -363,9 +365,9 @@ verbosity("min nreal = "+std::to_string(arma::as_scalar(arma::min(arma::min(nrea
 ////    cassert(!TmpMat.has_nan(),isCritical,"TmpMat has nan",__FILE__,__LINE__);
 ////    cassert(TmpMat.is_finite(),isCritical,"TmpMat is infinite",__FILE__,__LINE__);
 ////
-////    //verbosity("ewald: get name for ppm file ",2,__FILE__,__LINE__);
+////    //verbosity(_myP,"ewald: get name for ppm file ",2,__FILE__,__LINE__);
 ////    //string name="n_ewald_"+std::to_string(dir)+"d_m"; //std::to_string(k)
-////    //verbosity("write ppt file "+name,2,__FILE__,__LINE__);
+////    //verbosity(_myP,"write ppt file "+name,2,__FILE__,__LINE__);
 ////    //
 ////    //ppm(name,TmpMat*0.3,TmpMat,TmpMat,_myLatexPtr);
 ////}
@@ -376,8 +378,8 @@ cout << "Total charge check:" << sum(real(nc))*det(R)/prod(S) << endl;
 //_myLatexPtr->newLine(" check for normalization 1 $ \\Sigma_{i} g_{i} {V \\over N} = \\Sigma_{i} g_{i} dV$ = "+std::to_string(sum(g1,0)*det(R)/prod(S)));
 //_myLatexPtr->newLine(" with $V$ the volume of the computations mesh, N the number of grid points and dV the volume of one grid cell");
 
-verbosity("ewald: nc is a real stored in a complex matrix",2,__FILE__,__LINE__);
-verbosity("ewald: now compute potential phi",2,__FILE__,__LINE__);
+verbosity(_myP,"ewald: nc is a real stored in a complex matrix",2,__FILE__,__LINE__);
+verbosity(_myP,"ewald: now compute potential phi",2,__FILE__,__LINE__);
 
 //arma::cx_mat phi=*O.I*(*O.Li*(-4.*arma::datum::pi*(*O.O*(*O.J*nc))));
 
@@ -387,7 +389,7 @@ arma::cx_mat phi = *O.I*phik;
 double Unum=0.5*real(arma::accu(((*O.J*phi).t()*(*O.O*(*O.J*nc)))));
 
 arma::mat Xtranspose=X.t();
-verbosity("ewald: we have "+std::to_string(Xtranspose.n_rows)+" atoms in our system!",2,__FILE__,__LINE__);
+verbosity(_myP,"ewald: we have "+std::to_string(Xtranspose.n_rows)+" atoms in our system!",2,__FILE__,__LINE__);
 
 double Uself=P.Z*P.Z/(2.*sqrt(arma::datum::pi))*(1./sigma1)*Xtranspose.n_rows;
 
@@ -447,7 +449,7 @@ cout << "sizedr" << sum(dr) << endl;
 const double sigma1=0.75;
 const double sigma2=0.5;
 
-verbosity("compute g1,g2",2,__FILE__,__LINE__);
+verbosity(_myP,"compute g1,g2",2,__FILE__,__LINE__);
 
 
 _myLatexPtr->newLine(" charge distribution 1 as: $g_{1}={\\exp(-{dr^{2} \\over 2 \sigma_{1})^{2}}) \\over 2 \\pi \\sigma_{1}^{3}}$");
@@ -460,7 +462,7 @@ _myLatexPtr->newLine(" charge distribution 2 as: $g_{2}={\\exp(-{dr^{2} \\over 2
 //Col<double> g2=arma::exp(-(dr%dr)/(2.*pow(sigma2,2)))/sqrt(pow(2.*arma::datum::pi*sigma2*sigma2,3));
 mat g2=arma::exp(-(dr%dr)/(2.*pow(sigma2,2)))/sqrt(pow(2.*arma::datum::pi*sigma2*sigma2,3));
 
-verbosity("compute n",2,__FILE__,__LINE__);
+verbosity(_myP,"compute n",2,__FILE__,__LINE__);
 
 //arma::cx_mat n(g1.n_elem,1);
 //n.fill(0);

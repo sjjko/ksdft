@@ -9,6 +9,10 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "customAssert.h"
+#include <texcaller.h>
+//include to generate the image folder structure
+#include <sys/types.h>
+#include <sys/stat.h>
 
 /** \brief insert a latex string comment and write latex document of computations in the code
  */

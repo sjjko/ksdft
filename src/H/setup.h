@@ -96,7 +96,7 @@ mat r = M*idiagS*Pa.R.t();
 
 Mat<double> mat_center_of_cell(ones(Pa.prodS,3));
 
-verbosity("compute center of cell",2,__FILE__,__LINE__);
+verbosity(Pa,"compute center of cell",2,__FILE__,__LINE__);
 
 for(int j=0;j<Pa.prodS;j++)
     {
@@ -124,14 +124,14 @@ latX.newLine(" $ G2 = G^{2}$ ");
 arma::Mat<double> G2;
 G2=arma::sum(G%G,1);
 
-verbosity("now compute the structure factor",2,__FILE__,__LINE__);
+verbosity(Pa,"now compute the structure factor",2,__FILE__,__LINE__);
 
-verbosity("Compute structure factor using G: "+std::to_string(G.n_rows)+" x "+std::to_string(G.n_cols),2,__FILE__,__LINE__);
-verbosity("Compute structure factor using X: "+std::to_string(X.n_rows)+" x "+std::to_string(X.n_cols),2,__FILE__,__LINE__);
+verbosity(Pa,"Compute structure factor using G: "+std::to_string(G.n_rows)+" x "+std::to_string(G.n_cols),2,__FILE__,__LINE__);
+verbosity(Pa,"Compute structure factor using X: "+std::to_string(X.n_rows)+" x "+std::to_string(X.n_cols),2,__FILE__,__LINE__);
 
 arma::mat tmpmat(-G*X);
 
-verbosity("Now compute exponent of temporary matrix: "+std::to_string(tmpmat.n_rows)+" x "+std::to_string(tmpmat.n_cols),2,__FILE__,__LINE__);
+verbosity(Pa,"Now compute exponent of temporary matrix: "+std::to_string(tmpmat.n_rows)+" x "+std::to_string(tmpmat.n_cols),2,__FILE__,__LINE__);
 
 arma::cx_mat exponent(tmpmat.n_rows,tmpmat.n_cols,fill::zeros);
 exponent.set_imag(tmpmat);
@@ -142,12 +142,12 @@ latX.newLine(" structure factor associated with the wave vector of the correspon
 latX.newLine(" $ \\Pi_{k} S_{k} \\times 1$ column vector (one column matrix) ");
 latX.newLine(" $ Sf(\\vec(G)) = \\Sigma_{I} \\exp(-i \\vec(G) \\vec(X)_{I}) $ ");
 
-verbosity("Sf is a sum over all atoms I of exp(G*X_{I})!",2,__FILE__,__LINE__);
-verbosity("Sf is a column vector Sx1!",2,__FILE__,__LINE__);
+verbosity(Pa,"Sf is a sum over all atoms I of exp(G*X_{I})!",2,__FILE__,__LINE__);
+verbosity(Pa,"Sf is a column vector Sx1!",2,__FILE__,__LINE__);
 
 arma::cx_mat Sf(sum(exp(exponent),1));
 
-verbosity("setup finished",2,__FILE__,__LINE__);
+verbosity(Pa,"setup finished",2,__FILE__,__LINE__);
 
 
 

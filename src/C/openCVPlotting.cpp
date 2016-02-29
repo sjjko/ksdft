@@ -12,10 +12,10 @@ openCVPlotting::~openCVPlotting()
     //dtor
 }
 
-int openCVPlotting::plotMatrix(string title,arma::mat matrixToPlot)
+int openCVPlotting::plotMatrix(paramStruct Pa, string title,arma::mat matrixToPlot)
 {
 
-    verbosity("openCVPlotting: matrix row order in cv and column order in armadillo - have to transpose first",1,__FILE__,__LINE__);
+    verbosity(Pa,"openCVPlotting: matrix row order in cv and column order in armadillo - have to transpose first",1,__FILE__,__LINE__);
     arma::mat matrixToPlott=matrixToPlot.t();
     cv::Mat opencv_mat( matrixToPlott.n_rows, matrixToPlott.n_cols, CV_64FC1, matrixToPlott.memptr() );
     cv::Mat image;

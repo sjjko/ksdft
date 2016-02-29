@@ -11,6 +11,7 @@
 #include "structs.h"
 #include "dft_functions.h"
 #include "customAssert.h"
+#include "structs.h"
 
 class optimizeBase
     {
@@ -20,12 +21,11 @@ class optimizeBase
 		 \param G2inp a vector of wave vector squared
 		 \param Rinp a 3x3 matrix of system size
 		 \param chkPointer a pointer to a class checking the validity of operations */
-        inline optimizeBase(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vreal)
+        inline optimizeBase(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vdual)
                 {
                 this->_Op=Operator;
                 this->_Param=Parameter;
-                this->_Vreal=Vreal;
-                this->_Vdual=getVdual(this->_Op,Vreal);
+                this->_Vdual=Vdual;
                 _sdNit=Parameter.sdNit;
                 _pccgNit=Parameter.pccgNit;
                 };
@@ -41,7 +41,7 @@ class optimizeBase
             {
                 arma::cx_mat tempM=sqrt(arma::inv(Winp->t()*(*_Op.O*(Winp.get()))));
                 arma::cx_mat inpM=*Winp;
-                verbosity("W+(O(W)) has nrows:"+std::to_string(tempM.n_rows)+" and ncols: "+std::to_string(tempM.n_cols),2,__FILE__,__LINE__);
+                verbosity(this->_Param,"W+(O(W)) has nrows:"+std::to_string(tempM.n_rows)+" and ncols: "+std::to_string(tempM.n_cols),2,__FILE__,__LINE__);
                 *Winp=inpM*tempM; //sqrt(arma::inv(Winp->t()*(*_Op.O*(*Winp))));
                 }
                 catch(exception& e)
@@ -58,7 +58,6 @@ class optimizeBase
 
         operatorStruct _Op;
         paramStruct _Param;
-        arma::mat _Vreal;
         arma::mat _Vdual;
 
     protected:

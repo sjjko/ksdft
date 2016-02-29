@@ -4,7 +4,7 @@ using namespace myFunctions;
 
 gnuPlotPlotting::gnuPlotPlotting()
 {
-    //ctor
+_nameOfActualPlane="";
 }
 
 gnuPlotPlotting::~gnuPlotPlotting()
@@ -12,7 +12,7 @@ gnuPlotPlotting::~gnuPlotPlotting()
     //dtor
 }
 
-int gnuPlotPlotting::plotMatrix3Slices(string title,arma::mat matrixToPlot,Col<double> S)
+int gnuPlotPlotting::plotMatrix3Slices(paramStruct Pa, string title,arma::mat matrixToPlot,Col<double> S)
 {
 
   //! \brief does not plot - takes only slices and gives output in .2dMat files which are automatially postprocesses by
@@ -29,7 +29,7 @@ for(int k=0;k<3;k++)
     if(k==0) {plane="yz";}
     else if(k==1) {plane="xz";}
     else if(k==2) {plane="xy";}
-    TmpMat=myFunctions::slice(matrixToPlot,S,S(k)/2.,k);
+    TmpMat=myFunctions::slice(Pa,matrixToPlot,S,S(k)/2.,k);
     string fileName;
     fileName = title +"_"+ plane +".2dMat";
     ofstream of(fileName);
@@ -41,7 +41,7 @@ return 0;
 }
 
 
-std::string gnuPlotPlotting::plotAMatrixSlice(string title,arma::mat matrixToPlot,Col<double> S,int sliceIndex)
+std::string gnuPlotPlotting::plotAMatrixSlice(paramStruct Pa,string title,arma::mat matrixToPlot,Col<double> S,int sliceIndex)
 {
 
   //! \brief does not plot - takes only slices and gives output in .2dMat files which are automatially postprocesses by
@@ -52,18 +52,26 @@ std::string gnuPlotPlotting::plotAMatrixSlice(string title,arma::mat matrixToPlo
     //! \return nothing (int=0)
 
     arma::mat TmpMat;
-
-    if(sliceIndex==0) {_nameOfActualPlane="yz";}
+    myFunctions::cassert(sliceIndex<3 && sliceIndex>-1,ISCRITICAL,"gnuPlotPlotting::plotAMatrixSlice: sliceIndex out of range",__FILE__,__LINE__);
+    verbosity(Pa,"gnuPlotPlotting::set sliceIndex plane"+std::to_string(sliceIndex),2,__FILE__,__LINE__);
+    if(sliceIndex==0)
+    {
+    _nameOfActualPlane="yz";
+    }
     else if(sliceIndex==1) {_nameOfActualPlane="xz";}
     else if(sliceIndex==2) {_nameOfActualPlane="xy";}
-    TmpMat=myFunctions::slice(matrixToPlot,S,S(sliceIndex)/2.,sliceIndex);
+    verbosity(Pa,"gnuPlotPlotting::set sliceIndex plane finished",2,__FILE__,__LINE__);
+    verbosity(Pa,"gnuPlotPlotting::now slice the matrix",2,__FILE__,__LINE__);
+    TmpMat=myFunctions::slice(Pa,matrixToPlot,S,S(sliceIndex)/2.,sliceIndex);
     string fileName;
     fileName = title +"_"+ _nameOfActualPlane +".2dMat";
+    verbosity(Pa,"gnuPlotPlotting::now output into file stream",2,__FILE__,__LINE__);
 
     ofstream of(fileName);
     of << TmpMat << endl;
     of.close();
 
-    return title +"_"+ _nameOfActualPlane;
+    string returnString=title +"_"+ _nameOfActualPlane;
+    return returnString;
 }
 

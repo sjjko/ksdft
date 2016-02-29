@@ -4,6 +4,7 @@
 #include "main.h"
 #include "customAssert.h"
 #include "slice.h"
+#include "structs.h"
 
 using namespace std;
 
@@ -16,9 +17,10 @@ class gnuPlotPlotting
 
         gnuPlotPlotting();
         virtual ~gnuPlotPlotting();
-        int plotMatrix3Slices(string title,arma::mat matrixToPlot,Col<double> S);
-        string plotAMatrixSlice(string title,arma::mat matrixToPlot,Col<double> S,int sliceIndex);
-        inline string getPlaneName(){return _nameOfActualPlane;};
+        int plotMatrix3Slices(paramStruct Pa,string title,arma::mat matrixToPlot,Col<double> S);
+        string plotAMatrixSlice(paramStruct Pa,string title,arma::mat matrixToPlot,Col<double> S,int sliceIndex);
+        inline string getPlaneName(){return this->_nameOfActualPlane;};
+        inline string setPlaneName(string in){_nameOfActualPlane=in;};
 };
 
 #endif // GNUPLOTPLOTTING_H

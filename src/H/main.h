@@ -18,17 +18,12 @@
 #define DO_SD
 #undef DO_PCCG
 
-#define PERFORM_OPERATOR_TESTS
+#undef PERFORM_OPERATOR_TESTS
 
 #undef NORMALRUN
 #undef FDTEST
-#define SCHROEDINGER
 #undef HATOMS
 
-#ifdef SCHROEDINGER
-    #undef HATOMS
-    #undef FDTEST
-#endif
 #ifdef HATOMS
     #undef SCHROEDINGER
     #undef FDTEST
@@ -36,22 +31,12 @@
 
 
 //switches for energy components
-#ifdef NORMALRUN
     #undef CALC_KIN_ONLY
     #define CALC_KIN
     #define CALC_VEE
     #define CALC_EXC
     #define CALC_EION
-    #define CALC_DEXC
-#endif
-#ifdef SCHROEDINGER
-    #undef CALC_KIN_ONLY
-    #define CALC_KIN
-    #undef CALC_VEE
-    #undef CALC_EXC
-    #define CALC_EION
-    #undef CALC_DEXC
-#endif
+    #define CALC_ DEXC
 #ifdef FDTEST
     #undef CALC_KIN_ONLY
     #define CALC_KIN
@@ -78,18 +63,9 @@
 //#include "silo.h"
 #include <iomanip>  // needed to use manipulators with parameters (precision, width)
 
-extern int GLOBAL_verbosityLevel; //!< global variable set in main.cpp used in customAssert assert function
 #include "customAssert.h"
 
-
 #define WITH_TEX
-
-#ifdef WITH_TEX
-    #include <texcaller.h>
-    //include to generate the image folder structure
-    #include <sys/types.h>
-    #include <sys/stat.h>
-#endif
 
 #define WITH_BOOST
 

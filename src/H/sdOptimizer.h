@@ -16,7 +16,7 @@ class sdOptimizer:public optimizeBase
     {
     public:
         latexComment *myLatexClass; //!< public latex class, to be initialized in construction - used to give latex output stream
-        sdOptimizer(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vreal,latexComment *ltX);
+        sdOptimizer(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vdual,latexComment *ltX);
         ~sdOptimizer();
 		//! Laplace operator for input of values
 		/*!

@@ -5,10 +5,11 @@
 //using namespace arma;
 
 #include "customAssert.h"
+#include "structs.h"
 
 namespace myFunctions
 {
-inline arma::mat slice(arma::mat dat,arma::vec N,int n,int dir)
+inline arma::mat slice(const paramStruct Pa,arma::mat dat,arma::vec N,int n,int dir)
 {
 
 //! \brief
@@ -21,11 +22,11 @@ inline arma::mat slice(arma::mat dat,arma::vec N,int n,int dir)
 //!
 //!
 
-verbosity("slice: new out matrix ",2,__FILE__,__LINE__);
+verbosity(Pa,"slice: new out matrix ",2,__FILE__,__LINE__);
 
 arma::mat out;
 
-verbosity("start slicing ",2,__FILE__,__LINE__);
+verbosity(Pa,"start slicing ",2,__FILE__,__LINE__);
 
 try
 {
@@ -33,7 +34,7 @@ try
     //n=std::floor(n);
     if(n<1)
     {
-        verbosity("slice does not exist ",2,__FILE__,__LINE__);
+        verbosity(Pa,"slice does not exist ",2,__FILE__,__LINE__);
         //cout<<"Asking for non-existing slice!"<<endl;
         throw string("slice: Asking for non-existing slice!");
     }
@@ -45,15 +46,15 @@ try
             throw string("slice: Asking for non-existent slice!");
         }
 //else reshape
-        verbosity("data has dim "+std::to_string(N[0])+" , "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
-        verbosity("slice: dir3 do reshape to "+std::to_string(N[0])+" x "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"data has dim "+std::to_string(N[0])+" , "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir3 do reshape to "+std::to_string(N[0])+" x "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
         dat.reshape(N[0]*N[1],N[2]); //# Group into matrix with dir=3 as cols
-        verbosity("take one column at n "+std::to_string(n) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"take one column at n "+std::to_string(n) ,2,__FILE__,__LINE__);
         out=dat.col(n);
-        verbosity("column has size "+std::to_string(out.n_elem) ,2,__FILE__,__LINE__);
-        verbosity("slice: out do reshape to "+std::to_string(N[0])+" , "+std::to_string(N[1]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"column has size "+std::to_string(out.n_elem) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: out do reshape to "+std::to_string(N[0])+" , "+std::to_string(N[1]) ,2,__FILE__,__LINE__);
         out.reshape(N[0],N[1]); // Take n-th col and reshape as slice
-        verbosity("slice: dir3 finished reshaping" ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir3 finished reshaping" ,2,__FILE__,__LINE__);
 
     }
     else if(dir==1)
@@ -63,21 +64,21 @@ try
             //cout << "Asking for non-existent slice " << n << endl;
             throw string("slice: Asking for non-existent slice!");
         }
-        verbosity("data has dim "+std::to_string(N[0])+" , "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
-        verbosity("slice: dir2 do reshape to "+std::to_string(N[0])+" x "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"data has dim "+std::to_string(N[0])+" , "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir2 do reshape to "+std::to_string(N[0])+" x "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
         dat.reshape(N[0]*N[1],N[2]); //%# Group to expose N[1]
-        verbosity("slice: dir2 do an inplace transpose and convert to "+std::to_string(N[2])+" , "+std::to_string(N[1])+" x "+std::to_string(N[0]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir2 do an inplace transpose and convert to "+std::to_string(N[2])+" , "+std::to_string(N[1])+" x "+std::to_string(N[0]) ,2,__FILE__,__LINE__);
         inplace_trans(dat); //dat=//conj(dat'); //%# dat is now in order N[2],N[0]*N[1]
-        verbosity("slice: dir2 reshape to "+std::to_string(N[2])+" x "+std::to_string(N[0])+" , "+std::to_string(N[1]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir2 reshape to "+std::to_string(N[2])+" x "+std::to_string(N[0])+" , "+std::to_string(N[1]) ,2,__FILE__,__LINE__);
         dat.reshape(N[2]*N[0],N[1]); //%# Form with dir=2 as cols
-        verbosity("dir2: take one column at n "+std::to_string(n) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"dir2: take one column at n "+std::to_string(n) ,2,__FILE__,__LINE__);
         out=dat.col(n);
-        verbosity("column has size "+std::to_string(out.n_elem) ,2,__FILE__,__LINE__);
-        verbosity("slice: out do reshape to "+std::to_string(N[2])+" , "+std::to_string(N[0]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"column has size "+std::to_string(out.n_elem) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: out do reshape to "+std::to_string(N[2])+" , "+std::to_string(N[0]) ,2,__FILE__,__LINE__);
         out.reshape(N[2],N[0]); //%# Shape into slice
-        verbosity("slice: dir2 do an inplace transpose and convert to "+std::to_string(N[0])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir2 do an inplace transpose and convert to "+std::to_string(N[0])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
         inplace_trans(out);
-        verbosity("slice: dir2 finished reshaping" ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir2 finished reshaping" ,2,__FILE__,__LINE__);
     }//out=conj(out'); //%# Reorder as N[0],N[2];
     else if(dir==0)
     {
@@ -85,23 +86,23 @@ try
         {
             throw string("slice: Asking for non-existent slice!");
         }
-        verbosity("slice: dir1 do reshape to "+std::to_string(N[0])+" , "+std::to_string(N[1])+" x "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir1 do reshape to "+std::to_string(N[0])+" , "+std::to_string(N[1])+" x "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
         dat.reshape(N[0],N[1]*N[2]); //%# Group to expose N[0]
-        verbosity("slice: dir1 do an inplace transpose and convert to "+std::to_string(N[1])+" x "+std::to_string(N[2])+" , "+std::to_string(N[0]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir1 do an inplace transpose and convert to "+std::to_string(N[1])+" x "+std::to_string(N[2])+" , "+std::to_string(N[0]) ,2,__FILE__,__LINE__);
         inplace_trans(dat);//=conj(dat'); //%# dat is now N[1]*N[2],N[0]
-        verbosity("dir1: take one column at n "+std::to_string(n) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"dir1: take one column at n "+std::to_string(n) ,2,__FILE__,__LINE__);
         out=dat.col(n);
-        verbosity("dir1 column has size "+std::to_string(out.n_elem) ,2,__FILE__,__LINE__);
-        verbosity("slice: dir1 out do reshape to "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"dir1 column has size "+std::to_string(out.n_elem) ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir1 out do reshape to "+std::to_string(N[1])+" , "+std::to_string(N[2]) ,2,__FILE__,__LINE__);
         out.reshape(N[1],N[2]);
-        verbosity("slice: dir1 finished reshaping" ,2,__FILE__,__LINE__);
+        verbosity(Pa,"slice: dir1 finished reshaping" ,2,__FILE__,__LINE__);
     }
     else
     {
         throw string("Error in slice(): invalid choice for dir.  dir=");
 //cout << "Error in slice(): invalid choice for dir.  dir=" << dir << endl;
     }
-    verbosity("slice: out has dimensions "+std::to_string(out.size()) ,2,__FILE__,__LINE__);
+    verbosity(Pa,"slice: out has dimensions "+std::to_string(out.size()) ,2,__FILE__,__LINE__);
     return out;
 }
 catch(string s)

@@ -2,6 +2,7 @@
 #define CASSERT_H
 
 #include "main.h"
+#include "structs.h"
 
 //void cassert(string s,string file,float linie);
 
@@ -35,7 +36,7 @@ inline void cassert(bool test,bool isCritical,string s,string file,float linie)
     }
 }
 
-inline void verbosity(string s,int verbosityL,string file,float linie)
+inline void verbosity(paramStruct Pa, string s,int verbosityL,string file,float linie)
 {
 
     /** \brief prints message according to global level of verbosity flag set in input file
@@ -46,9 +47,8 @@ inline void verbosity(string s,int verbosityL,string file,float linie)
      * \param linie: current source line
      */
 
-
     //!< simple print function - prints if global verbosity level is greater than given
-    if(verbosityL > GLOBAL_verbosityLevel)
+    if(verbosityL < Pa.globalVL)
     {
         cout << file << " " << linie << " " <<  s  << endl;
     }

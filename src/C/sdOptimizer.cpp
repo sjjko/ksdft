@@ -17,7 +17,7 @@ int sdOptimizer::setup(std::shared_ptr<arma::cx_mat> Wi)//,checkOperatorSize<T> 
 
 double sdOptimizer::optimize(std::shared_ptr<arma::cx_mat> Wi)
 {
-    verbosity("optimize: we do an optimization for "+std::to_string(this->_sdNit)+" steps!",2,__FILE__,__LINE__);
+    verbosity(_Param,"optimize: we do an optimization for "+std::to_string(this->_sdNit)+" steps!",2,__FILE__,__LINE__);
     return this->optimize(this->_sdNit,Wi);
 
 }
@@ -33,34 +33,34 @@ double sdOptimizer::optimize(const int Niterations,std::shared_ptr<arma::cx_mat>
 
     std::string myFunctionString=" start of the steepest descent method \\newline ";
 
-    verbosity("optimize Niterations: we do an optimization for "+std::to_string(Niterations)+" steps!",2,__FILE__,__LINE__);
+    verbosity(_Param,"optimize Niterations: we do an optimization for "+std::to_string(Niterations)+" steps!",2,__FILE__,__LINE__);
     double E;
     //first we orthogonalize
-    verbosity("first set up the wavefunction",2,__FILE__,__LINE__);
+    verbosity(_Param,"first set up the wavefunction",2,__FILE__,__LINE__);
 
     myFunctionString+=" start of the steepest descent method \\newline ";
     myFunctionString+=" orthogonalize the wavefunction $W_{m}$ \\newline ";
     myFunctionString+=" $W=W \sqrt(W^{t}(O(W)))^{-1}$ \\newline ";
 
     this->setup(Wi);
-    verbosity("calculate the initial electronic configuration energy of the system",2,__FILE__,__LINE__);
+    verbosity(_Param,"calculate the initial electronic configuration energy of the system",2,__FILE__,__LINE__);
 
     myFunctionString+=" compute the current energy of the system  \\newline ";
 
     myFunctionString+=getELatex(); //!< get the latex description of the getE energy computation function
 
-    double E0=getE(this->_Op,this->_Param,*Wi.get(),this->_Vreal);
+    double E0=getE(this->_Op,this->_Param,*Wi.get(),this->_Vdual);
     int n=1;
-    verbosity("now do the sd optimization loop!",2,__FILE__,__LINE__);
+    verbosity(_Param,"now do the sd optimization loop!",2,__FILE__,__LINE__);
     while(n<Niterations)
         {
             if(n==1) myFunctionString+=getgradLatex(); //!< get the latex description of the getgrad energy gradient computation function
-            arma::cx_mat g0=getgrad(this->_Op,this->_Param,*Wi.get(),this->_Vreal);
+            arma::cx_mat g0=getgrad(this->_Op,this->_Param,*Wi.get(),this->_Vdual);
             if(n==1) myFunctionString+=" now update the wavefunction by descending by alpha = " + std::to_string(this->_Param.alpha) + " \\newline ";
             if(n==1) myFunctionString+=" $W=W-\\alpha \\nabla_{W} E$ \\newline ";
             *Wi=*Wi-this->_alpha*g0;
             if(n==1) myFunctionString+=" recalculate the energy \\newline ";
-            E=getE(this->_Op,this->_Param,*Wi,this->_Vreal);
+            E=getE(this->_Op,this->_Param,*Wi,this->_Vdual);
             cout << "" << endl;
             cout << "====================================" << endl;
             cout << "sd: step" << n << " of " << Niterations << endl;
@@ -87,8 +87,8 @@ double sdOptimizer::optimize(const int Niterations,std::shared_ptr<arma::cx_mat>
 
 }
 
-sdOptimizer::sdOptimizer(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vreal,latexComment *ltX)
-:optimizeBase(Operator,Parameter,Vreal)
+sdOptimizer::sdOptimizer(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vdual,latexComment *ltX)
+:optimizeBase(Operator,Parameter,Vdual)
 {
     //! \brief initialize the steepest descent method class
     //!
