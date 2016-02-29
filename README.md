@@ -1,7 +1,8 @@
-ksdft++ simple code to compute electronic energies in atomic systems
-by S.Konzett-Stoffl - 2015/16
-after lecture by T.Arias (see http://dft.physics.cornell.edu/old-website/minicourse/dft.pdf)
-or youtube for great lectures on dft {https://www.youtube.com/watch?v=oyvGeQ8ehBM}
+In short:
+	  ksdft++ simple code to compute electronic energies in atomic systems
+	  by S.Konzett-Stoffl - 2015/16
+	  after lecture by T.Arias (see http://dft.physics.cornell.edu/old-website/minicourse/dft.pdf)
+	  or youtube for great lectures on dft {https://www.youtube.com/watch?v=oyvGeQ8ehBM}
 
 External libraries used are:
 
@@ -38,6 +39,10 @@ Features:
 Installation:
 
 	  ksdft++ uses the make procedure; (aside you find the .cbp project file for processing with code::blocks ide)
+	  ksdft++ only tested on ubuntu linux, may require adaptions to the parts using the system routines when porting to different platforms
+	  
+	  0.) pull the github repository:  
+	      git pull https://github.com/sjjko/ksdft.git master
 	  
 	  1.) install armadillo, boost, fftw libraries in their development versions:
 	  sudo apt-get install libblas-dev
@@ -56,7 +61,9 @@ Installation:
 	  
 	  4.) make a soft link to script run.sh in script directory
 	  
-	  5.) run ksdft++ by evoking script run.sh 
+Running:
+
+	  run ksdft++ by evoking script run.sh in script folder:
 	  this script: 1.) cleans the directory
 		       2.) runs ksdft++
 		       3.) does postprocessing - generates images and converts latex output to pdf file
@@ -65,10 +72,10 @@ Modification:
 
 	  to add a new case proceed as follows:
 	  
-	  make new case directory in ksdft main directory case/caseName
-	  copy a atoms.param file from Hatoms, which holds the atom coordinates, one in each row
-	  copy a input.param file from Hatoms and change to your needs
-	  add an ionic potential in ionicPotentialClass::computePotential class method 
+	  I) 	make new case directory in ksdft main directory case/caseName
+	  II) 	copy a atoms.param file from Hatoms, which holds the atom coordinates, one in each row
+	  III) 	copy a input.param file from Hatoms and change to your needs
+	  IV) 	add an ionic potential in ionicPotentialClass::computePotential class method 
 	  
 	  
 
