@@ -14,7 +14,7 @@ class inputParser
 {
 
     public:
-        inputParser(const string inputFilename,struct paramStruct *parameterStruct);
+        inputParser(const string pathToCase, const string inputFilename,struct paramStruct *parameterStruct);
         virtual ~inputParser();
         int parseInput();
         arma::mat readAtomicCoordinates();
@@ -26,6 +26,7 @@ class inputParser
         string _inputFilename;
         struct paramStruct* _inputStruct;
         string _coordFilename;
+        string _pathToCase;
 
 };
 

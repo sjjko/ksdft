@@ -60,7 +60,7 @@ arma::mat Xt; //!< the atomic coordinate matrix
 verbosity(Pa,"Read Input Parameters!",2,__FILE__,__LINE__);
 #ifdef WITH_BOOST
     verbosity(Pa,"main: parse input file "+paramFile,2,__FILE__,__LINE__);
-    inputParser Iparser(paramFile,&Pa);
+    inputParser Iparser(pathToCase,paramFile,&Pa);
     if(Iparser.parseInput()){cout << "successfully read input parameters" << endl;};
 
     verbosity(Pa,"Now get the position of the atoms in the system and store in matrix",2,__FILE__,__LINE__);

@@ -8,7 +8,7 @@
 
 using namespace myFunctions;
 
-inputParser::inputParser(const string inputFilename,struct paramStruct *parameterStruct)
+inputParser::inputParser(const string pathToCase, const string inputFilename,struct paramStruct *parameterStruct)
 {
 //    /** \brief set up input parser class
 //     *
@@ -16,6 +16,7 @@ inputParser::inputParser(const string inputFilename,struct paramStruct *paramete
 //     * \param parameter struct containing containers for input data
 //     *
 //     */
+    this->_pathToCase=pathToCase;
     this->_inputFilename=inputFilename;
     this->_inputStruct=parameterStruct;
     if (!std::ifstream(_inputFilename))
@@ -26,6 +27,9 @@ inputParser::inputParser(const string inputFilename,struct paramStruct *paramete
         verbosity(*this->_inputStruct,"could not write template file - EXIT!",0,__FILE__,__LINE__);
         }
     }
+    this->_coordFilename=pathToCase+"/atoms.param";
+    myFunctions::cassert(std::ifstream(_coordFilename),ISCRITICAL,"inputParser::inputParser no atoms.param file found in folder "+pathToCase,__FILE__,__LINE__);
+
 }
 
 inputParser::~inputParser()
@@ -36,7 +40,8 @@ inputParser::~inputParser()
 int inputParser::writeTemplateInputFile()
 {
 //! \brief write a template input file
-ofstream myfile("inputFile.param");
+string fileToWrite=_pathToCase+_pathToCase;
+ofstream myfile(fileToWrite);
   if (myfile.is_open())
   {
     myfile << "[case]\n";
@@ -133,7 +138,7 @@ int inputParser::readInput()
 
             if(key.first=="Z") this->_inputStruct->Z=key.second.get_value<double>();
             else if(key.first=="f") this->_inputStruct->f=key.second.get_value<double>();
-            else if(key.first=="atomic coordinates filename") this->_coordFilename=key.second.get_value<std::string>();
+            //else if(key.first=="atomic coordinates filename") this->_coordFilename=key.second.get_value<std::string>();
             }
         }
         else if(section.first=="numerical")
