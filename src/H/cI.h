@@ -1,15 +1,12 @@
 #ifndef CI_H
 #define CI_H
 
-//! The Laplace operator class
+//! Backward fourier transformation class
 /*!
- This class provides operators for computing the Laplacian
- It can be applied on fourier transformed sets of wave functions
- means on sets of fourier coefficients of plane wave functions
+ This class provides operators for computing the transformation
+ of quantities from fourier to real space
  */
 
-//#include "checkOperatorSize.h"
-//#include "main.h"
 #include <armadillo>
 #include "latexComment.h"
 

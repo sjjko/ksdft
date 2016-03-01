@@ -32,7 +32,7 @@ string computeUm1();
 inline arma::mat getVdual(const operatorStruct O,const arma::mat V)
 {
 
-//! \brief function calculates J+(O(J(V)))
+//! \brief function calculates the dual potential as used in energy functional formulation: J+(O(J(V)))
 //! \param O...operator struct
 //! \param V...potential matrix
 //! \return matrix with dual potential
@@ -73,12 +73,14 @@ return description;
 /*compute the inverse of WOW*/
 inline arma::cx_mat Uinvers(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi)
 {
+//! \brief latex description of Uinvers operator
     return inv(Wi.t()*(*O.O*Wi));
 }
 
 
 inline string computeDensityLatex()
 {
+//! \brief latex description of density operator
 string description=" compute density at every space point $\\vec{n}(\\mathbf{r})$: \\newline ";
 description+= "$\\vec{n} = diag((\\mathbf{I}WU^{-1})(\\mathbf{I}W)^{\\dagger})$ ";
 return description;
@@ -89,7 +91,7 @@ return description;
 inline arma::mat computeDensityFromWavefuncs(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi,const arma::cx_mat Ui)
 {
 
-    //! \brief compute the density using the wavefunctions
+    //! \brief compute electronic density using wavefunctions
     //! \param O: operators in use in one struct
     //! \param P: parameter in use in one struct
     //! \param Wi: wavefunction describing electronic state
@@ -113,7 +115,7 @@ inline arma::mat computeDensityFromWavefuncs(const operatorStruct O,const paramS
 /*compute the potential from density*/
 inline arma::cx_mat solvePoisson(const operatorStruct O,const paramStruct P,const arma::mat ni)
 {
-    //! \brief solve the poisson equation
+    //! \brief solve the poisson equation from electron density distribution (electron potential phi from density)
     //! \param O: operators in use in one struct
     //! \param P: parameter in use in one struct
     //! \param ni: real matrix of density Sx1
@@ -124,8 +126,17 @@ inline arma::cx_mat solvePoisson(const operatorStruct O,const paramStruct P,cons
 }
 
 /*compute the hamiltonian*/
-inline arma::cx_mat HW(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi,const arma::mat VdualIon,const arma::cx_mat Ui,const arma::mat n)
+inline arma::cx_mat HW(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi,const arma::mat VdualIon,
+const arma::cx_mat Ui,const arma::mat n)
 {
+
+    //! \brief solve the hamiltonian operator
+    //! \param O: operators in use stored in struct
+    //! \param P: parameter in use stored in struct
+    //! \param Wi: complex matrix of N wavefunctions in N columns
+    //! \param VdualIon: dual ion potential as real one column matrix
+    //! \param Ui: inverse of U matrix, U=W+OW
+    //! \param n: one column matrix holding the density in real space
 
     verbosity(P,"HW: Veff",2,__FILE__,__LINE__);
     arma::cx_mat Veff(VdualIon.n_rows,1,fill::zeros);
@@ -193,6 +204,9 @@ inline arma::cx_mat HW(const operatorStruct O,const paramStruct P,const arma::cx
 
 inline string getgradLatex()
 {
+
+//! \brief holds latex description o gradient operator
+
 string description=" compute $\\nabla_{W} E$: ";
 description+= " $\\nabla_{W} E = f*(H-O(W(U^{-1}(W^{T}H))))U^{-1}$ ";
 return description;
@@ -203,11 +217,11 @@ inline arma::cx_mat getgrad(const operatorStruct O,const paramStruct P,const arm
 {
 
     //! \brief get the gradient of the energy along W
-    //! \param O: operators in use in one struct
-    //! \param P: parameter in use in one struct
-    //! \param Wi: wavefunction describing electronic state
-    //! \param Vdual: ion potential in real space
-    //! \return energy of current state as number
+    //! \param O: operators in use in a struct
+    //! \param P: parameter in use in a struct
+    //! \param Wi: wavefunctions describing electronic state
+    //! \param VdualIon: ion potential in real space
+    //! \return gradient of energy functional along W
     //!
     //! compute $\nabla_{W} E$ as follows:
     //! $\nabla_{W} E = f*(H-O(W(U^{-1}(W^{T}H))))U^{-1}$
@@ -226,8 +240,7 @@ inline arma::cx_mat getgrad(const operatorStruct O,const paramStruct P,const arm
 
 inline string getELatex()
 {
-
-    //! \brief return the latex description for the get energy function
+    //! \brief return the latex description for the energy functional function
 
 
     string description=" $E=E_{kin}+E_{ee}+E_{exc}+E_{ion}$ \\newline"
@@ -244,7 +257,7 @@ inline double getE(const operatorStruct O,const paramStruct P,const arma::cx_mat
     //! \param O: operators in use in one struct
     //! \param P: parameter in use in one struct
     //! \param Wi: wavefunction describing electronic state
-    //! \param Vdualinputvec: ion potential in real space
+    //! \param VdualIon: ion potential in real space
     //! \return energy of current state as number
     //!
     //! $E=E_{kin}+E_{ee}+E_{exc}+E_{ion}$
@@ -305,12 +318,6 @@ inline double getE(const operatorStruct O,const paramStruct P,const arma::cx_mat
     verbosity(P,"getE: we get a real part of size"+std::to_string(abs(accu(real(cReturnEnergy)))),3,__FILE__,__LINE__);
 
     return returnEnergy;
-    //std::complex<double> tnumber=-0.5*P.f*arma::trace(Wi.t()*(*O.L*(Wi*sqrt(Ui))));
-    //return std::real(tnumber);
-    //std::cout << Vdual.t()*n;
-   // auto d=Vdual.t()*n;
-//    return arma::as_scalar(Vdualinputvec*n); //.t()*n;
-//    return Vdual.t()*n+0.5*n.t()*(*O.J*(*O.O*phi));//+n.t()*(*O.J*(*O.O*(*O.J*Exc)));
 }
 
 
@@ -375,9 +382,8 @@ inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat 
 
 inline double Prod(const arma::cx_mat A,const arma::cx_mat B)
 {
+// \brief memory saving method of building product of A and B
     return real(trace(A.t()*B));
 }
-
-
 
 #endif // DFTFUNCTIONS_H_INCLUDED

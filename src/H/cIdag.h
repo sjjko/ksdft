@@ -1,11 +1,10 @@
 #ifndef cIdag_H
 #define cIdag_H
 
-//! The Laplace operator class
+//! Hermitian transpose of backward fourier transformation operator
 /*!
- This class provides operators for computing the LaplacIdagan
- It can be applied on fourier transformed sets of wave functions
- means on sets of fourier coefficIdagents of plane wave functions
+The hermitian transpose of fourier transformation from wavenumber space
+to real space
  */
 
 //#include "checkOperatorSize.h"
@@ -21,9 +20,9 @@ class cIdag
 
 		//! The constructor
 		/*!
-		 \param G2inp a vector of wave vector squared
-		 \param Rinp a 3x3 matrix of system size
-		 \param chkPointer a pointer to a class checking the validity of operations */
+		 \param Sinp a vector of dimensions of simulation domain
+		 \param Numwavfunc ... number of wavefunctions to use
+		 \param ltX ... pointer to latex class for documentation purposes */
         cIdag(arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
         ~cIdag();
 		//! Laplace operator for input of values
@@ -34,10 +33,7 @@ class cIdag
         arma::cx_mat operator*(arma::cx_mat* input);
     private:
         arma::Col<double> _S;
-        //checkOperatorSize<T> *_checkPointer;
         arma::cx_mat _outputM;
-
-//        std::auto_ptr<arma::mat> Rint;
 
 };
 

@@ -1,44 +1,32 @@
 #ifndef cJdag_H
 #define cJdag_H
 
-//! The Laplace operator class
+//! Hermitian transpose of forward fourier transformation operator
 /*!
- This class provides operators for computing the Laplacian
- It can be applied on fourier transformed sets of wave functions
- means on sets of fourier coefficients of plane wave functions
+The hermitian transpose of fourier transformation from real to wavenumber space
  */
 
-//#include "checkOperatorSize.h"
-//#include "main.h"
 #include <armadillo>
 #include "latexComment.h"
-
 
 class cJdag
     {
     public:
         latexComment *myLatexClass; //!< public latex class, to be initialized in construction - used to give latex output stream
-		//! The constructor
-		/*!
-		 \param G2inp a vector of wave vector squared
-		 \param Rinp a 3x3 matrix of system size
-		 \param chkPointer a pointer to a class checking the validity of operations */
-        cJdag(arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
+
+         /*!
+         \param Sinp a vector of dimensions of simulation domain
+		 \param Numwavfunc ... number of wavefunctions to use
+		 \param ltX ... pointer to latex class for documentation purposes !*/
+
+        cJdag(arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX); //! The constructor
         ~cJdag();
-		//! Laplace operator for input of values
-		/*!
-		 \param input as fourier coefficients of wave functions expanded in plane waves
-		 */
-        arma::cx_mat operator*(arma::cx_mat input);
-        arma::cx_mat operator*(arma::cx_mat* input);
+
+        arma::cx_mat operator*(arma::cx_mat input); //! hermitian fourier transformation operator matrix input
+        arma::cx_mat operator*(arma::cx_mat* input); //! hermitian fourier transformation operator matrix pointer input
     private:
-        arma::Col<double> _S;
-        //checkOperatorSize<T> *_checkPointer;
+        arma::Col<double> _S; //! matrix carrying the dimension of the simulation domain
         arma::cx_mat _outputM;
-
-//        std::auto_ptr<arma::mat> Rint;
-
 };
-
 
 #endif // L_H

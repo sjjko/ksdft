@@ -17,9 +17,6 @@
 					<Add directory="include" />
 					<Add directory="src/H" />
 				</Compiler>
-				<Linker>
-					<Add library="dl" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/ksdft++" prefix_auto="1" extension_auto="1" />
@@ -56,7 +53,6 @@
 			<Option weight="0" />
 		</Unit>
 		<Unit filename="src/C/main.cpp" />
-		<Unit filename="src/C/openCVPlotting.cpp" />
 		<Unit filename="src/C/pccgOptimizer.cpp" />
 		<Unit filename="src/C/sdOptimizer.cpp" />
 		<Unit filename="src/C/testingClass.cpp" />
@@ -86,7 +82,6 @@
 		<Unit filename="src/H/ionicPotentialClass.h" />
 		<Unit filename="src/H/latexComment.h" />
 		<Unit filename="src/H/main.h" />
-		<Unit filename="src/H/openCVPlotting.h" />
 		<Unit filename="src/H/optimizerBase.h" />
 		<Unit filename="src/H/pccgOptimizer.h" />
 		<Unit filename="src/H/plotting.h" />
