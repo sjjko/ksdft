@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>The Laplace operator class.  
+<p>Hermitian transpose of forward fourier transformation operator.  
  <a href="classc_jdag.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="c_jdag_8h_source.html">cJdag.h</a>&gt;</code></p>
@@ -99,23 +99,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a91122467ce3a719353c45946d844d0da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_jdag.html#a91122467ce3a719353c45946d844d0da">cJdag</a> (arma::Col&lt; double &gt; Sinp, int Numwavfunc, <a class="el" href="classlatex_comment.html">latexComment</a> *ltX)</td></tr>
-<tr class="memdesc:a91122467ce3a719353c45946d844d0da"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor.  <a href="#a91122467ce3a719353c45946d844d0da">More...</a><br/></td></tr>
 <tr class="separator:a91122467ce3a719353c45946d844d0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c628f3731b82dfd558456a86657debb"><td class="memItemLeft" align="right" valign="top">arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_jdag.html#a6c628f3731b82dfd558456a86657debb">operator*</a> (arma::cx_mat input)</td></tr>
-<tr class="memdesc:a6c628f3731b82dfd558456a86657debb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Laplace operator for input of values.  <a href="#a6c628f3731b82dfd558456a86657debb">More...</a><br/></td></tr>
+<tr class="memitem:aa228bb1389a650a6404f0a1d1b6e973e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa228bb1389a650a6404f0a1d1b6e973e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_jdag.html#aa228bb1389a650a6404f0a1d1b6e973e">~cJdag</a> ()</td></tr>
+<tr class="memdesc:aa228bb1389a650a6404f0a1d1b6e973e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor. <br/></td></tr>
+<tr class="separator:aa228bb1389a650a6404f0a1d1b6e973e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c628f3731b82dfd558456a86657debb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c628f3731b82dfd558456a86657debb"></a>
+arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (arma::cx_mat input)</td></tr>
 <tr class="separator:a6c628f3731b82dfd558456a86657debb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cf9be1db31603e26fbc51ecbdafdb42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9cf9be1db31603e26fbc51ecbdafdb42"></a>
-arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (arma::cx_mat *input)</td></tr>
+arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_jdag.html#a9cf9be1db31603e26fbc51ecbdafdb42">operator*</a> (arma::cx_mat *input)</td></tr>
+<tr class="memdesc:a9cf9be1db31603e26fbc51ecbdafdb42"><td class="mdescLeft">&#160;</td><td class="mdescRight">hermitian fourier transformation operator matrix input <br/></td></tr>
 <tr class="separator:a9cf9be1db31603e26fbc51ecbdafdb42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afbbef50f48876a5d782769d4e416b7c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlatex_comment.html">latexComment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">myLatexClass</a></td></tr>
+<tr class="memitem:afbbef50f48876a5d782769d4e416b7c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afbbef50f48876a5d782769d4e416b7c4"></a>
+<a class="el" href="classlatex_comment.html">latexComment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">myLatexClass</a></td></tr>
+<tr class="memdesc:afbbef50f48876a5d782769d4e416b7c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">public latex class, to be initialized in construction - used to give latex output stream <br/></td></tr>
 <tr class="separator:afbbef50f48876a5d782769d4e416b7c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The Laplace operator class. </p>
-<p>This class provides operators for computing the Laplacian It can be applied on fourier transformed sets of wave functions means on sets of fourier coefficients of plane wave functions </p>
+<div class="textblock"><p>Hermitian transpose of forward fourier transformation operator. </p>
+<p>The hermitian transpose of fourier transformation from real to wavenumber space </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a91122467ce3a719353c45946d844d0da"></a>
 <div class="memitem">
@@ -146,55 +152,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>The constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">G2inp</td><td>a vector of wave vector squared </td></tr>
-    <tr><td class="paramname">Rinp</td><td>a 3x3 matrix of system size </td></tr>
-    <tr><td class="paramname">chkPointer</td><td>a pointer to a class checking the validity of operations </td></tr>
+    <tr><td class="paramname">Sinp</td><td>a vector of dimensions of simulation domain </td></tr>
+    <tr><td class="paramname">Numwavfunc</td><td>... number of wavefunctions to use </td></tr>
+    <tr><td class="paramname">ltX</td><td>... pointer to latex class for documentation purposes ! </td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a6c628f3731b82dfd558456a86657debb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">arma::cx_mat cJdag::operator* </td>
-          <td>(</td>
-          <td class="paramtype">arma::cx_mat&#160;</td>
-          <td class="paramname"><em>input</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Laplace operator for input of values. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input</td><td>as fourier coefficients of wave functions expanded in plane waves </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="afbbef50f48876a5d782769d4e416b7c4"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classlatex_comment.html">latexComment</a>* cJdag::myLatexClass</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>public latex class, to be initialized in construction - used to give latex output stream </p>
 
 </div>
 </div>
@@ -205,7 +170,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 11:32:41 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

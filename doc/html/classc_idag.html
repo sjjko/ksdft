@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>The Laplace operator class.  
+<p>Hermitian transpose of backward fourier transformation operator.  
  <a href="classc_idag.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="c_idag_8h_source.html">cIdag.h</a>&gt;</code></p>
@@ -116,8 +116,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ae15c59e9c2dd100abd7456a814375da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The Laplace operator class. </p>
-<p>This class provides operators for computing the LaplacIdagan It can be applied on fourier transformed sets of wave functions means on sets of fourier coefficIdagents of plane wave functions </p>
+<div class="textblock"><p>Hermitian transpose of backward fourier transformation operator. </p>
+<p>The hermitian transpose of fourier transformation from wavenumber space to real space </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a03462e0cfb217c06ea1b1fb1b2e8b1dd"></a>
 <div class="memitem">
@@ -152,9 +152,9 @@ Public Attributes</h2></td></tr>
 <p>The constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">G2inp</td><td>a vector of wave vector squared </td></tr>
-    <tr><td class="paramname">Rinp</td><td>a 3x3 matrix of system size </td></tr>
-    <tr><td class="paramname">chkPointer</td><td>a pointer to a class checking the validity of operations </td></tr>
+    <tr><td class="paramname">Sinp</td><td>a vector of dimensions of simulation domain </td></tr>
+    <tr><td class="paramname">Numwavfunc</td><td>... number of wavefunctions to use </td></tr>
+    <tr><td class="paramname">ltX</td><td>... pointer to latex class for documentation purposes </td></tr>
   </table>
   </dd>
 </dl>
@@ -193,7 +193,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 11:32:41 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

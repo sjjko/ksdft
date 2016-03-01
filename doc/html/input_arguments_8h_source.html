@@ -97,15 +97,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;check if we have a true case directory at &quot;</span>+pathToCase,2,__FILE__,__LINE__);</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">string</span> paramFile=pathToCase+<span class="stringliteral">&quot;/inputFile.param&quot;</span>;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;ifstream f(paramFile.c_str());</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;myFunctions::cassert(f.good(),ISCRITICAL,<span class="stringliteral">&quot;could not find a inputFile.param file in directory &quot;</span>+ pathToCase +<span class="stringliteral">&quot; - Exit!&quot;</span>,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;f.close();</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;our input file for this run is &quot;</span>+paramFile,2,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif // INPUTARGUMENTS_H_INCLUDED</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordflow">if</span>(!f.good())</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;f.close();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;maybe we are in bin/Release folder - check this &quot;</span>+pathToCase,2,__FILE__,__LINE__);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">string</span> pathToCase=<span class="stringliteral">&quot;../../case/&quot;</span>+Pa.caseName;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;check if we have a true case directory at &quot;</span>+pathToCase,2,__FILE__,__LINE__);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">string</span> paramFile=pathToCase+<span class="stringliteral">&quot;/inputFile.param&quot;</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;ifstream f2(paramFile.c_str());</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;myFunctions::cassert(f2.good(),ISCRITICAL,<span class="stringliteral">&quot;could not find a inputFile.param file in input directory and in directory &quot;</span>+ pathToCase +<span class="stringliteral">&quot; - Exit!&quot;</span>,__FILE__,__LINE__);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;f2.close();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;our input file for this run is &quot;</span>+paramFile,2,__FILE__,__LINE__);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif // INPUTARGUMENTS_H_INCLUDED</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 11:32:41 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

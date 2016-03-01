@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>The Laplace operator class.  
+<p>Forward fourier transformation class.  
  <a href="classc_j.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="c_j_8h_source.html">cJ.h</a>&gt;</code></p>
@@ -102,13 +102,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aebd5fa4ed724877fc3cb79af3615aa2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor.  <a href="#aebd5fa4ed724877fc3cb79af3615aa2b">More...</a><br/></td></tr>
 <tr class="separator:aebd5fa4ed724877fc3cb79af3615aa2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c3851dfd67eb8ca80f01439cca716df"><td class="memItemLeft" align="right" valign="top">arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a> (arma::mat input)</td></tr>
-<tr class="memdesc:a2c3851dfd67eb8ca80f01439cca716df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Laplace operator for input of values.  <a href="#a2c3851dfd67eb8ca80f01439cca716df">More...</a><br/></td></tr>
 <tr class="separator:a2c3851dfd67eb8ca80f01439cca716df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19f850a6d1009228d17642328ef20dda"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19f850a6d1009228d17642328ef20dda"></a>
-arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (arma::cx_mat input)</td></tr>
+arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_j.html#a19f850a6d1009228d17642328ef20dda">operator*</a> (arma::cx_mat input)</td></tr>
+<tr class="memdesc:a19f850a6d1009228d17642328ef20dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">fourier transformation of real matrix <br/></td></tr>
 <tr class="separator:a19f850a6d1009228d17642328ef20dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43248c9e14d8a82d9963269890db5738"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43248c9e14d8a82d9963269890db5738"></a>
-arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><b>operator*</b> (arma::cx_mat *input)</td></tr>
+arma::cx_mat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc_j.html#a43248c9e14d8a82d9963269890db5738">operator*</a> (arma::cx_mat *input)</td></tr>
+<tr class="memdesc:a43248c9e14d8a82d9963269890db5738"><td class="mdescLeft">&#160;</td><td class="mdescRight">fourier transformation class of complex matrix <br/></td></tr>
 <tr class="separator:a43248c9e14d8a82d9963269890db5738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -117,8 +118,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a67c95057fe0d2b248d0da8e0c2d197db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The Laplace operator class. </p>
-<p>This class provides operators for computing the Laplacian It can be applied on fourier transformed sets of wave functions means on sets of fourier coefficients of plane wave functions </p>
+<div class="textblock"><p>Forward fourier transformation class. </p>
+<p>This class provides operators for computing the transformation of quantities from real to fourier space </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aebd5fa4ed724877fc3cb79af3615aa2b"></a>
 <div class="memitem">
@@ -153,9 +154,9 @@ Public Attributes</h2></td></tr>
 <p>The constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">G2inp</td><td>a vector of wave vector squared </td></tr>
-    <tr><td class="paramname">Rinp</td><td>a 3x3 matrix of system size </td></tr>
-    <tr><td class="paramname">chkPointer</td><td>a pointer to a class checking the validity of operations </td></tr>
+    <tr><td class="paramname">Sinp</td><td>a vector of dimensions of simulation domain </td></tr>
+    <tr><td class="paramname">Numwavfunc</td><td>... number of wavefunctions to use </td></tr>
+    <tr><td class="paramname">ltX</td><td>... pointer to latex class for documentation purposes ! </td></tr>
   </table>
   </dd>
 </dl>
@@ -176,14 +177,6 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Laplace operator for input of values. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">input</td><td>as fourier coefficients of wave functions expanded in plane waves </td></tr>
-  </table>
-  </dd>
-</dl>
 <p>&lt; compute the FFT with real input matrix by copying it into the real part of a temporary complex matrix tmpM </p>
 
 </div>
@@ -209,7 +202,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 11:32:41 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
