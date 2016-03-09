@@ -89,36 +89,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef cJdag_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define cJdag_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//! Hermitian transpose of forward fourier transformation operator</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">The hermitian transpose of fourier transformation from real to wavenumber space</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;armadillo&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;latexComment.h&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classc_jdag.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classc_jdag.html">cJdag</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">   15</a></span>&#160;        <a class="code" href="classlatex_comment.html">latexComment</a> *<a class="code" href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">myLatexClass</a>; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classc_jdag.html#a91122467ce3a719353c45946d844d0da">cJdag</a>(arma::Col&lt;double&gt; Sinp,<span class="keywordtype">int</span> Numwavfunc,<a class="code" href="classlatex_comment.html">latexComment</a> *ltX); </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classc_jdag.html#aa228bb1389a650a6404f0a1d1b6e973e">~cJdag</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">   15</a></span>&#160;        <a class="code" href="classlatex_comment.html">latexComment</a> *<a class="code" href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">myLatexClass</a>; <span class="comment">//!&lt; public latex class, to be initialized in construction - used to give latex output stream</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"></span><span class="comment"></span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">         /*!</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">         \param Sinp a vector of dimensions of simulation domain</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">         \param Numwavfunc ... number of wavefunctions to use</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">         \param ltX ... pointer to latex class for documentation purposes !*/</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classc_jdag.html#a91122467ce3a719353c45946d844d0da">cJdag</a>(arma::Col&lt;double&gt; Sinp,<span class="keywordtype">int</span> Numwavfunc,<a class="code" href="classlatex_comment.html">latexComment</a> *ltX); <span class="comment">//! The constructor</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span>        <a class="code" href="classc_jdag.html#aa228bb1389a650a6404f0a1d1b6e973e">~cJdag</a>();</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        arma::cx_mat operator*(arma::cx_mat input); </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        arma::cx_mat operator*(arma::cx_mat* input); </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        arma::Col&lt;double&gt; _S; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        arma::cx_mat _outputM;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        arma::cx_mat operator*(arma::cx_mat input); <span class="comment">//! hermitian fourier transformation operator matrix input</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span>        arma::cx_mat operator*(arma::cx_mat* input); <span class="comment">//! hermitian fourier transformation operator matrix pointer input</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span>    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        arma::Col&lt;double&gt; _S; <span class="comment">//! matrix carrying the dimension of the simulation domain</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span>        arma::cx_mat _outputM;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif // L_H</span></div>
-<div class="ttc" id="classc_jdag_html_a91122467ce3a719353c45946d844d0da"><div class="ttname"><a href="classc_jdag.html#a91122467ce3a719353c45946d844d0da">cJdag::cJdag</a></div><div class="ttdeci">cJdag(arma::Col&lt; double &gt; Sinp, int Numwavfunc, latexComment *ltX)</div><div class="ttdef"><b>Definition:</b> cJdag.cpp:4</div></div>
-<div class="ttc" id="classc_jdag_html_aa228bb1389a650a6404f0a1d1b6e973e"><div class="ttname"><a href="classc_jdag.html#aa228bb1389a650a6404f0a1d1b6e973e">cJdag::~cJdag</a></div><div class="ttdeci">~cJdag()</div><div class="ttdoc">The constructor. </div><div class="ttdef"><b>Definition:</b> cJdag.cpp:22</div></div>
-<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> latexComment.h:22</div></div>
-<div class="ttc" id="classc_jdag_html_afbbef50f48876a5d782769d4e416b7c4"><div class="ttname"><a href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">cJdag::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> cJdag.h:15</div></div>
-<div class="ttc" id="classc_jdag_html"><div class="ttname"><a href="classc_jdag.html">cJdag</a></div><div class="ttdoc">Hermitian transpose of forward fourier transformation operator. </div><div class="ttdef"><b>Definition:</b> cJdag.h:12</div></div>
+<div class="ttc" id="classc_jdag_html_a91122467ce3a719353c45946d844d0da"><div class="ttname"><a href="classc_jdag.html#a91122467ce3a719353c45946d844d0da">cJdag::cJdag</a></div><div class="ttdeci">cJdag(arma::Col&lt; double &gt; Sinp, int Numwavfunc, latexComment *ltX)</div><div class="ttdef"><b>Definition:</b> <a href="c_jdag_8cpp_source.html#l00004">cJdag.cpp:4</a></div></div>
+<div class="ttc" id="classc_jdag_html_aa228bb1389a650a6404f0a1d1b6e973e"><div class="ttname"><a href="classc_jdag.html#aa228bb1389a650a6404f0a1d1b6e973e">cJdag::~cJdag</a></div><div class="ttdeci">~cJdag()</div><div class="ttdoc">The constructor. </div><div class="ttdef"><b>Definition:</b> <a href="c_jdag_8cpp_source.html#l00022">cJdag.cpp:22</a></div></div>
+<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00022">latexComment.h:22</a></div></div>
+<div class="ttc" id="classc_jdag_html_afbbef50f48876a5d782769d4e416b7c4"><div class="ttname"><a href="classc_jdag.html#afbbef50f48876a5d782769d4e416b7c4">cJdag::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="c_jdag_8h_source.html#l00015">cJdag.h:15</a></div></div>
+<div class="ttc" id="classc_jdag_html"><div class="ttname"><a href="classc_jdag.html">cJdag</a></div><div class="ttdoc">Hermitian transpose of forward fourier transformation operator. </div><div class="ttdef"><b>Definition:</b> <a href="c_jdag_8h_source.html#l00012">cJdag.h:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

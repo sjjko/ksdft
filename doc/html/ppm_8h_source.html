@@ -122,8 +122,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">%# Input- red, green, blue: 2d data of red, green, blue intensities</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> ppm(<a class="code" href="structparam_struct.html">paramStruct</a> Pa, <span class="keywordtype">string</span> fname,arma::mat red,arma::mat green,arma::mat blue,<a class="code" href="classlatex_comment.html">latexComment</a> *latX)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    //! \brief output routine for ppm images</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    //!</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    //! \param red, green, blue: 2d data of red, green, blue intensities</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    //! \param</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    //! \return color ppm image in file &quot;fname&quot; (view with &quot;xli fname&quot;).</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;ofstream myfile;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;myfile.open (fname+<span class="stringliteral">&quot;.ppm&quot;</span>, std::ofstream::out);</div>
@@ -183,8 +188,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;arma::mat ones=ppmDat.ones();</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;ppm: now rescale the data using maximum mx and minimum of data mn&quot;</span>,2,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;ppmDat=(ppmDat-ones*mn)/(ones*mx-ones*mn)*pixmx; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;ppm: round the values&quot;</span>,2,__FILE__,__LINE__);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;ppmDat=(ppmDat-ones*mn)/(ones*mx-ones*mn)*pixmx; <span class="comment">//!&lt; now rescale the data according to min/max values</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span>verbosity(Pa,<span class="stringliteral">&quot;ppm: round the values&quot;</span>,2,__FILE__,__LINE__);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">//dat=([arma::reshape(red’,1,width*height); ...</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">//      arma::reshape(green’,1,width*height); ...</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">//      arma::reshape(blue’,1,width*height)] ...</span></div>
@@ -204,21 +209,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#ifdef INCLUDE_PICTURE_IN_LATEX</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor"></span>latX-&gt;latexComment::convertPPMToPS(fname);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;latX-&gt;<a class="code" href="classlatex_comment.html#af8853a40cd9f1582ae1a9a2aa1b723e9">insertImage</a>(fname+<span class="stringliteral">&quot;.ps&quot;</span>); </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;latX-&gt;<a class="code" href="classlatex_comment.html#ad16ab1350715bdb31dbeaa838aace26a">insertImage</a>(fname+<span class="stringliteral">&quot;.ps&quot;</span>,<span class="stringliteral">&quot;caption&quot;</span>,,Pa.caseName); <span class="comment">//!&lt; now we insert the image into our latex document</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"></span><span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif // PPM_H</span></div>
-<div class="ttc" id="classlatex_comment_html_af8853a40cd9f1582ae1a9a2aa1b723e9"><div class="ttname"><a href="classlatex_comment.html#af8853a40cd9f1582ae1a9a2aa1b723e9">latexComment::insertImage</a></div><div class="ttdeci">void insertImage(const std::string imageName, const std::string captionString)</div><div class="ttdoc">add image to latex document </div><div class="ttdef"><b>Definition:</b> latexComment.cpp:32</div></div>
-<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:115</div></div>
-<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> latexComment.h:22</div></div>
+<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00115">dualPotential.cpp:115</a></div></div>
+<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00022">latexComment.h:22</a></div></div>
+<div class="ttc" id="classlatex_comment_html_ad16ab1350715bdb31dbeaa838aace26a"><div class="ttname"><a href="classlatex_comment.html#ad16ab1350715bdb31dbeaa838aace26a">latexComment::insertImage</a></div><div class="ttdeci">void insertImage(const std::string imageName, const std::string captionString, const std::string caseName)</div><div class="ttdoc">add image to latex document </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8cpp_source.html#l00032">latexComment.cpp:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

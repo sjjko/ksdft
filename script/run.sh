@@ -27,7 +27,7 @@ rm ./log.minidft
 echo "finished ksdft++" | tee -a log.runsh
 echo "====================" | tee -a log.runsh
 echo "call post processing routine" | tee -a log.runsh
-bash plotScript.sh  | tee -a log.run | tee -a log.runsh
+bash plotScript.sh $CASENAME  | tee -a log.run | tee -a log.runsh
 echo "finished postprocessing routine" | tee -a log.runsh
 echo "cp latex pdf to ./doc folder" | tee -a log.runsh
 cp latex.pdf ./doc/ksdft++.pdf

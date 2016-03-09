@@ -89,8 +89,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PCCGOPTIMIZER_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PCCGOPTIMIZER_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//! pccg optimizer implementation</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> conjugate gradient optimization algorithm</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//#include &quot;checkOperatorSize.h&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;main.h&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;optimizerBase.h&quot;</span></div>
@@ -100,10 +104,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classpccg_optimizer.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classpccg_optimizer.html">pccgOptimizer</a>:<span class="keyword">public</span> <a class="code" href="classoptimize_base.html">optimizeBase</a></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classpccg_optimizer.html#a9badf6d42a3fdc607fc06a7cfab44a29">   18</a></span>&#160;        <a class="code" href="classlatex_comment.html">latexComment</a> *<a class="code" href="classpccg_optimizer.html#a9badf6d42a3fdc607fc06a7cfab44a29">myLatexClass</a>; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="classpccg_optimizer.html">pccgOptimizer</a>(<span class="keyword">const</span> <a class="code" href="structoperator_struct.html">operatorStruct</a> Operator,<span class="keyword">const</span> <a class="code" href="structparam_struct.html">paramStruct</a> Parameter,<span class="keyword">const</span> arma::mat Vdual,<span class="keyword">const</span> arma::mat G2Input,<a class="code" href="classlatex_comment.html">latexComment</a> *ltX);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//        ~pccgOptimizer();</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classpccg_optimizer.html#a9badf6d42a3fdc607fc06a7cfab44a29">   18</a></span>&#160;        <a class="code" href="classlatex_comment.html">latexComment</a> *<a class="code" href="classpccg_optimizer.html#a9badf6d42a3fdc607fc06a7cfab44a29">myLatexClass</a>; <span class="comment">//!&lt; public latex class, to be initialized in construction - used to give latex output stream</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span>        <a class="code" href="classpccg_optimizer.html">pccgOptimizer</a>(<span class="keyword">const</span> <a class="code" href="structoperator_struct.html">operatorStruct</a> Operator,<span class="keyword">const</span> <a class="code" href="structparam_struct.html">paramStruct</a> Parameter,<span class="keyword">const</span> arma::mat Vdual,<span class="keyword">const</span> arma::mat G2Input,<a class="code" href="classlatex_comment.html">latexComment</a> *ltX);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//        ~pccgOptimizer();</span><span class="comment"></span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">        //! Laplace operator for input of values</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span><span class="comment">        /*!</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">         \param pointer to wavefunction coefficient matrix (is altered by setup)</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">         */</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classoptimize_base.html#a82611f23cca0ff951d44dbcd7d9eb8c5">setup</a>(std::shared_ptr&lt;arma::cx_mat&gt; W);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        arma::cx_mat K(<span class="keyword">const</span> arma::cx_mat W);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">double</span> optimize(<span class="keyword">const</span> <span class="keywordtype">int</span>  Niterations,std::shared_ptr&lt;arma::cx_mat&gt; W);</div>
@@ -115,17 +122,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif // L_H</span></div>
-<div class="ttc" id="classoptimize_base_html_a82611f23cca0ff951d44dbcd7d9eb8c5"><div class="ttname"><a href="classoptimize_base.html#a82611f23cca0ff951d44dbcd7d9eb8c5">optimizeBase::setup</a></div><div class="ttdeci">virtual int setup()</div><div class="ttdoc">Laplace operator for input of values. </div><div class="ttdef"><b>Definition:</b> optimizerBase.h:37</div></div>
-<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:115</div></div>
-<div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:131</div></div>
-<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> latexComment.h:22</div></div>
-<div class="ttc" id="classpccg_optimizer_html_a9badf6d42a3fdc607fc06a7cfab44a29"><div class="ttname"><a href="classpccg_optimizer.html#a9badf6d42a3fdc607fc06a7cfab44a29">pccgOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> pccgOptimizer.h:18</div></div>
-<div class="ttc" id="classpccg_optimizer_html"><div class="ttname"><a href="classpccg_optimizer.html">pccgOptimizer</a></div><div class="ttdoc">pccg optimizer implementation </div><div class="ttdef"><b>Definition:</b> pccgOptimizer.h:15</div></div>
-<div class="ttc" id="classoptimize_base_html"><div class="ttname"><a href="classoptimize_base.html">optimizeBase</a></div><div class="ttdoc">The base class for various optimizers implemented. </div><div class="ttdef"><b>Definition:</b> optimizerBase.h:16</div></div>
+<div class="ttc" id="classoptimize_base_html_a82611f23cca0ff951d44dbcd7d9eb8c5"><div class="ttname"><a href="classoptimize_base.html#a82611f23cca0ff951d44dbcd7d9eb8c5">optimizeBase::setup</a></div><div class="ttdeci">virtual int setup()</div><div class="ttdoc">Laplace operator for input of values. </div><div class="ttdef"><b>Definition:</b> <a href="optimizer_base_8h_source.html#l00037">optimizerBase.h:37</a></div></div>
+<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00115">dualPotential.cpp:115</a></div></div>
+<div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00131">dualPotential.cpp:131</a></div></div>
+<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00022">latexComment.h:22</a></div></div>
+<div class="ttc" id="classpccg_optimizer_html_a9badf6d42a3fdc607fc06a7cfab44a29"><div class="ttname"><a href="classpccg_optimizer.html#a9badf6d42a3fdc607fc06a7cfab44a29">pccgOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="pccg_optimizer_8h_source.html#l00018">pccgOptimizer.h:18</a></div></div>
+<div class="ttc" id="classpccg_optimizer_html"><div class="ttname"><a href="classpccg_optimizer.html">pccgOptimizer</a></div><div class="ttdoc">pccg optimizer implementation </div><div class="ttdef"><b>Definition:</b> <a href="pccg_optimizer_8h_source.html#l00015">pccgOptimizer.h:15</a></div></div>
+<div class="ttc" id="classoptimize_base_html"><div class="ttname"><a href="classoptimize_base.html">optimizeBase</a></div><div class="ttdoc">The base class for various optimizers implemented. </div><div class="ttdef"><b>Definition:</b> <a href="optimizer_base_8h_source.html#l00016">optimizerBase.h:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

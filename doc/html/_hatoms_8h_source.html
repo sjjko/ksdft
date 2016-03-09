@@ -114,7 +114,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor"></span><span class="keywordtype">string</span> name=<span class="stringliteral">&quot;hatoms_Vdual&quot;</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">string</span> imageName=gpL.plotAMatrixSlice(name,Vdual,Pa.S,0);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">string</span> caption=<span class="stringliteral">&quot;Hatoms: The initial ion potential as computed using the structure function - &quot;</span>+gpL.getPlaneName()+<span class="stringliteral">&quot; plane.&quot;</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;latX.insertImage(imageName,caption);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;latX.insertImage(imageName,caption,Pa.caseName);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;latX.subsubSection(<span class="stringliteral">&quot;Preparation of the wavefunction&quot;</span>);</div>
@@ -214,7 +214,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            name=<span class="stringliteral">&quot;HATOMS_psi_&quot;</span>+std::to_string(st);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordtype">string</span> imageName=gpL.plotAMatrixSlice(name,dat,Pa.S,k);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordtype">string</span> caption=<span class="stringliteral">&quot;result from solution of schroedinger equation: slice through wave function of electron &quot;</span> + std::to_string(st) + <span class="stringliteral">&quot; plane &quot;</span>+plane;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            latX.insertImage(imageName,caption);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            latX.insertImage(imageName,caption,Pa.caseName);</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor"></span>    }</div>
@@ -260,15 +260,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">//        ppm(name,sl*0.3,sl,sl,&amp;latX);</span></div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="comment">//    }</span></div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">//}</span></div>
-<div class="ttc" id="classsd_optimizer_html"><div class="ttname"><a href="classsd_optimizer.html">sdOptimizer</a></div><div class="ttdoc">The base class for various optimizers implemented. </div><div class="ttdef"><b>Definition:</b> sdOptimizer.h:15</div></div>
-<div class="ttc" id="classlatex_comment_html_a23cb3405f45ecd08d512d84d738ccee7"><div class="ttname"><a href="classlatex_comment.html#a23cb3405f45ecd08d512d84d738ccee7">latexComment::commentMyFunction</a></div><div class="ttdeci">void commentMyFunction()</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> latexComment.h:47</div></div>
-<div class="ttc" id="classsd_optimizer_html_a8168978b3115c2f6dfcdcd413b48b61f"><div class="ttname"><a href="classsd_optimizer.html#a8168978b3115c2f6dfcdcd413b48b61f">sdOptimizer::setup</a></div><div class="ttdeci">int setup(std::shared_ptr&lt; arma::cx_mat &gt; W)</div><div class="ttdoc">Laplace operator for input of values. </div><div class="ttdef"><b>Definition:</b> sdOptimizer.cpp:3</div></div>
-<div class="ttc" id="classpccg_optimizer_html"><div class="ttname"><a href="classpccg_optimizer.html">pccgOptimizer</a></div><div class="ttdoc">pccg optimizer implementation </div><div class="ttdef"><b>Definition:</b> pccgOptimizer.h:15</div></div>
-<div class="ttc" id="classsd_optimizer_html_ad83b50717e118863ced681c92f64b28d"><div class="ttname"><a href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">sdOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> sdOptimizer.h:18</div></div>
+<div class="ttc" id="classsd_optimizer_html"><div class="ttname"><a href="classsd_optimizer.html">sdOptimizer</a></div><div class="ttdoc">The base class for various optimizers implemented. </div><div class="ttdef"><b>Definition:</b> <a href="sd_optimizer_8h_source.html#l00015">sdOptimizer.h:15</a></div></div>
+<div class="ttc" id="classlatex_comment_html_a23cb3405f45ecd08d512d84d738ccee7"><div class="ttname"><a href="classlatex_comment.html#a23cb3405f45ecd08d512d84d738ccee7">latexComment::commentMyFunction</a></div><div class="ttdeci">void commentMyFunction()</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00047">latexComment.h:47</a></div></div>
+<div class="ttc" id="classsd_optimizer_html_a8168978b3115c2f6dfcdcd413b48b61f"><div class="ttname"><a href="classsd_optimizer.html#a8168978b3115c2f6dfcdcd413b48b61f">sdOptimizer::setup</a></div><div class="ttdeci">int setup(std::shared_ptr&lt; arma::cx_mat &gt; W)</div><div class="ttdoc">Laplace operator for input of values. </div><div class="ttdef"><b>Definition:</b> <a href="sd_optimizer_8cpp_source.html#l00003">sdOptimizer.cpp:3</a></div></div>
+<div class="ttc" id="classpccg_optimizer_html"><div class="ttname"><a href="classpccg_optimizer.html">pccgOptimizer</a></div><div class="ttdoc">pccg optimizer implementation </div><div class="ttdef"><b>Definition:</b> <a href="pccg_optimizer_8h_source.html#l00015">pccgOptimizer.h:15</a></div></div>
+<div class="ttc" id="classsd_optimizer_html_ad83b50717e118863ced681c92f64b28d"><div class="ttname"><a href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">sdOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="sd_optimizer_8h_source.html#l00018">sdOptimizer.h:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

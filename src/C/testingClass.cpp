@@ -46,7 +46,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
         gnuPlotPlotting gpL;
         string imgName=gpL.plotAMatrixSlice(_myP,"schroedinger_Vosci",Vosci,Pa.S,0);
         _myLatexPtr->newLine("A parabolic potential is assumed with the following shape:");
-        _myLatexPtr->insertImage(imgName,"parabolic ion potential for which Schroedinger equation is solved.");
+        _myLatexPtr->insertImage(imgName,"parabolic ion potential for which Schroedinger equation is solved.",Pa.caseName);
 
         verbosity(_myP,"schroedinger: the oscillator potential has dimension "+std::to_string(Vosci.n_rows),2,__FILE__,__LINE__);
         verbosity(_myP,"schroedinger: initialize wavefunction W",2,__FILE__,__LINE__);
@@ -80,7 +80,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
 
         _myLatexPtr->newLine("The following image shows the initial density computed using the initial state of random wavefunction.");
 
-        _myLatexPtr->insertImage("schroedinger_initialDensity_xy","density after initialization of the wavefunctions");
+        _myLatexPtr->insertImage("schroedinger_initialDensity_xy","density after initialization of the wavefunctions",Pa.caseName);
 
         sd.myLatexClass->commentMyFunction();
         verbosity(_myP,"====================================",2,__FILE__,__LINE__);
@@ -152,7 +152,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
                     name="schroedinger_psi_"+std::to_string(st);
                     string imageName=gpL.plotAMatrixSlice(Pa,name,dat,Pa.S,k);
                     string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
-                    _myLatexPtr->insertImage(imageName,caption);
+                    _myLatexPtr->insertImage(imageName,caption,Pa.caseName);
                 }
                 #endif
             }
@@ -164,7 +164,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
         density=computeDensityFromWavefuncs(Op,Pa,*W.get(),Ui);
         imgName=gpL.plotAMatrixSlice(Pa,"schroedinger_density_final",density,Pa.S,0);
         _myLatexPtr->newLine("Finally a density distribution as shown in the next image is computed.");
-        _myLatexPtr->insertImage(imgName,"final result of Schroedinger equation: density");
+        _myLatexPtr->insertImage(imgName,"final result of Schroedinger equation: density",Pa.caseName);
 
         bool testPassed=false;
         if(abs(finalEnergy-18)<0.01)

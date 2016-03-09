@@ -100,8 +100,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">inline</span> arma::mat slice(<span class="keyword">const</span> <a class="code" href="structparam_struct.html">paramStruct</a> Pa,arma::mat dat,arma::vec N,<span class="keywordtype">int</span> n,<span class="keywordtype">int</span> dir)</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//! \brief</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//!</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//! \param N: dimensions of dat in a 3-vector</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//! \param dat: 3d data set (any shape) of total size prod(N)=N(1)*N(2)*N(3)</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//! \param dir: direction perpendicular to slice --- dir=0,1,2 gives yz,xz,yz planes</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//! \param n: desired slice number from data; 1 &lt;= n &lt;= N(dir)</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//! \return n-th dir-plane of dat (lower remaining dimension leading)</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//!</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//!</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;verbosity(Pa,<span class="stringliteral">&quot;slice: new out matrix &quot;</span>,2,__FILE__,__LINE__);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;arma::mat out;</div>
@@ -195,11 +204,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif // SLICE_H_INCLUDED</span></div>
-<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:115</div></div>
+<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00115">dualPotential.cpp:115</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

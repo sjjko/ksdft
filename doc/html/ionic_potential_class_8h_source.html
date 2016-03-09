@@ -103,15 +103,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="classionic_potential_class.html">ionicPotentialClass</a>(<a class="code" href="structoperator_struct.html">operatorStruct</a> Op,<a class="code" href="structparam_struct.html">paramStruct</a> Pa,mat dr,cx_mat Sfi,arma::mat Xi,arma::mat G2i,<span class="keywordtype">string</span> caseName);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classionic_potential_class.html">ionicPotentialClass</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        arma::mat getPotential(); </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">void</span> checkPotential();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        arma::mat getPotential(); <span class="comment">//! &lt; retrieve dual potential for case specified in string</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span>        <span class="keywordtype">void</span> checkPotential();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordtype">int</span> computePotential();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordtype">void</span> getListOfPotentialPotentials();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordtype">void</span> checkArbitraryMatrix(mat M,<span class="keywordtype">string</span> errorMessage);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        arma::mat _Vdual; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        arma::mat _Vdual; <span class="comment">//! the potential to return for further computations</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">string</span> _caseName;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="structoperator_struct.html">operatorStruct</a> _Op;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="structparam_struct.html">paramStruct</a> _Pa;</div>
@@ -124,13 +124,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif // IONICPOTENTIALCLASS_H</span></div>
-<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:115</div></div>
-<div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:131</div></div>
-<div class="ttc" id="classionic_potential_class_html"><div class="ttname"><a href="classionic_potential_class.html">ionicPotentialClass</a></div><div class="ttdef"><b>Definition:</b> ionicPotentialClass.h:12</div></div>
+<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00115">dualPotential.cpp:115</a></div></div>
+<div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00131">dualPotential.cpp:131</a></div></div>
+<div class="ttc" id="classionic_potential_class_html"><div class="ttname"><a href="classionic_potential_class.html">ionicPotentialClass</a></div><div class="ttdef"><b>Definition:</b> <a href="ionic_potential_class_8h_source.html#l00012">ionicPotentialClass.h:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

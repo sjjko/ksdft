@@ -25,7 +25,7 @@ verbosity("Hatom: now plot the Vdual potential",2,__FILE__,__LINE__);
 string name="hatoms_Vdual";
 string imageName=gpL.plotAMatrixSlice(name,Vdual,Pa.S,0);
 string caption="Hatoms: The initial ion potential as computed using the structure function - "+gpL.getPlaneName()+" plane.";
-latX.insertImage(imageName,caption);
+latX.insertImage(imageName,caption,Pa.caseName);
 #endif
 
 latX.subsubSection("Preparation of the wavefunction");
@@ -125,7 +125,7 @@ for(unsigned int st=0; st<Psi->n_cols; st++)
             name="HATOMS_psi_"+std::to_string(st);
             string imageName=gpL.plotAMatrixSlice(name,dat,Pa.S,k);
             string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
-            latX.insertImage(imageName,caption);
+            latX.insertImage(imageName,caption,Pa.caseName);
         }
         #endif
     }

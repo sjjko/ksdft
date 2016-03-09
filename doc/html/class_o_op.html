@@ -121,7 +121,10 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a775319a094b3702fae11a04d0a634970"><td class="mdescLeft">&#160;</td><td class="mdescRight">public latex class, to be initialized in construction - used to give latex output stream <br/></td></tr>
 <tr class="separator:a775319a094b3702fae11a04d0a634970"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p>Definition at line <a class="el" href="_o_8h_source.html#l00011">11</a> of file <a class="el" href="_o_8h_source.html">O.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa061ee84d9b5962ce2728a7dcdfc5733"></a>
 <div class="memitem">
 <div class="memproto">
@@ -155,6 +158,36 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="_o_8cpp_source.html#l00003">3</a> of file <a class="el" href="_o_8cpp_source.html">O.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    //! \brief initialize overlap matrix class</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    //!</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    //! \param Rinput: input matrix of grid point positions</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    //! compute $O_{\beta,\alpha} = \int b_{\alpha}(\vec{x}) b_{\beta}(\vec{x}) dV$</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">    //! which for plane waves becomes:</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">    //! $O= det(\mathbf{R}) \mathbf{1}$</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;std::cout &lt;&lt; <span class="stringliteral">&quot;setup O class&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;std::cout &lt;&lt; <span class="stringliteral">&quot;type:&quot;</span> &lt;&lt; <span class="keyword">typeid</span>(Rinput).name() &lt;&lt; <span class="stringliteral">&quot; Ri &quot;</span> &lt;&lt; <span class="keyword">typeid</span>(_Ri).name() &lt;&lt; endl;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;arma::mat Test(3,3);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;_Ri=Test;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;_Ri=Rinput;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="class_o_op.html#a775319a094b3702fae11a04d0a634970">myLatexClass</a>=ltX;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;std::string myFunctionString=<span class="stringliteral">&quot; \\textbf{\\large{}initiate overlap matrix class} \\newline &quot;</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;myFunctionString+=<span class="stringliteral">&quot; $O_{\\beta,\\alpha} = \\int b_{\\alpha}(\\vec{x}) b_{\\beta}(\\vec{x}) dV$ \\newline&quot;</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;myFunctionString+=<span class="stringliteral">&quot; implemented for plane waves: &quot;</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;myFunctionString+=<span class="stringliteral">&quot; $O = det(\\mathbf{R}) \\mathbf{1}$&quot;</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="class_o_op.html#a775319a094b3702fae11a04d0a634970">myLatexClass</a>-&gt;<a class="code" href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">setMyFunctionString</a>(myFunctionString);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//verbosity(&quot;Ri assigned !&quot;,2,__FILE__,__LINE__);</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//verbosity(&quot;now go on !&quot;,2,__FILE__,__LINE__);</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="ttc" id="classlatex_comment_html_a5886c955858e04709e325b19e56b87a7"><div class="ttname"><a href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">latexComment::setMyFunctionString</a></div><div class="ttdeci">void setMyFunctionString(std::string inputString)</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00048">latexComment.h:48</a></div></div>
+<div class="ttc" id="class_o_op_html_a775319a094b3702fae11a04d0a634970"><div class="ttname"><a href="class_o_op.html#a775319a094b3702fae11a04d0a634970">OOp::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="_o_8h_source.html#l00014">O.h:14</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <a class="anchor" id="a025a2c6172df38bb92ba5f64db05dfdf"></a>
@@ -182,16 +215,18 @@ Public Attributes</h2></td></tr>
 <p>assignment operator for overlap class </p>
 <p>link overlap matrix classes </p>
 
+<p>Definition at line <a class="el" href="_o_8h_source.html#l00019">19</a> of file <a class="el" href="_o_8h_source.html">O.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/H/<a class="el" href="_o_8h_source.html">O.h</a></li>
-<li>src/C/O.cpp</li>
+<li>src/C/<a class="el" href="_o_8cpp_source.html">O.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

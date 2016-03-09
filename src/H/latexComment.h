@@ -41,7 +41,7 @@ class latexComment
         int writeTheLatexDocument(string DocumentName); //!< write the string into a pdf document
         void startItemize(); //!< start a list to add items successively
         void endItemize(); //!< end the list
-        void insertImage(const std::string imageName,const std::string captionString);//!< add image to latex document
+        void insertImage(const std::string imageName,const std::string captionString,const std::string caseName);//!< add image to latex document
         void addItem(std::string stringToAdd);  //!< add an item to the list
         inline void commentMyFunctionAsItem() {addItem(_myFunctionString);}; //!< used by classes to return their latex description
         inline void commentMyFunction() {this->newLine(_myFunctionString);}; //!< used by classes to return their latex description

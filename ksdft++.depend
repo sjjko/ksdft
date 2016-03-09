@@ -1,0 +1,285 @@
+# depslib dependency file v1.0
+1456422979 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cI.cpp
+	"cI.h"
+	"fft_minidft.h"
+
+1456802880 /home/kos/Code/kos/minidft/ksdft++/src/H/cI.h
+	<armadillo>
+	"latexComment.h"
+
+1457529883 /home/kos/Code/kos/minidft/ksdft++/src/H/latexComment.h
+	"main.h"
+	<unistd.h>
+	<sys/types.h>
+	<errno.h>
+	<stdio.h>
+	<sys/wait.h>
+	<stdlib.h>
+	"customAssert.h"
+	<texcaller.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1456764190 /home/kos/Code/kos/minidft/ksdft++/src/H/main.h
+	<iostream>
+	<list>
+	<map>
+	<list>
+	<string>
+	<memory>
+	<exception>
+	<fftw.h>
+	<exception>
+	<armadillo>
+	"fft_minidft.h"
+	<iomanip>
+	"customAssert.h"
+	<boost/foreach.hpp>
+	<string>
+	<set>
+	<boost/property_tree/ptree.hpp>
+	<boost/property_tree/ini_parser.hpp>
+
+1456422209 /home/kos/Code/kos/minidft/ksdft++/src/H/fft_minidft.h
+	<armadillo>
+
+1456759654 /home/kos/Code/kos/minidft/ksdft++/src/H/customAssert.h
+	"main.h"
+	"structs.h"
+
+1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cIdag.cpp
+	"cIdag.h"
+	"fft_minidft.h"
+
+1456802778 /home/kos/Code/kos/minidft/ksdft++/src/H/cIdag.h
+	<armadillo>
+	"latexComment.h"
+
+1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cJ.cpp
+	"cJ.h"
+	"fft_minidft.h"
+
+1456802832 /home/kos/Code/kos/minidft/ksdft++/src/H/cJ.h
+	<armadillo>
+	"latexComment.h"
+
+1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cJdag.cpp
+	"cJdag.h"
+	"fft_minidft.h"
+
+1456802868 /home/kos/Code/kos/minidft/ksdft++/src/H/cJdag.h
+	<armadillo>
+	"latexComment.h"
+
+1456758601 source:/home/kos/Code/kos/minidft/ksdft++/src/C/gnuPlotPlotting.cpp
+	"gnuPlotPlotting.h"
+
+1456758491 /home/kos/Code/kos/minidft/ksdft++/src/H/gnuPlotPlotting.h
+	"main.h"
+	"customAssert.h"
+	"slice.h"
+	"structs.h"
+
+1456757197 /home/kos/Code/kos/minidft/ksdft++/src/H/slice.h
+	"customAssert.h"
+	"structs.h"
+
+1456761894 source:/home/kos/Code/kos/minidft/ksdft++/src/C/inputParser.cpp
+	"inputParser.h"
+	<boost/property_tree/ptree.hpp>
+	<boost/property_tree/ini_parser.hpp>
+
+1456761703 /home/kos/Code/kos/minidft/ksdft++/src/H/inputParser.h
+	"main.h"
+	"structs.h"
+	"customAssert.h"
+	"armadillo"
+
+1456758750 /home/kos/Code/kos/minidft/ksdft++/src/H/structs.h
+	"O.h"
+	"Linv.h"
+	"L.h"
+	"cJ.h"
+	"cI.h"
+	"cJdag.h"
+	"cIdag.h"
+	"main.h"
+
+1456758233 /home/kos/Code/kos/minidft/ksdft++/src/H/O.h
+	"main.h"
+	"latexComment.h"
+
+1456422209 /home/kos/Code/kos/minidft/ksdft++/src/H/Linv.h
+	<armadillo>
+	"latexComment.h"
+
+1456422208 /home/kos/Code/kos/minidft/ksdft++/src/H/L.h
+	"main.h"
+	"latexComment.h"
+
+1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/L.cpp
+	"L.h"
+
+1456764129 source:/home/kos/Code/kos/minidft/ksdft++/src/C/latexComment.cpp
+	"latexComment.h"
+
+1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/Linv.cpp
+	"Linv.h"
+
+1456764145 source:/home/kos/Code/kos/minidft/ksdft++/src/C/main.cpp
+	"main.h"
+	<texcaller.h>
+	<sys/types.h>
+	<sys/stat.h>
+	"latexComment.h"
+	"O.h"
+	"L.h"
+	"Linv.h"
+	"cI.h"
+	"cJ.h"
+	"cJdag.h"
+	"cIdag.h"
+	"structs.h"
+	"optimizerBase.h"
+	"sdOptimizer.h"
+	"pccgOptimizer.h"
+	"smooth.h"
+	"ppm.h"
+	<typeinfo>
+	"structs.h"
+	"inputParser.h"
+	"JItest.h"
+	"slice.h"
+	"testingClass.h"
+	"gnuPlotPlotting.h"
+	"atomicSystem.h"
+	"inputArguments.h"
+	"setup.h"
+
+1456759307 /home/kos/Code/kos/minidft/ksdft++/src/H/optimizerBase.h
+	"main.h"
+	"structs.h"
+	"dft_functions.h"
+	"customAssert.h"
+	"structs.h"
+
+1456803524 /home/kos/Code/kos/minidft/ksdft++/src/H/dft_functions.h
+	"main.h"
+	"excVWN.h"
+	"excpVWN.h"
+	"customAssert.h"
+	"structs.h"
+
+1456756795 /home/kos/Code/kos/minidft/ksdft++/src/H/excVWN.h
+	"main.h"
+	"customAssert.h"
+
+1456422208 /home/kos/Code/kos/minidft/ksdft++/src/H/excpVWN.h
+	"main.h"
+	<armadillo>
+	"customAssert.h"
+
+1456500967 /home/kos/Code/kos/minidft/ksdft++/src/H/sdOptimizer.h
+	"main.h"
+	"optimizerBase.h"
+	"dft_functions.h"
+	"latexComment.h"
+
+1456506206 /home/kos/Code/kos/minidft/ksdft++/src/H/pccgOptimizer.h
+	"main.h"
+	"optimizerBase.h"
+	"dft_functions.h"
+	"latexComment.h"
+
+1456758831 /home/kos/Code/kos/minidft/ksdft++/src/H/smooth.h
+	"main.h"
+	"structs.h"
+
+1457530015 /home/kos/Code/kos/minidft/ksdft++/src/H/ppm.h
+	"main.h"
+	"smooth.h"
+	"structs.h"
+
+1456422209 /home/kos/Code/kos/minidft/ksdft++/src/H/JItest.h
+	"main.h"
+
+1456759086 /home/kos/Code/kos/minidft/ksdft++/src/H/testingClass.h
+	"customAssert.h"
+	"structs.h"
+	"latexComment.h"
+	"plotting.h"
+	"openCVPlotting.h"
+	"ppm.h"
+	"gnuPlotPlotting.h"
+	"dft_functions.h"
+	"sdOptimizer.h"
+	"pccgOptimizer.h"
+
+1456422208 /home/kos/Code/kos/minidft/ksdft++/src/H/plotting.h
+	"armadillo"
+	"plotImplementationBase.h"
+
+1456422209 /home/kos/Code/kos/minidft/ksdft++/src/H/plotImplementationBase.h
+	"armadillo"
+	"customAssert.h"
+
+1456759223 /home/kos/Code/kos/minidft/ksdft++/src/H/openCVPlotting.h
+	"armadillo"
+	"customAssert.h"
+	"plotImplementationBase.h"
+	<opencv2/contrib/contrib.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/highgui/highgui.hpp>
+	"structs.h"
+
+1456759155 /home/kos/Code/kos/minidft/ksdft++/src/H/setup.h
+	"main.h"
+
+1456422209 /home/kos/Code/kos/minidft/ksdft++/src/H/fdtest.h
+
+1456458519 /home/kos/Code/kos/minidft/ksdft++/src/H/Hatoms.h
+
+1456759178 source:/home/kos/Code/kos/minidft/ksdft++/src/C/O.cpp
+	"O.h"
+
+1456759200 source:/home/kos/Code/kos/minidft/ksdft++/src/C/openCVPlotting.cpp
+	"openCVPlotting.h"
+
+1456760738 source:/home/kos/Code/kos/minidft/ksdft++/src/C/pccgOptimizer.cpp
+	"pccgOptimizer.h"
+
+1456760775 source:/home/kos/Code/kos/minidft/ksdft++/src/C/sdOptimizer.cpp
+	"sdOptimizer.h"
+
+1456759559 source:/home/kos/Code/kos/minidft/ksdft++/src/C/testingClass.cpp
+	"testingClass.h"
+	"slice.h"
+	"smooth.h"
+
+1456760792 source:/home/kos/Code/kos/minidft/ksdft++/src/C/atomicSystem.cpp
+	"atomicSystem.h"
+
+1456623321 /home/kos/Code/kos/minidft/ksdft++/src/H/atomicSystem.h
+	"main.h"
+	"customAssert.h"
+	"pccgOptimizer.h"
+	"sdOptimizer.h"
+	"structs.h"
+	"inputParser.h"
+	<dlfcn.h>
+	"gnuPlotPlotting.h"
+	"ionicPotentialClass.h"
+
+1456766253 /home/kos/Code/kos/minidft/ksdft++/src/H/inputArguments.h
+
+1456755038 /home/kos/Code/kos/minidft/ksdft++/src/H/ionicPotentialClass.h
+	"main.h"
+	"structs.h"
+	"latexComment.h"
+	"customAssert.h"
+
+1456758723 source:/home/kos/Code/kos/minidft/ksdft++/src/C/ionicPotentialClass.cpp
+	"ionicPotentialClass.h"
+
+1456623638 /home/kos/Code/kos/minidft/ksdft++/src/H/schroedinger.h
+

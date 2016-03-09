@@ -152,6 +152,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The base class for various optimizers implemented. </p>
 <p>This class provides the basis for all the optimization algorithms implemented </p>
+
+<p>Definition at line <a class="el" href="optimizer_base_8h_source.html#l00016">16</a> of file <a class="el" href="optimizer_base_8h_source.html">optimizerBase.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acb685ee2a3343f714f87beb03abab365"></a>
 <div class="memitem">
@@ -201,6 +203,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="optimizer_base_8h_source.html#l00024">24</a> of file <a class="el" href="optimizer_base_8h_source.html">optimizerBase.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                this-&gt;_Op=Operator;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                this-&gt;_Param=Parameter;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                this-&gt;_Vdual=Vdual;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                _sdNit=Parameter.<a class="code" href="structparam_struct.html#a65353d016344f59c26383782c839fdc4">sdNit</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                _pccgNit=Parameter.<a class="code" href="structparam_struct.html#a5cbb2f57bf5134129db94bf003a009f1">pccgNit</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                };</div>
+<div class="ttc" id="structparam_struct_html_a65353d016344f59c26383782c839fdc4"><div class="ttname"><a href="structparam_struct.html#a65353d016344f59c26383782c839fdc4">paramStruct::sdNit</a></div><div class="ttdeci">int sdNit</div><div class="ttdoc">number of iterations steepest descent </div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00124">dualPotential.cpp:124</a></div></div>
+<div class="ttc" id="structparam_struct_html_a5cbb2f57bf5134129db94bf003a009f1"><div class="ttname"><a href="structparam_struct.html#a5cbb2f57bf5134129db94bf003a009f1">paramStruct::pccgNit</a></div><div class="ttdeci">int pccgNit</div><div class="ttdoc">number of iterations conjugate gradient </div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00125">dualPotential.cpp:125</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -233,6 +246,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="optimizer_base_8h_source.html#l00037">37</a> of file <a class="el" href="optimizer_base_8h_source.html">optimizerBase.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{<span class="keywordflow">return</span> 1;}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
@@ -241,7 +257,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:39 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:22 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

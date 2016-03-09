@@ -120,7 +120,7 @@ myfile.close();
 
 #ifdef INCLUDE_PICTURE_IN_LATEX
 latX->latexComment::convertPPMToPS(fname);
-latX->insertImage(fname+".ps"); //!< now we insert the image into our latex document
+latX->insertImage(fname+".ps","caption",,Pa.caseName); //!< now we insert the image into our latex document
 #endif
 
 return 1;

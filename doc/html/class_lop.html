@@ -121,6 +121,8 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The Laplace operator class. </p>
 <p>This class provides operators for computing the Laplacian It can be applied on fourier transformed sets of wave functions means on sets of fourier coefficients of plane wave functions </p>
+
+<p>Definition at line <a class="el" href="_l_8h_source.html#l00015">15</a> of file <a class="el" href="_l_8h_source.html">L.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a6f917e9236f7f9a98b343e02bcf64715"></a>
 <div class="memitem">
@@ -146,6 +148,10 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="_l_8cpp_source.html#l00024">24</a> of file <a class="el" href="_l_8cpp_source.html">L.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -171,16 +177,27 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="_l_8cpp_source.html#l00028">28</a> of file <a class="el" href="_l_8cpp_source.html">L.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;arma::cx_mat outputMAT(input);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;input.n_cols;i++)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">//check(_Faktor,input.col(i),&quot;*&quot;); // check if _Faktor has as many cols as input rows</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    outputMAT.col(i)=this-&gt;_Faktor%input.col(i);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordflow">return</span> outputMAT;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/H/<a class="el" href="_l_8h_source.html">L.h</a></li>
-<li>src/C/L.cpp</li>
+<li>src/C/<a class="el" href="_l_8cpp_source.html">L.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

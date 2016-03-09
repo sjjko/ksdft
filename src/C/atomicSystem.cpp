@@ -322,7 +322,7 @@ int atomicSystem::postDensity(const string texCaption,const string fileNameEndin
         mat density=computeDensityFromWavefuncs(_Op,_Pa,*_W,Ui);
         //gnuPlotPlotting *gpL;
         string imgName=_gpLT->plotAMatrixSlice(_Pa,_Pa.caseName+"_density_"+fileNameEnding,density,_Pa.S,0);
-        _ltX->insertImage(imgName,texCaption);
+        _ltX->insertImage(imgName,texCaption,_Pa.caseName);
         //delete gpL;
 }
 
@@ -337,7 +337,7 @@ int atomicSystem::postVdual(const string texCaption)
         string name=_Pa.caseName+"_Vdual";
         string imgName=_gpLT->plotAMatrixSlice(_Pa,name,this->_Vdual,_Pa.S,0);
         verbosity(_Pa,"atomicSystem::postVdual: now insert image and caption into latex document ",2,__FILE__,__LINE__);
-        _ltX->insertImage(imgName,texCaption);
+        _ltX->insertImage(imgName,texCaption,_Pa.caseName);
         //delete gpL;
         return 0;
 }
@@ -389,7 +389,7 @@ int atomicSystem::postPsi()
                     name="schroedinger_psi_"+std::to_string(st);
                     string imageName=_gpLT->plotAMatrixSlice(_Pa,name,dat,_Pa.S,k);
                     string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
-                    _ltX->insertImage(imageName,caption);
+                    _ltX->insertImage(imageName,caption,_Pa.caseName);
                 }
                 #endif
             }

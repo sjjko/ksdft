@@ -97,8 +97,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">bool</span> IJtestMultiColumn(<span class="keyword">const</span> <a class="code" href="structoperator_struct.html">operatorStruct</a> O,<span class="keyword">const</span> <a class="code" href="structparam_struct.html">paramStruct</a> P,arma::Col&lt;double&gt; Sgrid);</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">bool</span> IJtest(<span class="keyword">const</span> <a class="code" href="structoperator_struct.html">operatorStruct</a> O,<span class="keyword">const</span> <a class="code" href="structparam_struct.html">paramStruct</a> P,arma::Col&lt;double&gt; Sgrid)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">    //! \brief do a J I inversion transformation test</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">    //!</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    //! \param O an operator struct</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    //! \param P a parameter struct</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    //! \return S, the S column vector containing the grid dimension</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">bool</span> returnval=<span class="keyword">false</span>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;arma::cx_mat dW=arma::randu&lt;arma::cx_mat&gt;(arma::prod(Sgrid),1);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//cout &lt;&lt; dW &lt;&lt; endl;</span></div>
@@ -112,8 +117,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">bool</span> IJtestMultiColumn(<span class="keyword">const</span> <a class="code" href="structoperator_struct.html">operatorStruct</a> O,<span class="keyword">const</span> <a class="code" href="structparam_struct.html">paramStruct</a> P,arma::Col&lt;double&gt; Sgrid)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    //! \brief do a J I inversion transformation test with a multicolumn matrix input</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    //!</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    //! \param O an operator struct</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    //! \param P a parameter struct</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    //! \return S, the S column vector containing the grid dimension</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">bool</span> returnval=<span class="keyword">false</span>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;arma::cx_mat dW=arma::randu&lt;arma::cx_mat&gt;(arma::prod(Sgrid),5);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//cout &lt;&lt; dW &lt;&lt; endl;</span></div>
@@ -130,12 +140,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:115</div></div>
-<div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> dualPotential.cpp:131</div></div>
+<div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00115">dualPotential.cpp:115</a></div></div>
+<div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00131">dualPotential.cpp:131</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

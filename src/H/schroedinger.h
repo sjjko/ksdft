@@ -13,7 +13,7 @@ Vosci=0.5*pow(omega,2)*(dr%dr);
 
 string imgName=gpL.plotAMatrixSlice("schroedinger_Vosci",Vosci,Pa.S,0);
 latX.newLine("A parabolic potential is assumed with the following shape:");
-latX.insertImage(imgName,"parabolic ion potential for which Schroedinger equation is solved.");
+latX.insertImage(imgName,"parabolic ion potential for which Schroedinger equation is solved.",Pa.caseName);
 
 verbosity("schroedinger: the oscillator potential has dimension "+std::to_string(Vosci.n_rows),2,__FILE__,__LINE__);
 verbosity("schroedinger: initialize wavefunction W",2,__FILE__,__LINE__);
@@ -46,7 +46,7 @@ gpL.plotMatrix3Slices("schroedinger_initialDensity",density,Pa.S);
 
 latX.newLine("The following image shows the initial density computed using the initial state of random wavefunction.");
 
-latX.insertImage("schroedinger_initialDensity_xy","density after initialization of the wavefunctions");
+latX.insertImage("schroedinger_initialDensity_xy","density after initialization of the wavefunctions",Pa.caseName);
 
 sd.myLatexClass->commentMyFunction();
 verbosity("====================================",2,__FILE__,__LINE__);
@@ -118,7 +118,7 @@ for(unsigned int st=0; st<Psi->n_cols; st++)
             name="schroedinger_psi_"+std::to_string(st);
             string imageName=gpL.plotAMatrixSlice(name,dat,Pa.S,k);
             string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
-            latX.insertImage(imageName,caption);
+            latX.insertImage(imageName,caption,Pa.caseName);
         }
         #endif
     }
@@ -130,4 +130,4 @@ Ui=Uinvers(Op,Pa,*W.get());
 density=computeDensityFromWavefuncs(Op,Pa,*W.get(),Ui);
 imgName=gpL.plotAMatrixSlice("schroedinger_density_final",density,Pa.S,0);
 latX.newLine("Finally a density distribution as shown in the next image is computed.");
-latX.insertImage(imgName,"final result of Schroedinger equation: density");
+latX.insertImage(imgName,"final result of Schroedinger equation: density",Pa.caseName);

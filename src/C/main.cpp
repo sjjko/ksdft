@@ -68,6 +68,9 @@ paramStruct Pa;
     const std::string latexFileName="ksdft++.pdf";
     latX.writeHeader();
     latX.section(" ksdft++ documentation: ");
+    latX.newLine(" Program for computing the electronic energy configuration of atoms and molecules. ");
+    latX.newLine(" Devised after lecture by T.Arias. This run computes the case "+Pa.caseName);
+
     latX.subSection("The inital setup stage");
     latX.newLine(" The following steps are performed in the setup stage: ");
 #endif

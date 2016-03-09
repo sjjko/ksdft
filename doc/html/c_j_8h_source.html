@@ -89,36 +89,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CJ_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define CJ_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//! Forward fourier transformation class</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span><span class="comment">/*!</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> This class provides operators for computing the transformation</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> of quantities from real to fourier space</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;armadillo&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;latexComment.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classc_j.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classc_j.html">cJ</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">   16</a></span>&#160;        <a class="code" href="classlatex_comment.html">latexComment</a> *<a class="code" href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">myLatexClass</a>; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">   16</a></span>&#160;        <a class="code" href="classlatex_comment.html">latexComment</a> *<a class="code" href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">myLatexClass</a>; <span class="comment">//!&lt; public latex class, to be initialized in construction - used to give latex output stream</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span><span class="comment">        //! The constructor</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span><span class="comment">        /*!</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">         \param Sinp a vector of dimensions of simulation domain</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">         \param Numwavfunc ... number of wavefunctions to use</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">         \param ltX ... pointer to latex class for documentation purposes !*/</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classc_j.html#aebd5fa4ed724877fc3cb79af3615aa2b">cJ</a>(arma::Col&lt;double&gt; Sinp,<span class="keywordtype">int</span> Numwavfunc,<a class="code" href="classlatex_comment.html">latexComment</a> *ltX);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        ~<a class="code" href="classc_j.html">cJ</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        arma::cx_mat <a class="code" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a>(arma::mat input); </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        arma::cx_mat <a class="code" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a>(arma::cx_mat input); </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        arma::cx_mat <a class="code" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a>(arma::cx_mat* input); </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        arma::cx_mat <a class="code" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a>(arma::mat input); <span class="comment">//! fourier transformation of real matrix</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span>        arma::cx_mat <a class="code" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a>(arma::cx_mat input); <span class="comment">//! fourier transformation class of complex matrix</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span>        arma::cx_mat <a class="code" href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">operator*</a>(arma::cx_mat* input); <span class="comment">//! fourier transformation class of complex matrix represented by pointer</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span>    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        arma::Col&lt;double&gt; _S;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        arma::cx_mat _outputM;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif // L_H</span></div>
-<div class="ttc" id="classc_j_html_a2c3851dfd67eb8ca80f01439cca716df"><div class="ttname"><a href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">cJ::operator*</a></div><div class="ttdeci">arma::cx_mat operator*(arma::mat input)</div><div class="ttdef"><b>Definition:</b> cJ.cpp:52</div></div>
-<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> latexComment.h:22</div></div>
-<div class="ttc" id="classc_j_html"><div class="ttname"><a href="classc_j.html">cJ</a></div><div class="ttdoc">Forward fourier transformation class. </div><div class="ttdef"><b>Definition:</b> cJ.h:13</div></div>
-<div class="ttc" id="classc_j_html_aebd5fa4ed724877fc3cb79af3615aa2b"><div class="ttname"><a href="classc_j.html#aebd5fa4ed724877fc3cb79af3615aa2b">cJ::cJ</a></div><div class="ttdeci">cJ(arma::Col&lt; double &gt; Sinp, int Numwavfunc, latexComment *ltX)</div><div class="ttdoc">The constructor. </div><div class="ttdef"><b>Definition:</b> cJ.cpp:4</div></div>
-<div class="ttc" id="classc_j_html_a67c95057fe0d2b248d0da8e0c2d197db"><div class="ttname"><a href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">cJ::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdef"><b>Definition:</b> cJ.h:16</div></div>
+<div class="ttc" id="classc_j_html_a2c3851dfd67eb8ca80f01439cca716df"><div class="ttname"><a href="classc_j.html#a2c3851dfd67eb8ca80f01439cca716df">cJ::operator*</a></div><div class="ttdeci">arma::cx_mat operator*(arma::mat input)</div><div class="ttdef"><b>Definition:</b> <a href="c_j_8cpp_source.html#l00052">cJ.cpp:52</a></div></div>
+<div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00022">latexComment.h:22</a></div></div>
+<div class="ttc" id="classc_j_html"><div class="ttname"><a href="classc_j.html">cJ</a></div><div class="ttdoc">Forward fourier transformation class. </div><div class="ttdef"><b>Definition:</b> <a href="c_j_8h_source.html#l00013">cJ.h:13</a></div></div>
+<div class="ttc" id="classc_j_html_aebd5fa4ed724877fc3cb79af3615aa2b"><div class="ttname"><a href="classc_j.html#aebd5fa4ed724877fc3cb79af3615aa2b">cJ::cJ</a></div><div class="ttdeci">cJ(arma::Col&lt; double &gt; Sinp, int Numwavfunc, latexComment *ltX)</div><div class="ttdoc">The constructor. </div><div class="ttdef"><b>Definition:</b> <a href="c_j_8cpp_source.html#l00004">cJ.cpp:4</a></div></div>
+<div class="ttc" id="classc_j_html_a67c95057fe0d2b248d0da8e0c2d197db"><div class="ttname"><a href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">cJ::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdef"><b>Definition:</b> <a href="c_j_8h_source.html#l00016">cJ.h:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

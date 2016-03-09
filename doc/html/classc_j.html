@@ -120,6 +120,8 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Forward fourier transformation class. </p>
 <p>This class provides operators for computing the transformation of quantities from real to fourier space </p>
+
+<p>Definition at line <a class="el" href="c_j_8h_source.html#l00013">13</a> of file <a class="el" href="c_j_8h_source.html">cJ.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aebd5fa4ed724877fc3cb79af3615aa2b"></a>
 <div class="memitem">
@@ -161,6 +163,26 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
+<p>Definition at line <a class="el" href="c_j_8cpp_source.html#l00004">4</a> of file <a class="el" href="c_j_8cpp_source.html">cJ.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;std::cout &lt;&lt; <span class="stringliteral">&quot;setup L class&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;this-&gt;_S=Sinp;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;this-&gt;_outputM=arma::cx_mat(arma::prod(this-&gt;_S),Numwavfunc);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<a class="code" href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">myLatexClass</a>=ltX;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;std::string myFunctionString=<span class="stringliteral">&quot; \\textbf{\\large{}backward fourier transformation operator cJ} \\newline &quot;</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;myFunctionString+=<span class="stringliteral">&quot; $I^{-1}=\\mathbf{F}_{3}^{-1}$ \\newline&quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;myFunctionString+=<span class="stringliteral">&quot; uses fft to transform $\\Sigma_{k} S_{k} \\times N_{s}$ matrix from k to r space&quot;</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;myFunctionString+=<span class="stringliteral">&quot; ( backward == fftw forward transform)&quot;</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<a class="code" href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">myLatexClass</a>-&gt;<a class="code" href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">setMyFunctionString</a>(myFunctionString);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//this-&gt;_checkPointer=chkPointer;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
+<div class="ttc" id="classlatex_comment_html_a5886c955858e04709e325b19e56b87a7"><div class="ttname"><a href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">latexComment::setMyFunctionString</a></div><div class="ttdeci">void setMyFunctionString(std::string inputString)</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00048">latexComment.h:48</a></div></div>
+<div class="ttc" id="classc_j_html_a67c95057fe0d2b248d0da8e0c2d197db"><div class="ttname"><a href="classc_j.html#a67c95057fe0d2b248d0da8e0c2d197db">cJ::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdef"><b>Definition:</b> <a href="c_j_8h_source.html#l00016">cJ.h:16</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -179,6 +201,21 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>&lt; compute the FFT with real input matrix by copying it into the real part of a temporary complex matrix tmpM </p>
 
+<p>Definition at line <a class="el" href="c_j_8cpp_source.html#l00052">52</a> of file <a class="el" href="c_j_8cpp_source.html">cJ.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//!&lt; compute the FFT with real input matrix by copying it into the real part of a temporary complex matrix tmpM</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;arma::cx_mat tmpM(input,arma::zeros&lt;arma::mat&gt;(input.n_rows,input.n_cols));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;arma::cx_mat outputMAT(tmpM);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0;i&lt;input.n_cols;i++)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">//check(_Faktor,input.col(i),&quot;*&quot;); // check if _Faktor has as many cols as input rows</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    outputMAT.col(i)=1./arma::prod(this-&gt;_S)*func_fftn(tmpM.col(i),this-&gt;_S,<span class="stringliteral">&quot;forward&quot;</span>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordflow">return</span> outputMAT;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -193,16 +230,18 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>public latex class, to be initialized in construction - used to give latex output stream </p>
 
+<p>Definition at line <a class="el" href="c_j_8h_source.html#l00016">16</a> of file <a class="el" href="c_j_8h_source.html">cJ.h</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/H/<a class="el" href="c_j_8h_source.html">cJ.h</a></li>
-<li>src/C/cJ.cpp</li>
+<li>src/C/<a class="el" href="c_j_8cpp_source.html">cJ.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 29 2016 22:48:38 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

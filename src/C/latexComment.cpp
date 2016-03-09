@@ -29,19 +29,17 @@ void latexComment::startItemize()
  this->_latex += " \\begin{enumerate} ";
 }
 
-void latexComment::insertImage(const std::string imageName,const std::string captionString)
+void latexComment::insertImage(const std::string imageName,const std::string captionString,const std::string caseName)
 {
     #ifdef WITH_TEX
         this->_latex += " \\begin{figure}[ht] ";
         this->_latex += " \\begin{center} ";
-        this->_latex += " \\includegraphics[scale=1.0]{./POSTPROCESSING/EPS/"+imageName+"} ";
+        this->_latex += " \\includegraphics[width=0.5 \\textwidth,height=0.5 \\textwidth]{./POSTPROCESSING/"+caseName+"/IMG/"+imageName+"} ";
         this->_latex += " \\caption{"+captionString+"} ";
         this->_latex += " \\end{center} ";
         this->_latex += " \\end{figure} ";
    #endif
 }
-
-
 
 void latexComment::endItemize()
 {
@@ -85,7 +83,7 @@ int latexComment::section(string title)
 {
     //is a matrix of size: N x Nions G(N,3) * X(3,Na) ---> (N,Na)
     #ifdef WITH_TEX
-        this->_latex+=" \\noindent\\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}} ";
+        this->_latex+=" \\begin{center} \\noindent\\makebox[\\linewidth]{\\rule{\\paperwidth}{0.4pt}} \\end{center} ";
         this->_latex+=" \\section{ ";
         this->_latex+=title;
         this->_latex+="} ";
