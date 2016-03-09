@@ -1,21 +1,18 @@
-ksdft++
-===============
+## ksdft++
 ______
 
-In short:
-------------------------
+### In short:
 	  ksdft++ simple code to compute electronic energies in atomic systems
 	  by S.Konzett-Stoffl - 2015/16
 	  after lecture by T.Arias (see http://dft.physics.cornell.edu/old-website/minicourse/dft.pdf)
 	  or youtube for great lectures on dft {https://www.youtube.com/watch?v=oyvGeQ8ehBM}
 	  
 ______
-External libraries used are:
-------------------------
+### External libraries used are:
 
 	  for the matrix algebra:
 	  
-	  [armadillo] (http://arma.sourceforge.net/) by Conrad Sanderson,
+	  [armadillo](http://arma.sourceforge.net/) by Conrad Sanderson,
 	  [released under MPL], see below:
 	  (
 	  Conrad Sanderson.
@@ -25,11 +22,10 @@ External libraries used are:
 	  
 	  for the fast fourier transform [fftw](http://www.fftw.org) 
 	  
-	  for input data processing [libboost:ptree](http://www.boost.org/)
+	  for input data processing ptree class of [boost](http://www.boost.org/) library is used
 	 
 ______	 
-Features:
-------------------------
+### Features:
 	  
 	  as devised by T.Arias, formulation of matrix operations through
 	  overloading of operators in operator classes
@@ -41,8 +37,7 @@ Features:
 	  in postprocessing routine plotScript.sh found in script folder
 
 ______
-Installation:
-------------------------
+### Installation:
 
 	  ksdft++ uses the make procedure; (aside you find the .cbp project file for processing with code::blocks ide)
 	  ksdft++ only tested on ubuntu linux, may require adaptions to the parts using the system routines when porting to different platforms
@@ -67,8 +62,7 @@ Installation:
 	  if make runs through without errors you should find binaries in /bin/Debug or/and /bin/Release respectively
 
 ______
-Running:
-------------------------
+### Running:
 
 	  run ksdft++ by evoking script run.sh in script folder:
 	  this script: 1.) cleans the directory
@@ -76,8 +70,7 @@ Running:
 		       3.) does postprocessing - generates images and converts latex output to pdf file
 
 ______
-Results:
-------------------------
+### Results:
 
 	  After running you should find 
 			  
@@ -86,8 +79,7 @@ Results:
 			    - output of results data in POSTPROCESSING/yourcasename/DATA folder
 			    
 ______
-Modification:
-------------------------
+### Modification:
 
 	  to add a new case proceed as follows:
 	  
