@@ -1,15 +1,21 @@
-In short:
+ksdft++
+===============
+______
 
+In short:
+------------------------
 	  ksdft++ simple code to compute electronic energies in atomic systems
 	  by S.Konzett-Stoffl - 2015/16
 	  after lecture by T.Arias (see http://dft.physics.cornell.edu/old-website/minicourse/dft.pdf)
 	  or youtube for great lectures on dft {https://www.youtube.com/watch?v=oyvGeQ8ehBM}
-
+	  
+______
 External libraries used are:
+------------------------
 
 	  for the matrix algebra:
 	  
-	  armadillo (http://arma.sourceforge.net/) by Conrad Sanderson,
+	  [armadillo] (http://arma.sourceforge.net/) by Conrad Sanderson,
 	  [released under MPL], see below:
 	  (
 	  Conrad Sanderson.
@@ -17,16 +23,13 @@ External libraries used are:
 	  Technical Report, NICTA, 2010. 
 	  )
 	  
-	  for the fast fourier transform:
+	  for the fast fourier transform [fftw](http://www.fftw.org) 
 	  
-	  fftw (http://www.fftw.org) 
-	  [released under the GNU General Public License]
-	  
-	  for input data processing:
-	  
-	  libboost: ptree
-	  
+	  for input data processing [libboost:ptree](http://www.boost.org/)
+	 
+______	 
 Features:
+------------------------
 	  
 	  as devised by T.Arias, formulation of matrix operations through
 	  overloading of operators in operator classes
@@ -36,8 +39,10 @@ Features:
 	  
 	  automatic latex documentation, the document of which is generated 
 	  in postprocessing routine plotScript.sh found in script folder
-	  
+
+______
 Installation:
+------------------------
 
 	  ksdft++ uses the make procedure; (aside you find the .cbp project file for processing with code::blocks ide)
 	  ksdft++ only tested on ubuntu linux, may require adaptions to the parts using the system routines when porting to different platforms
@@ -60,22 +65,29 @@ Installation:
 	  
 	  3.) do a bash setup.sh - should invoke make command and link script files
 	  if make runs through without errors you should find binaries in /bin/Debug or/and /bin/Release respectively
-	  	  
+
+______
 Running:
+------------------------
 
 	  run ksdft++ by evoking script run.sh in script folder:
 	  this script: 1.) cleans the directory
 		       2.) runs ksdft++
 		       3.) does postprocessing - generates images and converts latex output to pdf file
-		       
+
+______
 Results:
+------------------------
 
 	  After running you should find 
 			  
-			    a pdf file documenting what ksdft++ has done in doc/ksdft++.pdf
-			    images of wavefunctions and densities as computed in POSTPROCESSING/EPS folder
-	  
+			    - a pdf file documenting what ksdft++ has done in POSTPROCESSING/yourcasename/doc/yourcasename_doku.pdf
+			    - images of wavefunctions and densities as computed in the POSTPROCESSING/yourcasename/IMG folder
+			    - output of results data in POSTPROCESSING/yourcasename/DATA folder
+			    
+______
 Modification:
+------------------------
 
 	  to add a new case proceed as follows:
 	  
