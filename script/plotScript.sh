@@ -9,6 +9,13 @@ echo "==========================================================================
 if [ -z "$1" ]; then
   echo "Supply case name as first argument to this script - EXIT" | tee log.runsh
   echo "usage: bash ./plotScript.sh caseName" | tee log.runsh
+  echo ""
+  echo "the following case names are available:" | tee log.runsh
+  CASELIST=$(echo case/*)$
+  for CASE in $CASELIST
+  do
+    echo "		x " $(basename $CASE)
+   done
   echo "===========================================================================" | tee $MAINDIR/log.plotScript
   exit
 else
@@ -20,7 +27,7 @@ echo "assemble gnuplot script!" | tee -a $MAINDIR/log.plotScript
 echo "my current directory is" $PWD | tee -a $MAINDIR/log.plotScript
 
 
-MATRIXFILES=$(find -name "*.2dMat")
+MATRIXFILES=$(find -maxdepth 1 -name "*.2dMat")
 
 if [ -z "$MATRIXFILES" ]; then
   echo "no matrix files .2dMat found - exit!" | tee -a $MAINDIR/log.plotScript
@@ -29,7 +36,7 @@ else
  echo "found the following matrix files: " $MATRIXFILES  | tee -a $MAINDIR/log.plotScript
 fi
 
-POSTPROCDIR=$(find -name "POSTPROCESSING")
+POSTPROCDIR=$(find  -maxdepth 1 -name "POSTPROCESSING")
 if [ ! -d "$POSTPROCDIR" ]; then
 	echo "did not find postprocessing directory - create one!"  | tee -a $MAINDIR/log.plotScript
 	mkdir POSTPROCESSING | tee -a $MAINDIR/log.plotScript
@@ -114,7 +121,15 @@ unset border
 " | tee -a $PLOTSCRIPT
 
 echo "set contour base" | tee -a $PLOTSCRIPT
-echo "set palette rgbformula 33,13,10" | tee -a $PLOTSCRIPT
+#echo "set palette rgbformula 33,13,10" | tee -a $PLOTSCRIPT
+#  7,5,15   ... traditional pm3d (black-blue-red-yellow)
+#  3,11,6   ... green-red-violet
+#  23,28,3  ... ocean (green-blue-white); try also all other permutations
+#  21,22,23 ... hot (black-red-yellow-white)
+#  30,31,32 ... color printable on gray (black-blue-violet-yellow-white)
+#  33,13,10 ... rainbow (blue-green-yellow-red)
+#  34,35,36 ... AFM hot (black-red-yellow-white)
+echo "set palette rgbformula 21,22,23" | tee -a $PLOTSCRIPT
 #echo "set palette maxcolors 12" | tee -a $PLOTSCRIPT
 #echo "set view 0,0" | tee -a $PLOTSCRIPT
 #echo "set cntrparam bspline" | tee -a $PLOTSCRIPT
@@ -130,32 +145,42 @@ echo "splot inputFilename matrix with image" | tee -a $PLOTSCRIPT
 
 echo "set terminal pngcairo size 800,800 " | tee -a $PLOTSCRIPT
 echo "set output outputnamepng " | tee -a $PLOTSCRIPT
-echo "replot' " | tee -a $PLOTSCRIPT
+echo "replot " | tee -a $PLOTSCRIPT
+
+echo "set terminal pngcairo size 800,800 " | tee -a $PLOTSCRIPT
+echo "set output outputnamepngWOAxis " | tee -a $PLOTSCRIPT
+echo "unset ytics "| tee -a $PLOTSCRIPT
+echo "unset xtics"| tee -a $PLOTSCRIPT
+echo "unset border"| tee -a $PLOTSCRIPT
+echo "unset colorbox"| tee -a $PLOTSCRIPT
+echo "set xlabel \"\" " | tee -a  $PLOTSCRIPT
+echo "set ylabel \"\" " | tee -a  $PLOTSCRIPT
+echo "replot " | tee -a $PLOTSCRIPT
 
 
-
-echo "we have the following files to apply gnuplot to: " $(find -name "*.2dMat")  | tee -a $MAINDIR/log.plotScript
-for FILENAMEINLIST in $(find -name "*.2dMat")
+echo "we have the following files to apply gnuplot to: " $(find  -maxdepth 1 -name "*.2dMat")  | tee -a $MAINDIR/log.plotScript
+for FILENAMEINLIST in $(find -maxdepth 1 -name "*.2dMat")
 do
   echo "plot file " $FILENAMEINLIST | tee -a $MAINDIR/log.plotScript
   FILENAME=$(basename $FILENAMEINLIST) 
   FILENAME_WO_ENDING=${FILENAME%%.*}
   OUTNAME=$FILENAME_WO_ENDING".pdf" 
   OUTNAMEPNG=$FILENAME_WO_ENDING".png" 
+  OUTNAMEPNGWOAXIS=$FILENAME_WO_ENDING"_woAxis.png" 
   echo "The pdf outputfile is named " $OUTNAME | tee -a $MAINDIR/log.plotScript
-  gnuplot -e "inputFilename='${FILENAMEINLIST}'; outputname='${OUTNAME}'; outputnamepng='${OUTNAMEPNG}'" $PLOTSCRIPT  | tee -a $MAINDIR/log.plotScript
-  #echo "now move data to image directory"  | tee -a $MAINDIR/log.plotScript
-  #mv ${FILENAMEINLIST} $DATADIR
+  gnuplot -e "inputFilename='${FILENAMEINLIST}'; outputname='${OUTNAME}'; outputnamepng='${OUTNAMEPNG}'; outputnamepngWOAxis='${OUTNAMEPNGWOAXIS}'" $PLOTSCRIPT  | tee -a $MAINDIR/log.plotScript
+  echo "now move data to image directory"  | tee -a $MAINDIR/log.plotScript
+  mv ${FILENAMEINLIST} $DATADIR
 done
 
 echo "move all pdf images to image directory " $IMGDIR  | tee -a $MAINDIR/log.plotScript
 
-for FILENAMEINLIST in $(find -name "*.pdf")
+for FILENAMEINLIST in $(find  -maxdepth 1 -name "*.pdf")
 do
  mv $FILENAMEINLIST $IMGDIR
 done
 
-for FILENAMEINLIST in $(find -name "*.png")
+for FILENAMEINLIST in $(find  -maxdepth 1 -name "*.png")
 do
  mv $FILENAMEINLIST $IMGDIR
 done
@@ -180,8 +205,12 @@ mkdir $LATEXDIR
 echo "move latex pdf to " $LATEXDIR | tee -a $MAINDIR/log.plotScript
 mv $MAINDIR/$latexFilename $LATEXDIR
 
+resultsFile="finalResult_"$CASENAME".dat"
+echo "finally move final results file " $resultsFile " to results folder " $CASEDIR | tee -a $MAINDIR/log.plotScript
+mv $MAINDIR/$resultsFile $CASEDIR
+
 echo "now remove remnants of latex"  | tee -a $MAINDIR/log.plotScript
 rm $MAINDIR/latex.*
 
 echo "finished plotting! "   | tee -a $MAINDIR/log.plotScript
-echo "===========================================================================" | tee $MAINDIR/log.plotScript
+echo "===========================================================================" | tee -a $MAINDIR/log.plotScript

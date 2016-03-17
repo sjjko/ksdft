@@ -11,6 +11,8 @@
 #include "gnuPlotPlotting.h"
 #include "ionicPotentialClass.h"
 
+//! master class for setup and performance of dft computations
+
 using namespace std;
 using namespace arma;
 
@@ -30,7 +32,8 @@ class atomicSystem
         int setupWavefunction(); //!<setup random wavefunction matrix as initial condition
         int postProcessing();
         int setupOptimizers();
-        int solveIt();
+        void plotX();
+        string solveIt();
         int postVdual(const string texCaption);
         inline int orthogonalizeWavefunction()
             {
@@ -40,16 +43,16 @@ class atomicSystem
             myFunctions::cassert(((this->_W->is_finite()) && (!this->_W->has_nan())),ISCRITICAL,"atomicSystem::orthogonalizeWavefunction: found nan or infinite value in wavefunction",__FILE__,__LINE__);
             return 0;
             }
-        int postPsi();
+        string postPsi();
         int postDensity(const string texCaption,const string fileNameEnding);
-        inline int doPostProcessing(const string texCaption,const string fileNameEnding)
+        inline string doPostProcessing(const string texCaption,const string fileNameEnding)
         {
             int returnInt=0;
 
-            returnInt=this->postPsi();
-            returnInt+=this->postDensity(texCaption,fileNameEnding);
+            string returnString=this->postPsi();
+            returnInt=this->postDensity(texCaption,fileNameEnding);
 
-            return returnInt;
+            return returnString;
         }
 
 
@@ -67,6 +70,7 @@ class atomicSystem
         latexComment *_ltX; //!< pointer to global latex documentation class
         mat _X; //!< atomic coordinates matrix transposed
         arma::cx_mat _Sf; //!< the structure function as exp(i G X), an prod(S)x1 matrix
+        double _ionSelfEnergyUewald; //! self energy of ion cores
 
         mat _Vdual;
 

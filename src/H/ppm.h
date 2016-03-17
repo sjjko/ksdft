@@ -1,24 +1,11 @@
 #ifndef PPM_H
 #define PPM_H
 
-/*
- * =====================================================================================
- *
- *       Filename:  ppm.h
- *
- *    Description:  ppm.h
- *
- *        Version:  1.0
- *        Created:  2015-03-09 00:33:35
- *       Revision:  none
- *       Compiler:  gcc
- *
- *         Author:  T.Arias - converted to c++ by S.KonzettStoffl
- *   Organization:
- *
- * =====================================================================================
+//! class for output of dat in ppm file format - depŕecated
+/*!
+ As introduced by T.Arias for Octave, this class plots matrix data
+ into ppm files - deprecated
  */
-
 
 #include "main.h"
 #include "smooth.h"
@@ -51,9 +38,9 @@ arma::mat redSmooth,greenSmooth,blueSmooth;
 //for (int en=1;en<=4;en++)
 //{
     verbosity(Pa,"smooth the datasets using the smooth routine ",2,__FILE__,__LINE__);
-    redSmooth=smooth(red);
-    greenSmooth=smooth(green);
-    blueSmooth=smooth(blue);
+    redSmooth=smooth(Pa,red);
+    greenSmooth=smooth(Pa,green);
+    blueSmooth=smooth(Pa,blue);
 //}
     verbosity(Pa,"ppm: finished smoothing ",2,__FILE__,__LINE__);
 

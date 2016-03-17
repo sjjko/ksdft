@@ -21,7 +21,9 @@ class optimizeBase
 		 \param G2inp a vector of wave vector squared
 		 \param Rinp a 3x3 matrix of system size
 		 \param chkPointer a pointer to a class checking the validity of operations */
-        inline optimizeBase(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vdual)
+		 inline int returnSdTotalIterations(){return this->_sdNit;} //! return number of iterations of Sd optimizer
+         inline int returnPccgTotalIterations(){return this->_pccgNit;} //! return number of iterations of Pccg optimizer
+         inline optimizeBase(const operatorStruct Operator,const paramStruct Parameter,const arma::mat Vdual)
                 {
                 this->_Op=Operator;
                 this->_Param=Parameter;
@@ -39,10 +41,15 @@ class optimizeBase
         {
             try
             {
-                arma::cx_mat tempM=sqrt(arma::inv(Winp->t()*(*_Op.O*(Winp.get()))));
-                arma::cx_mat inpM=*Winp;
-                verbosity(this->_Param,"W+(O(W)) has nrows:"+std::to_string(tempM.n_rows)+" and ncols: "+std::to_string(tempM.n_cols),2,__FILE__,__LINE__);
-                *Winp=inpM*tempM; //sqrt(arma::inv(Winp->t()*(*_Op.O*(*Winp))));
+                //arma::cx_mat tempM=
+
+                //arma::cx_mat tempM=sqrt(arma::inv(Winp->t()*(*_Op.O*(Winp.get()))));
+                //arma::cx_mat tempM=sqrt(arma::inv(Winp->t()*(*_Op.O*(*Winp))));
+
+                //arma::cx_mat inpM=*Winp;
+                //verbosity(this->_Param,"W+(O(W)) has nrows:"+std::to_string(tempM.n_rows)+" and ncols: "+std::to_string(tempM.n_cols),2,__FILE__,__LINE__);
+                //*Winp=inpM*tempM; //sqrt(arma::inv(Winp->t()*(*_Op.O*(*Winp))));
+                *Winp=*Winp*USquaredInverse(_Op,_Param,*Winp);
                 }
                 catch(exception& e)
                 {

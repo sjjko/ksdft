@@ -57,6 +57,11 @@ int main(int argc, char** argv)
 {
 paramStruct Pa;
 
+
+
+
+
+
 #include "inputArguments.h"
 
 #ifdef PLOT_GNUPLOT
@@ -108,6 +113,7 @@ verbosity(Pa,"Read Input Parameters!",2,__FILE__,__LINE__);
     Pa={.Z=1,.f=2,.number_of_wavefunctions=2,.alpha=0.5e-3,.Nit=2,.globalVL=333};
 #endif
 
+
 verbosity(Pa,"For reasons of practicality we read X rowwise, but compute now columnwise - take transpose of Xt to get X! ",1,__FILE__,__LINE__);
 
 #ifdef WITH_TEX
@@ -156,14 +162,15 @@ verbosity(Pa,"initiate LinvOp!",2,__FILE__,__LINE__);
 Op.L=Lclass;
 Op.Li=Liclass;
 verbosity(Pa,"initiate cIOp!",2,__FILE__,__LINE__);
-Op.I=cIclass;//(S,Pa.number_of_wavefunctions);
+Op.I=cIclass;
 verbosity(Pa,"initiate IdagOp!",2,__FILE__,__LINE__);
-Op.Id=cIdagclass; //(S,Pa.number_of_wavefunctions);
+Op.Id=cIdagclass;
 verbosity(Pa,"initiate cJOp!",2,__FILE__,__LINE__);
-Op.J=cJclass;//(S,Pa.number_of_wavefunctions);
+Op.J=cJclass;
 verbosity(Pa,"initiate cJdagOp!",2,__FILE__,__LINE__);
-Op.Jd=cJdagclass; //(S,Pa.number_of_wavefunctions);
+Op.Jd=cJdagclass;
 verbosity(Pa,"operator struct operated!",2,__FILE__,__LINE__);
+
 
 #ifdef PERFORM_OPERATOR_TESTS
 verbosity(Pa,"We test the implementation of the operators!",0,__FILE__,__LINE__);
@@ -180,28 +187,34 @@ verbosity(Pa,"Finished testing - dump the class instance!",0,__FILE__,__LINE__);
 delete ts;
 #endif
 
-verbosity(Pa,"Main computing part:",2,__FILE__,__LINE__);
+verbosity(Pa,"Main computing part:",1,__FILE__,__LINE__);
 
 atomicSystem atm(Op,Pa,&gpL,&latX);
-verbosity(Pa,"main: retrieve atomic coordinates",2,__FILE__,__LINE__);
+verbosity(Pa,"main: retrieve atomic coordinates",1,__FILE__,__LINE__);
 atm.getAtomicCoordinates();
 atm.setupGeometry();
 atm.setupPotential();
 atm.postVdual("dual ion potential");
-verbosity(Pa,"main: setup wavefunction",2,__FILE__,__LINE__);
+verbosity(Pa,"main: setup wavefunction",1,__FILE__,__LINE__);
 atm.setupWavefunction();
-verbosity(Pa,"main: setup optimizers",2,__FILE__,__LINE__);
+verbosity(Pa,"main: setup optimizers",1,__FILE__,__LINE__);
 atm.setupOptimizers();
-verbosity(Pa,"main: solve",2,__FILE__,__LINE__);
-atm.solveIt();
-verbosity(Pa,"main: do postprocessing",2,__FILE__,__LINE__);
-atm.doPostProcessing("final density after mininimizing the energy functional","final");
+verbosity(Pa,"main: solve and retrieve the final Solution per string",1,__FILE__,__LINE__);
+string finalSolution = atm.solveIt();
+verbosity(Pa,"main: do postprocessing",1,__FILE__,__LINE__);
+finalSolution += atm.doPostProcessing("final density after mininimizing the energy functional","final");
+verbosity(Pa,"main: output final energy result in text file",1,__FILE__,__LINE__);
+string finalResultFilename="finalResult_"+Pa.caseName+".dat";
+std::ofstream finalResultFile(finalResultFilename);
+finalResultFile << finalSolution << endl;
+finalResultFile.close();
 
 verbosity(Pa,"Latex part:",2,__FILE__,__LINE__);
 
 #ifdef WITH_TEX
     std::ofstream latexStringFile("latex.tex");
     latX.closeString();
+    //latexStringFile.precision(2);
     latexStringFile << latX.getString() << endl;
     latexStringFile.close();
 #endif // WITH_TEX

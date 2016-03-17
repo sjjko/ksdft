@@ -131,12 +131,12 @@ class testingClass
             //cout << Wtrial << endl;
             //cout << size(Wtrial) << endl;
             arma::cx_mat squareM=Wtrial.t()*(*Op.O*Wtrial);
-            arma::cx_mat Y=Wtrial*arma::sqrt(arma::inv(squareM));
+            arma::cx_mat Y=Wtrial*arma::sqrtmat(arma::inv(squareM));
             //cout << Wtrial.row(0) << endl;
             arma::cx_mat OrthoMatrix=trans(Y)*(*Op.O*Y);
 
             arma::cx_mat Ui=Uinvers(Op,Pa,Wtrial);
-            Y=Wtrial*sqrt(Ui);
+            Y=Wtrial*sqrtmat(Ui);
             arma::cx_mat OrthoMatrix2=trans(Y)*(*Op.O*Y);
 
             cout << OrthoMatrix2 - OrthoMatrix << endl;

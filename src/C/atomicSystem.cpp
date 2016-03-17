@@ -4,6 +4,7 @@ using namespace std;
 using namespace arma;
 
 
+
 int atomicSystem::setupPotential()
 {
  //! \brief set up the computational potential - output is the dual potential -
@@ -13,11 +14,16 @@ int atomicSystem::setupPotential()
 //! uses dynamic linking and compilation at run time
 
 verbosity(_Pa,"atomicSystem::setupPotential get potential using ionicpotentialClass",2,__FILE__,__LINE__);
-ionicPotentialClass pot(_Op,_Pa,_dr,_Sf,_X,_G2,_Pa.caseName);
+ionicPotentialClass pot(_Op,_Pa,_dr,_mat_center_of_cell,_Sf,_X,_G2,_Pa.caseName,this->_ltX);
 pot.computePotential();
 pot.checkPotential();
 this->_Vdual=pot.getPotential();
 verbosity(_Pa,"atomicSystem::setupPotential Vdual read",2,__FILE__,__LINE__);
+this->_ionSelfEnergyUewald=pot.computeEwaldIonSelfEnergy();
+verbosity(_Pa,"atomicSystem::now get the ewald ions self energy",2,__FILE__,__LINE__);
+stringstream Str;
+Str << "Computed an ewald self energy of "<<this->_ionSelfEnergyUewald<<" hartree!" << endl;
+verbosity(_Pa,Str.str(),2,__FILE__,__LINE__);
 
 //string pathToCaseDir=" ./case/"+_Pa.caseName+"/";
 //string includeDirectories="-I /home/kos/Code/kos/minidft/ksdft++/case/"+_Pa.caseName+"/ ";
@@ -117,46 +123,97 @@ int atomicSystem::setupOptimizers()
     cassert(_Vdual.n_elem>0,ISCRITICAL,"atomicSystem::setupOptimizers potential Vdual has no elements - forgotten to initialize it?",__FILE__,__LINE__);
         verbosity(_Pa,"atomicSystem::setupOptimizers start",2,__FILE__,__LINE__);
 
+    sdOptimizer sdtt = sdOptimizer(_Op,_Pa,_Vdual,_ltX);
+    verbosity(_Pa,"iterations of sdtt "+std::to_string(sdtt.returnSdTotalIterations()),2,__FILE__,__LINE__);
+
     //sdOptimizer sdn(_Op,_Pa,_Vdual,_ltX);
-    _sd.reset(new sdOptimizer(_Op,_Pa,_Vdual,_ltX));
-            verbosity(_Pa,"atomicSystem::setupOptimizers documentation",2,__FILE__,__LINE__);
+    sdOptimizer *sdt = new sdOptimizer(_Op,_Pa,_Vdual,_ltX);
+    verbosity(_Pa,"iterations of sdt "+std::to_string(sdt->returnSdTotalIterations()),2,__FILE__,__LINE__);
+
+    _sd.reset(sdt);
+    verbosity(_Pa,"iterations of sd "+std::to_string(_sd->returnSdTotalIterations()),2,__FILE__,__LINE__);
+    verbosity(_Pa,"atomicSystem::setupOptimizers documentation !",2,__FILE__,__LINE__);
     _sd->myLatexClass->commentMyFunction();
+    verbosity(_Pa,"atomicSystem::setupOptimizers reset pccg and initialize new instance",2,__FILE__,__LINE__);
     this->_pccg.reset (new pccgOptimizer(_Op,_Pa,_Vdual,_G2,_ltX));
+    verbosity(_Pa,"atomicSystem::setupOptimizers ouput pccg docu",2,__FILE__,__LINE__);
     this->_pccg->myLatexClass->commentMyFunction();
 };
 
-int atomicSystem::solveIt()
+string atomicSystem::solveIt()
 {
 //! \brief minimizing the energy functional by application of steepest descent method first - then conjugate gradient method
+//! \return string giving the resulting energy
 
 cassert(_W->n_rows>0,ISCRITICAL,"atomicSystem::solveIt wavefunction has not been initialized - forgotten to do setupOptimizers!",__FILE__,__LINE__);
 cassert(_W->n_cols>0,ISCRITICAL,"atomicSystem::solveIt wavefunction has not been initialized - forgotten to do setupOptimizers!",__FILE__,__LINE__);
+
+string resultString;
+
+resultString="==========================================================\n";
+resultString+="FINAL RESULTS OF KSDFT++\n";
+resultString+="==========================================================\n";
+resultString+="CASE: "+_Pa.caseName+"\n";
+resultString+="number of ionic cores: "+std::to_string(_Pa.X.n_cols)+"\n";
+resultString+="number of electrons: "+std::to_string(_Pa.number_of_wavefunctions)+"\n";
+resultString+="domain size is: "+std::to_string(_Pa.R(0,0))+" x "+std::to_string(_Pa.R(1,1))+" x "+std::to_string(_Pa.R(2,2))+" bohr \n";
+resultString+="we have grid points: "+std::to_string(_Pa.S(0))+" x "+std::to_string(_Pa.S(1))+" x "+std::to_string(_Pa.S(2))+" \n";
+resultString+="The Ewald self energy of the ions is : "+std::to_string(this->_ionSelfEnergyUewald)+" hartree \n";
+
+double finalEnergy=0;
+if(_sd->returnSdTotalIterations()>0)
+{
+resultString+="==========================================================\n";
+
+    resultString+="optimize using steepest descent method for " + std::to_string(_sd->returnSdTotalIterations()) + "iterations!\n";
 
 _sd->setup(_W);
 _sd->myLatexClass->commentMyFunction();
 verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 verbosity(_Pa,"atomic: optimize using sd",0,__FILE__,__LINE__);
 verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
-double finalEnergy=_sd->optimize(_W);
+finalEnergy=_sd->optimize(_W)+this->_ionSelfEnergyUewald;
 verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 verbosity(_Pa,"atomic: sd optimized system to an energy of "+std::to_string(finalEnergy)+" hartree!",0,__FILE__,__LINE__);
 verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 _sd->myLatexClass->commentMyFunction();
 verbosity(_Pa,"atomic: restart as orthonormal function",2,__FILE__,__LINE__);
-this->orthogonalizeWavefunction();
+//this->orthogonalizeWavefunction();
+
+    resultString+="sd optimized system to an energy of "+std::to_string(finalEnergy)+" hartree!\n";
+resultString+="==========================================================\n";
+}
+
+double finalEnergy_pccg=finalEnergy;
+if(_pccg->returnPccgTotalIterations()>0)
+{
+resultString+="==========================================================\n";
+    resultString+="optimize using conjugate gradient method for " + std::to_string(_pccg->returnPccgTotalIterations()) + "iterations!\n";
+
+
+
 verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 verbosity(_Pa,"atomic: optimize using pccg",0,__FILE__,__LINE__);
 verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 _pccg->myLatexClass->commentMyFunction();
-finalEnergy=_pccg->optimize(_W);
+
+_pccg->setup(_W);
+finalEnergy_pccg=_pccg->optimize(_W)+this->_ionSelfEnergyUewald;
 _pccg->myLatexClass->commentMyFunction();
 //verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
-//verbosity(_Pa,"atomic: pccg optimized system to an energy of "+std::to_string(finalEnergy)+" hartree!",0,__FILE__,__LINE__);
+//verbosity(_Pa,"atomic: pccg optimized system to an energy of "+std::to_string(finalEnergy_pccg)+" hartree!",0,__FILE__,__LINE__);
 cout << "====================================" << endl;
 cout << "atomic: finished optimization" << endl;
 cout << "====================================" << endl;
+}
 
-return 0;
+if(_sd->returnSdTotalIterations()>0)
+{
+    resultString+="pccg optimized system to an energy of "+std::to_string(finalEnergy_pccg)+" hartree!\n";
+resultString+="==========================================================\n";
+}
+
+return resultString;
 }
 
 atomicSystem::atomicSystem(operatorStruct Op,paramStruct Pa,gnuPlotPlotting *gpLT,latexComment *latX)
@@ -311,6 +368,36 @@ verbosity(_Pa,"====================================",0,__FILE__,__LINE__);
 return 0;
 }
 
+void atomicSystem::plotX()
+{
+//! \brief plot the atomic positions in xy,yz,xz planes
+//! \return string containing the ascii plot
+//! blow up the X matrix the plot slices
+
+stringstream returnStream;
+
+returnStream.precision(2); //! set numeric precision of stream
+returnStream << "=============================================" << endl;
+returnStream << " ATOMIC COORDINATES AS DEFINED IN atom.param" << endl;
+returnStream << "=============================================" << endl;
+
+verbosity(_Pa,"we have "+std::to_string(_X.n_rows)+" atoms in the system ",2,__FILE__,__LINE__);
+verbosity(_Pa,"create a gaussian at every atomic core ",2,__FILE__,__LINE__);
+
+////Vps.col(0)=(exp(-_G2));
+////Vps(0)=0;
+////this->_Vdual=real(*_Op.J*(Vps%_Sf));
+//
+//int maxX=(int)max(_X.row(0))+1;
+//int maxY=(int)max(_X.row(1))+1;
+//int maxZ=(int)max(_X.row(2))+1;
+//int minX=(int)min(_X.row(0))-1;
+//int minY=(int)min(_X.row(1))-1;
+//int minZ=(int)min(_X.row(2))-1;
+
+
+}
+
 int atomicSystem::postDensity(const string texCaption,const string fileNameEnding)
 {
 
@@ -342,26 +429,41 @@ int atomicSystem::postVdual(const string texCaption)
         return 0;
 }
 
-int atomicSystem::postPsi()
+string atomicSystem::postPsi()
 {
 
-//! \brief compute and output wavefunctions and their squares
+stringstream resultStringstream;
+resultStringstream.precision(2);
+
+resultStringstream << "Compute wavefunctions and energy levels for " << _Pa.number_of_wavefunctions << " electrons!" << endl;
+
+//! \brief compute and output wavefunctions and their squares and return a string with the electronic energy levelse
 
         verbosity(_Pa,"atomic: now compute psi",2,__FILE__,__LINE__);
         std::shared_ptr<arma::cx_mat> Psi(new arma::cx_mat(*_W));
-        std::shared_ptr<arma::mat> Epsilon(new arma::mat(_Pa.number_of_wavefunctions,1));
-        gnuPlotPlotting *gpL;
+        std::shared_ptr<arma::mat> Epsilon(new arma::mat(_Pa.number_of_wavefunctions,1,fill::zeros));
 
         myFunctions::cassert(getPsi(_Op,_Pa,*_W,_Vdual,Psi,Epsilon),ISCRITICAL,"failed extracting eigenvalues and eigenvectors from final solution W!",__FILE__,__LINE__);
 
-        _ltX->newLine("The electron states have the following energies:");
+        _ltX->newLine("\\clearpage The electron states have the following energies:  ");
 
         arma::mat dat(Psi->n_rows,1);
         string name;
+        resultStringstream << "==========================================================" << endl;
+
         for(unsigned int st=0; st<Psi->n_cols; st++)
         {
-            std::cout << "=== State " << st << ", has energy = " << Epsilon->row(st) << " === " << std::endl;
-            _ltX->newLine("=== state " + std::to_string(st) + " has energy " + std::to_string(as_scalar(Epsilon->row(st)))+ "hartree ===");
+
+            resultStringstream << "=== State " << st << ", has an energy of " << arma::as_scalar(Epsilon->row(st)) << " === " << endl;
+
+            std::cout.precision(2);
+            std::cout << "=== State " << st << ", has an energy of " << as_scalar(Epsilon->row(st)) << " === " << std::endl;
+            string theString;
+            stringstream s1stream;
+            s1stream.precision(2);
+            s1stream<<"\\clearpage === state " << std::to_string(st) << " has an energy of " << as_scalar(Epsilon->row(st)) << " hartree ===   ";
+            s1stream>>theString;
+            _ltX->newLine(s1stream.str());
             verbosity(_Pa,"now we get the square of the wavefunction for output",2,__FILE__,__LINE__);
             dat=real(pow(*_Op.I*Psi->col(st),2));
             verbosity(_Pa,"print three slices of result to as ppm / gnuplot",2,__FILE__,__LINE__);
@@ -374,7 +476,6 @@ int atomicSystem::postPsi()
                 else if(k==2) {plane="xy";}
                 verbosity(_Pa,"now take a slice of data at plane "+plane,2,__FILE__,__LINE__);
                 arma::mat sl;
-                verbosity(_Pa,"take a slice "+plane,2,__FILE__,__LINE__);
                 sl=myFunctions::slice(_Pa,dat,_Pa.S,(int) _Pa.S(k)/2.,k);
                 #ifdef PLOT_PPM
                 verbosity(_Pa,"get name for ppm file "+plane,2,__FILE__,__LINE__);
@@ -384,18 +485,22 @@ int atomicSystem::postPsi()
                 #endif
                 #ifdef PLOT_GNUPLOT
                 if(st==0) _ltX->newLine("The physical eingenstates of the hamiltonian Psi are shown in the next figure:");
-                if(k==0)
-                {
-                    name="schroedinger_psi_"+std::to_string(st);
-                    string imageName=_gpLT->plotAMatrixSlice(_Pa,name,dat,_Pa.S,k);
-                    string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
-                    _ltX->insertImage(imageName,caption,_Pa.caseName);
-                }
+                //if(k==0)
+                //{
+                name=_Pa.caseName+"_psi_"+std::to_string(st);
+                string imageName=_gpLT->plotAMatrixSlice(_Pa,name,dat,_Pa.S,k);
+                string caption="result from solution of schroedinger equation: slice through wave function of electron " + std::to_string(st) + " plane "+plane;
+                _ltX->insertImage(imageName,caption,_Pa.caseName);
+                //}
                 #endif
             }
             #endif
         }
-        return 0;
+                resultStringstream << "========================================================== " << endl;
+
+    string resultString=resultStringstream.str();
+    //resultStringstream >> resultString;
+    return resultString;
 }
 
 int atomicSystem::setupWavefunction()

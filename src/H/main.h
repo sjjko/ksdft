@@ -29,14 +29,13 @@
     #undef FDTEST
 #endif
 
-
 //switches for energy components
     #undef CALC_KIN_ONLY
     #define CALC_KIN
     #define CALC_VEE
     #define CALC_EXC
     #define CALC_EION
-    #define CALC_ DEXC
+    #define CALC_DEXC
 #ifdef FDTEST
     #undef CALC_KIN_ONLY
     #define CALC_KIN

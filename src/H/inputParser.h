@@ -6,7 +6,7 @@
 #include "customAssert.h"
 #include "armadillo"
 
-/** \brief Class for input data processing
+/** \brief class for input data processing
  * uses BOOST property_tree and reads input data ascii file
  */
 

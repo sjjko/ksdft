@@ -99,86 +99,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;dlfcn.h&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;gnuPlotPlotting.h&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;ionicPotentialClass.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using namespace </span>arma;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classatomic_system.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classatomic_system.html">atomicSystem</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//! \brief class which contains all ingredients to solve nonlinear energy functional from parser to postprocessing routines</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//! is a wrapper for all the routines amassed so far</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classatomic_system.html">atomicSystem</a>(<a class="code" href="structoperator_struct.html">operatorStruct</a> Op,<a class="code" href="structparam_struct.html">paramStruct</a> Pa,<a class="code" href="classgnu_plot_plotting.html">gnuPlotPlotting</a> *gpLT,<a class="code" href="classlatex_comment.html">latexComment</a> *latX);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classatomic_system.html">atomicSystem</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordtype">int</span> getAtomicCoordinates();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">int</span> setupGeometry();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">int</span> setupPotential();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">int</span> setupWavefunction(); <span class="comment">//!&lt;setup random wavefunction matrix as initial condition</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"></span>        <span class="keywordtype">int</span> postProcessing();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">int</span> setupOptimizers();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">int</span> solveIt();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">int</span> postVdual(<span class="keyword">const</span> <span class="keywordtype">string</span> texCaption);</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classatomic_system.html#aa1cd3770e4f98bbfc093510dbbdc5e67">   35</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classatomic_system.html#aa1cd3770e4f98bbfc093510dbbdc5e67">orthogonalizeWavefunction</a>()</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            {<span class="comment"></span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">            //! \brief orthogonalize the wavefunction</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">            //! \param W - wavefunction as prodSxNo wavefunction complex matrix</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span>            *_W=*_W*inv(sqrt((_W-&gt;t())*(*_Op.O*(*_W))));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            myFunctions::cassert(((this-&gt;_W-&gt;is_finite()) &amp;&amp; (!this-&gt;_W-&gt;has_nan())),ISCRITICAL,<span class="stringliteral">&quot;atomicSystem::orthogonalizeWavefunction: found nan or infinite value in wavefunction&quot;</span>,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">int</span> postPsi();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">int</span> postDensity(<span class="keyword">const</span> <span class="keywordtype">string</span> texCaption,<span class="keyword">const</span> <span class="keywordtype">string</span> fileNameEnding);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> doPostProcessing(<span class="keyword">const</span> <span class="keywordtype">string</span> texCaption,<span class="keyword">const</span> <span class="keywordtype">string</span> fileNameEnding)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">int</span> returnInt=0;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            returnInt=this-&gt;postPsi();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            returnInt+=this-&gt;postDensity(texCaption,fileNameEnding);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> returnInt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//! master class for setup and performance of dft computations</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using namespace </span>arma;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classatomic_system.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="classatomic_system.html">atomicSystem</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//! \brief class which contains all ingredients to solve nonlinear energy functional from parser to postprocessing routines</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//! is a wrapper for all the routines amassed so far</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="classatomic_system.html">atomicSystem</a>(<a class="code" href="structoperator_struct.html">operatorStruct</a> Op,<a class="code" href="structparam_struct.html">paramStruct</a> Pa,<a class="code" href="classgnu_plot_plotting.html">gnuPlotPlotting</a> *gpLT,<a class="code" href="classlatex_comment.html">latexComment</a> *latX);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="classatomic_system.html">atomicSystem</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">int</span> getAtomicCoordinates();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">int</span> setupGeometry();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">int</span> setupPotential();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordtype">int</span> setupWavefunction(); <span class="comment">//!&lt;setup random wavefunction matrix as initial condition</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span>        <span class="keywordtype">int</span> postProcessing();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">int</span> setupOptimizers();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">int</span> solveIt();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">int</span> postVdual(<span class="keyword">const</span> <span class="keywordtype">string</span> texCaption);</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classatomic_system.html#aa1cd3770e4f98bbfc093510dbbdc5e67">   37</a></span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="classatomic_system.html#aa1cd3770e4f98bbfc093510dbbdc5e67">orthogonalizeWavefunction</a>()</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            {<span class="comment"></span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">            //! \brief orthogonalize the wavefunction</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">            //! \param W - wavefunction as prodSxNo wavefunction complex matrix</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span>            *_W=*_W*inv(sqrt((_W-&gt;t())*(*_Op.O*(*_W))));</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            myFunctions::cassert(((this-&gt;_W-&gt;is_finite()) &amp;&amp; (!this-&gt;_W-&gt;has_nan())),ISCRITICAL,<span class="stringliteral">&quot;atomicSystem::orthogonalizeWavefunction: found nan or infinite value in wavefunction&quot;</span>,__FILE__,__LINE__);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">int</span> postPsi();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">int</span> postDensity(<span class="keyword">const</span> <span class="keywordtype">string</span> texCaption,<span class="keyword">const</span> <span class="keywordtype">string</span> fileNameEnding);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keyword">inline</span> <span class="keywordtype">int</span> doPostProcessing(<span class="keyword">const</span> <span class="keywordtype">string</span> texCaption,<span class="keyword">const</span> <span class="keywordtype">string</span> fileNameEnding)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">int</span> returnInt=0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            returnInt=this-&gt;postPsi();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            returnInt+=this-&gt;postDensity(texCaption,fileNameEnding);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">return</span> returnInt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">string</span> _caseName; <span class="comment">//!&lt; name of current atomic system</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span>        <a class="code" href="structparam_struct.html">paramStruct</a> _Pa; <span class="comment">//!&lt; pointer to parameter class</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span>        <a class="code" href="structoperator_struct.html">operatorStruct</a> _Op; <span class="comment">//!&lt; pointer to operator class</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span>        mat _mat_center_of_cell; <span class="comment">//!&lt; center of cell coordinates - convieniently (wastefully) stored in  prodSx3 matrix</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span>        mat _r; <span class="comment">//!&lt; coordinate of computational cell: prodSx3 matrix</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span>        mat _dr; <span class="comment">//!&lt; distance of computational cell from center: prodSx1 matrix</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span>        mat _G; <span class="comment">//!&lt; wavenumber: prodSx3 matrix</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span>        mat _G2; <span class="comment">//!&lt; squared wavenumber: prodSx1 matrix</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span>        mat _Xt; <span class="comment">//!&lt; the atomic coordinate matrix</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>        <a class="code" href="classlatex_comment.html">latexComment</a> *_ltX; <span class="comment">//!&lt; pointer to global latex documentation class</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span>        mat _X; <span class="comment">//!&lt; atomic coordinates matrix transposed</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>        arma::cx_mat _Sf; <span class="comment">//!&lt; the structure function as exp(i G X), an prod(S)x1 matrix</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        mat _Vdual;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        std::shared_ptr&lt;cx_mat&gt; _W; <span class="comment">//!&lt; the wavefunction stored in complex prodSx3 matrix</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::shared_ptr&lt;pccgOptimizer&gt; _pccg;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::shared_ptr&lt;sdOptimizer&gt; _sd;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="classgnu_plot_plotting.html">gnuPlotPlotting</a> *_gpLT;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">string</span> _caseName; <span class="comment">//!&lt; name of current atomic system</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span>        <a class="code" href="structparam_struct.html">paramStruct</a> _Pa; <span class="comment">//!&lt; pointer to parameter class</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span>        <a class="code" href="structoperator_struct.html">operatorStruct</a> _Op; <span class="comment">//!&lt; pointer to operator class</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span>        mat _mat_center_of_cell; <span class="comment">//!&lt; center of cell coordinates - convieniently (wastefully) stored in  prodSx3 matrix</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span>        mat _r; <span class="comment">//!&lt; coordinate of computational cell: prodSx3 matrix</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span>        mat _dr; <span class="comment">//!&lt; distance of computational cell from center: prodSx1 matrix</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span>        mat _G; <span class="comment">//!&lt; wavenumber: prodSx3 matrix</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>        mat _G2; <span class="comment">//!&lt; squared wavenumber: prodSx1 matrix</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span>        mat _Xt; <span class="comment">//!&lt; the atomic coordinate matrix</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>        <a class="code" href="classlatex_comment.html">latexComment</a> *_ltX; <span class="comment">//!&lt; pointer to global latex documentation class</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span>        mat _X; <span class="comment">//!&lt; atomic coordinates matrix transposed</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>        arma::cx_mat _Sf; <span class="comment">//!&lt; the structure function as exp(i G X), an prod(S)x1 matrix</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        mat _Vdual;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::shared_ptr&lt;cx_mat&gt; _W; <span class="comment">//!&lt; the wavefunction stored in complex prodSx3 matrix</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        std::shared_ptr&lt;pccgOptimizer&gt; _pccg;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        std::shared_ptr&lt;sdOptimizer&gt; _sd;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="classgnu_plot_plotting.html">gnuPlotPlotting</a> *_gpLT;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif // ATOMICSYSTEM_H</span></div>
-<div class="ttc" id="classgnu_plot_plotting_html"><div class="ttname"><a href="classgnu_plot_plotting.html">gnuPlotPlotting</a></div><div class="ttdef"><b>Definition:</b> <a href="gnu_plot_plotting_8h_source.html#l00011">gnuPlotPlotting.h:11</a></div></div>
-<div class="ttc" id="classatomic_system_html"><div class="ttname"><a href="classatomic_system.html">atomicSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="atomic_system_8h_source.html#l00017">atomicSystem.h:17</a></div></div>
-<div class="ttc" id="classatomic_system_html_aa1cd3770e4f98bbfc093510dbbdc5e67"><div class="ttname"><a href="classatomic_system.html#aa1cd3770e4f98bbfc093510dbbdc5e67">atomicSystem::orthogonalizeWavefunction</a></div><div class="ttdeci">int orthogonalizeWavefunction()</div><div class="ttdef"><b>Definition:</b> <a href="atomic_system_8h_source.html#l00035">atomicSystem.h:35</a></div></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif // ATOMICSYSTEM_H</span></div>
+<div class="ttc" id="classgnu_plot_plotting_html"><div class="ttname"><a href="classgnu_plot_plotting.html">gnuPlotPlotting</a></div><div class="ttdef"><b>Definition:</b> <a href="gnu_plot_plotting_8h_source.html#l00015">gnuPlotPlotting.h:15</a></div></div>
+<div class="ttc" id="classatomic_system_html"><div class="ttname"><a href="classatomic_system.html">atomicSystem</a></div><div class="ttdef"><b>Definition:</b> <a href="atomic_system_8h_source.html#l00019">atomicSystem.h:19</a></div></div>
+<div class="ttc" id="classatomic_system_html_aa1cd3770e4f98bbfc093510dbbdc5e67"><div class="ttname"><a href="classatomic_system.html#aa1cd3770e4f98bbfc093510dbbdc5e67">atomicSystem::orthogonalizeWavefunction</a></div><div class="ttdeci">int orthogonalizeWavefunction()</div><div class="ttdef"><b>Definition:</b> <a href="atomic_system_8h_source.html#l00037">atomicSystem.h:37</a></div></div>
 <div class="ttc" id="structparam_struct_html"><div class="ttname"><a href="structparam_struct.html">paramStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00115">dualPotential.cpp:115</a></div></div>
 <div class="ttc" id="structoperator_struct_html"><div class="ttname"><a href="structoperator_struct.html">operatorStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00131">dualPotential.cpp:131</a></div></div>
 <div class="ttc" id="classlatex_comment_html"><div class="ttname"><a href="classlatex_comment.html">latexComment</a></div><div class="ttdoc">insert a latex string comment and write latex document of computations in the code ...</div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00022">latexComment.h:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 9 2016 10:16:21 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 10 2016 10:33:03 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

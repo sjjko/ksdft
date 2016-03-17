@@ -6,13 +6,15 @@ atomic coordinates filename=./atoms.param
 Nx=48
 Ny=48
 Nz=48
-Rx=10.7
-Ry=10.7
-Rz=10.7
+Rx=1
+Ry=1
+Rz=1
+scalefactor geometry=10.68
 [numerical]
 alpha=3e-5
-no. iterations steepest descent=50
-no. iterations conjugate gradient=200
+no. iterations steepest descent=70
+no. iterations conjugate gradient=0
 number of electrons (wavefunctions)=16
 [general]
-VerbosityLevel=0
+VerbosityLevel=1
+smoothing iterations=2

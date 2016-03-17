@@ -1,7 +1,7 @@
 #ifndef CI_H
 #define CI_H
 
-//! Backward fourier transformation class
+//! backward fourier transformation operator class
 /*!
  This class provides operators for computing the transformation
  of quantities from fourier to real space

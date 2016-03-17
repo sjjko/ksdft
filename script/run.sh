@@ -11,10 +11,17 @@
 
 if [ -z "$1" ]; then
   echo "supply caseName as first argument to this script" | tee log.runsh
+  CASELIST=$(echo case/*)$
+  for CASE in $CASELIST
+  do
+    echo "		x " $(basename $CASE)
+   done
+  echo "===========================================================================" | tee $MAINDIR/log.plotScript
   exit
+else
+  CASENAME=$1
 fi
 
-CASENAME=$1
 echo "run ksdft with case " $CASENAME | tee -a log.runsh
 echo "====================" | tee -a log.runsh
 echo "call cleanup script" | tee -a log.runsh
@@ -22,8 +29,8 @@ bash cleanup.sh | tee -a log.runsh
 echo "finished cleanup" | tee -a log.runsh
 echo "====================" | tee -a log.runsh
 echo "call ksdft++" | tee -a log.runsh
-rm ./log.minidft
-./release_ksdft++ $CASENAME | tee -a log.minidft log.runsh
+rm ./log.ksdft
+./release_ksdft++ $CASENAME | tee -a log.ksdft log.runsh
 echo "finished ksdft++" | tee -a log.runsh
 echo "====================" | tee -a log.runsh
 echo "call post processing routine" | tee -a log.runsh

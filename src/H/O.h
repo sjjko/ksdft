@@ -1,6 +1,12 @@
 #ifndef OOP_H
 #define OOP_H
 
+//! the basevector product operator O
+/*!
+ This class provides the operator to compute the product of two basevectors
+ in wavenumber space
+ */
+
 #include "main.h"
 #include "latexComment.h"
 

@@ -21,6 +21,9 @@ const arma::mat Vdual,std::shared_ptr<arma::cx_mat> returnPsi,std::shared_ptr<ar
 double Prod(const arma::cx_mat A,const arma::cx_mat B);
 arma::cx_mat diagOuter(paramStruct Pa,const arma::cx_mat A,const arma::cx_mat B);
 arma::mat getVdual(const operatorStruct O,const arma::mat V);
+arma::cx_mat USquaredInverse(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi);
+
+
 
 string getELatex();
 string getgradLatex();
@@ -77,6 +80,12 @@ inline arma::cx_mat Uinvers(const operatorStruct O,const paramStruct P,const arm
     return inv(Wi.t()*(*O.O*Wi));
 }
 
+/*compute the inverse of WOW and takes square*/
+inline arma::cx_mat USquaredInverse(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi)
+{
+//! \brief latex description of Uinvers operator
+    return sqrtmat(inv(Wi.t()*(*O.O*Wi)));
+}
 
 inline string computeDensityLatex()
 {
@@ -331,7 +340,7 @@ inline string getPsiLatex()
 }
 
 
-inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat Wi,const arma::mat Vdual,std::shared_ptr<arma::cx_mat> returnPsi
+inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat Win,const arma::mat Vdual,std::shared_ptr<arma::cx_mat> returnPsi
 ,std::shared_ptr<arma::mat> returnEpsilon)
 {
 
@@ -339,7 +348,7 @@ inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat 
     //!
     //! \param O: operators in use in one struct
     //! \param P: parameter in use in one struct
-    //! \param Wi: wavefunction describing electronic state
+    //! \param Win: wavefunction describing electronic state
     //! \param Vdual: ion potential in real space
     //! \param returnPsi: $\Psi$ returned to argument pointer to complex matrix
     //! \param returnEpsilon: energies of the various eigenfunctions of the Hamiltonian as real vector
@@ -347,15 +356,28 @@ inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat 
     //! with Y defined as $Y=W U^{-1/2}$
     //! $\Psi = Y D$ with $D: (DY)^{\dagger} H (DY) = diag(\vec{\epsilon})$
 
-    arma::cx_mat Ui=Uinvers(O,P,Wi);
-    arma::cx_mat Y=Wi*sqrt(Ui);
-    arma::mat n=computeDensityFromWavefuncs(O,P,Wi,Ui);
+
+   // cout << arma::inv(arma::sqrt(Win.t()*(*O.O*Win)))*(arma::sqrt(Win.t()*(*O.O*Win))) << endl;
+    //arma::cx_mat Ui=arma::inv(arma::sqrt(Win.t()*(*O.O*Win))); //Uinvers(O,P,Win);
+
+    arma::cx_mat Ui=Uinvers(O,P,Win);
+    arma::cx_mat Y=Win*USquaredInverse(O,P,Win); //*sqrt(Ui);
+    arma::mat n=computeDensityFromWavefuncs(O,P,Win,Ui);
     arma::cx_mat HY=HW(O,P,Y,Vdual,Ui,n);
     verbosity(P,"getPsi: compute mu",2,__FILE__,__LINE__);
     arma::cx_mat mu=Y.t()*HY;
     //mu is hermitian -> mu_dag=mu
+    cout << "mu " << endl;
+    cout << mu-mu.t() << endl;
 
     arma::cx_vec epsilonVector(P.number_of_wavefunctions);
+
+        for(int i=0;i<epsilonVector.n_elem;i++)
+    {
+        verbosity(P,"getPsi: after ini computation - eigenvalue "+std::to_string(i)+" is "+std::to_string(real(epsilonVector(i)))+" "+std::to_string(imag(epsilonVector(i))),2,__FILE__,__LINE__);
+    }
+
+
 
     verbosity(P,"getPsi: compute eigenenergies and vectors",2,__FILE__,__LINE__);
     arma::eig_gen(epsilonVector,*returnPsi,mu);//solve for eigenvalues and eigenvectors
@@ -370,13 +392,23 @@ inline int getPsi(const operatorStruct O,const paramStruct P,const arma::cx_mat 
 
     for(int i=0;i<epsilonVector.n_elem;i++)
     {
-        verbosity(P,"getPsi: eigenvalue "+std::to_string(i)+" is ",2,__FILE__,__LINE__);
+        verbosity(P,"getPsi: eigenvalue "+std::to_string(i)+" is "+std::to_string(real(epsilonVector(i)))+" "+std::to_string(imag(epsilonVector(i))),2,__FILE__,__LINE__);
     }
 
     verbosity(P,"getPsi: return values",2,__FILE__,__LINE__);
     returnEpsilon->col(0)=arma::real(epsilonVector);
 
+
     *returnPsi=Y*(*returnPsi);
+
+    cout << Y.t()*Y << endl;
+    cout << "should be the identity: " << endl;
+    cout << returnPsi->t()*(*O.O*(*returnPsi)) << endl;
+    cout << "should be diagonal: " << endl;
+    cout << returnPsi->t()*HW(O,P,*returnPsi,Vdual,Ui,n) << endl;
+    cout << "should match the following vector entries: " << endl;
+    cout << epsilonVector << endl;
+
     return 1;
 }
 

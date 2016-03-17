@@ -1,0 +1,14 @@
+Basically ksdft++ solves the time independent Schrödinger equation which reads as follows:
+$$ {\hbar^2 \over 2 m} \nabla^2 \psi + V \psi = E \psi $$
+
+with $$ \psi $$ the wavefunction describing the electrons,
+V the potential operator acting on the wavefunction,
+summarizing terms containing the potential energy field the other electrons create as well as the ions and further quantum mechanical terms. E is the energy of the state $$ \psi $$.
+In DFT the operator equation above is not solve using the wavefunction except in the kinetic energy term, but the density, which is interpreted to be the
+square of the wavefunction at one space-time point.
+
+The wavefunction lends itself to a probabilistic
+description of the underlying dynamics, with its square giving the density n of particles found at one space-time point (x,t):
+$$ n(x) = \int dV \psi(x)^{\dagger} \psi(x) $$
+
+$$ E_{kin} = \int_{V} dV {\hbar^2 \over 2 m} \psi(x)^{\dagger} \nabla^2 \psi(x) $$

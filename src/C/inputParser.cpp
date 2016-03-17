@@ -64,6 +64,7 @@ ofstream myfile(fileToWrite);
     myfile << "number of electrons (wavefunctions)=2\n";
     myfile << "[general]\n";
     myfile << "VerbosityLevel=1\n";
+    myfile << "smoothing iterations=2\n";
     myfile.close();
   }
   else
@@ -89,6 +90,15 @@ arma::mat inputParser::readAtomicCoordinates()
 
     cout << "inputParser: read atomic coordinate file: " << this->_coordFilename << endl;
     returnMatrix.load(this->_coordFilename,arma::csv_ascii);
+
+    cout << "now scale the atomic coordinates by the input scale factor " << this->_inputStruct->scaleFactor << endl;
+
+    returnMatrix*=this->_inputStruct->scaleFactor;
+
+    cout << "We have the following scaled atomic coordinates:" << endl;
+    cout << returnMatrix << endl;
+
+
     return returnMatrix;
 
 }
@@ -165,6 +175,8 @@ int inputParser::readInput()
             if(key.first=="Rx") this->_inputStruct->R(0,0)=key.second.get_value<double>();
             if(key.first=="Ry") this->_inputStruct->R(1,1)=key.second.get_value<double>();
             if(key.first=="Rz") this->_inputStruct->R(2,2)=key.second.get_value<double>();
+            if(key.first=="scalefactor geometry") this->_inputStruct->scaleFactor=key.second.get_value<double>();
+
             }
         }
         else if(section.first=="general")
@@ -176,12 +188,17 @@ int inputParser::readInput()
                 {
                 this->_inputStruct->globalVL=key.second.get_value<int>();
                 }
+            if(key.first=="smoothing iterations")
+                {
+                this->_inputStruct->smoothingIterations=key.second.get_value<int>();
+                }
             }
         }
     this->_inputStruct->prodS=arma::prod(this->_inputStruct->S);
 
     }
 
+    myFunctions::cassert(((this->_inputStruct->smoothingIterations>0)),ISCRITICAL,"inputParser: smoothig iterations parameter in section general not set!",__FILE__,__LINE__);
     myFunctions::cassert(((this->_inputStruct->Z>0) && (this->_inputStruct->Z<1000)),ISCRITICAL,"inputParser: Z out of bounds!",__FILE__,__LINE__);
     myFunctions::cassert(((this->_inputStruct->number_of_wavefunctions>0) && (this->_inputStruct->number_of_wavefunctions<500)),
     ISCRITICAL,"inputParser: number of electrons out of bounds!",__FILE__,__LINE__);
@@ -190,6 +207,11 @@ int inputParser::readInput()
     cout << "The system has " << this->_inputStruct->number_of_wavefunctions << " electrons!" << endl;
     cout << "We compute " << this->_inputStruct->sdNit << " iterations with steepest descent optimizer!" << endl;
     cout << "We compute " << this->_inputStruct->pccgNit << " iterations with conjugate gradient optimizer!" << endl;
+
+    cout << " now we scale the coordinates " << endl;
+
+    this->_inputStruct->R*=this->_inputStruct->scaleFactor;
+
 
     return 0;
 }

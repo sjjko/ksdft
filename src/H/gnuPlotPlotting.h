@@ -1,10 +1,15 @@
 #ifndef GNUPLOTPLOTTING_H
 #define GNUPLOTPLOTTING_H
 
+
+/*! formatted output of matrix data for postprocessing with plotScript.sh (using gnuplot)
+*/
+
 #include "main.h"
 #include "customAssert.h"
 #include "slice.h"
 #include "structs.h"
+#include "smooth.h"
 
 using namespace std;
 

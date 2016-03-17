@@ -4,7 +4,7 @@
 #include <armadillo>
 #include "latexComment.h"
 
-///inverse Laplacian
+//! The inverse Laplace operator class
 /** Linv: compute the Laplacian of a number N of wavefunction coefficients */
 
 class Linv

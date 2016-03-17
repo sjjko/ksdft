@@ -11,7 +11,7 @@ arma::cx_mat pccgOptimizer::K(const arma::cx_mat Wi)
     arma::cx_mat Wout(Wi);
     arma::mat ones(_G2);
     ones.fill(1.);
-    for(int i=0;i<Wout.n_cols;i++)
+    for(int i=0;i<(int)Wout.n_cols;i++)
     {
         Wout.col(i)=(ones/(ones+this->_G2)%(Wout.col(i)));
     }

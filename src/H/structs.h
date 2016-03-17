@@ -35,6 +35,8 @@ struct paramStruct
     int globalVL; //!< global verbosity level
     double prodS;
     string caseName;
+    int smoothingIterations;
+    double scaleFactor; //! multiply dimensions of net and X coordinates by this factor
 };
 
 struct operatorStruct

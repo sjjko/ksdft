@@ -53,22 +53,33 @@ std::string gnuPlotPlotting::plotAMatrixSlice(paramStruct Pa,string title,arma::
 
     arma::mat TmpMat;
     myFunctions::cassert(sliceIndex<3 && sliceIndex>-1,ISCRITICAL,"gnuPlotPlotting::plotAMatrixSlice: sliceIndex out of range",__FILE__,__LINE__);
-    verbosity(Pa,"gnuPlotPlotting::set sliceIndex plane"+std::to_string(sliceIndex),2,__FILE__,__LINE__);
+    verbosity(Pa,"gnuPlotPlotting::plotAMatrixSlice set sliceIndex plane"+std::to_string(sliceIndex),2,__FILE__,__LINE__);
     if(sliceIndex==0)
     {
     _nameOfActualPlane="yz";
     }
     else if(sliceIndex==1) {_nameOfActualPlane="xz";}
     else if(sliceIndex==2) {_nameOfActualPlane="xy";}
-    verbosity(Pa,"gnuPlotPlotting::set sliceIndex plane finished",2,__FILE__,__LINE__);
-    verbosity(Pa,"gnuPlotPlotting::now slice the matrix",2,__FILE__,__LINE__);
+    verbosity(Pa,"gnuPlotPlotting::plotAMatrixSlice set sliceIndex plane finished",2,__FILE__,__LINE__);
+    verbosity(Pa,"gnuPlotPlotting::plotAMatrixSlice now slice the matrix",2,__FILE__,__LINE__);
     TmpMat=myFunctions::slice(Pa,matrixToPlot,S,S(sliceIndex)/2.,sliceIndex);
     string fileName;
     fileName = title +"_"+ _nameOfActualPlane +".2dMat";
     verbosity(Pa,"gnuPlotPlotting::now output into file stream",2,__FILE__,__LINE__);
 
+    verbosity(Pa,"gnuPlotPlotting:: plotAMatrixSlice now smooth the output data",2,__FILE__,__LINE__);
+
+
+    //mat smoothedMat(smooth(Pa,TmpMat));
+    mat TmpIntermediateMat(TmpMat);
+    for(int sI=0;sI<Pa.smoothingIterations;sI++)
+    {
+    mat smoothedTmpMat(smooth(Pa,TmpIntermediateMat));
+    TmpIntermediateMat=smoothedTmpMat;
+    }
+
     ofstream of(fileName);
-    of << TmpMat << endl;
+    of << TmpIntermediateMat << endl;
     of.close();
 
     string returnString=title +"_"+ _nameOfActualPlane;

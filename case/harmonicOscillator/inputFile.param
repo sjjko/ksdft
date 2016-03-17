@@ -9,10 +9,12 @@ Nz=30
 Rx=6
 Ry=6
 Rz=6
+scalefactor geometry=1
 [numerical]
 alpha=3e-5
-no. iterations steepest descent=50
-no. iterations conjugate gradient=200
+no. iterations steepest descent=300
+no. iterations conjugate gradient=0
 number of electrons (wavefunctions)=4
 [general]
-VerbosityLevel=1
+VerbosityLevel=2
+smoothing iterations=3

@@ -212,31 +212,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
 <p>&lt; set alpha step parameter </p>
 
 <p>Definition at line <a class="el" href="sd_optimizer_8cpp_source.html#l00090">90</a> of file <a class="el" href="sd_optimizer_8cpp_source.html">sdOptimizer.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;:<a class="code" href="classoptimize_base.html#acb685ee2a3343f714f87beb03abab365">optimizeBase</a>(Operator,Parameter,Vdual)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{<span class="comment"></span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    //! \brief initialize the steepest descent method class</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    //!</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    //! \param Operator: operators used, in one struct</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    //! \param Parameter: parameters used, in one struct</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    //! \param Vdual: the ion potential matrix in real space</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    //! \param ltX: global latex class</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">//    this-&gt;_Nit=Parameter.Nit; //!&lt; set number of iterations for sd</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    this-&gt;_alpha=Parameter.<a class="code" href="structparam_struct.html#a08df4faf751352f632ff21a963de7846">alpha</a>; <span class="comment">//!&lt; set alpha step parameter</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"></span>    cout &lt;&lt; <span class="stringliteral">&quot;sd: intialize: Nit &quot;</span> &lt;&lt; _sdNit &lt;&lt; <span class="stringliteral">&quot; alpha: &quot;</span> &lt;&lt; _alpha &lt;&lt; endl;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">myLatexClass</a>=ltX;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    std::string myFunctionString=<span class="stringliteral">&quot; \\textbf{\\large{}steepest descent solution method class} \\newline &quot;</span>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">myLatexClass</a>-&gt;<a class="code" href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">setMyFunctionString</a>(myFunctionString);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
-<div class="ttc" id="classlatex_comment_html_a5886c955858e04709e325b19e56b87a7"><div class="ttname"><a href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">latexComment::setMyFunctionString</a></div><div class="ttdeci">void setMyFunctionString(std::string inputString)</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00048">latexComment.h:48</a></div></div>
-<div class="ttc" id="classoptimize_base_html_acb685ee2a3343f714f87beb03abab365"><div class="ttname"><a href="classoptimize_base.html#acb685ee2a3343f714f87beb03abab365">optimizeBase::optimizeBase</a></div><div class="ttdeci">optimizeBase(const operatorStruct Operator, const paramStruct Parameter, const arma::mat Vdual)</div><div class="ttdoc">The constructor. </div><div class="ttdef"><b>Definition:</b> <a href="optimizer_base_8h_source.html#l00024">optimizerBase.h:24</a></div></div>
-<div class="ttc" id="structparam_struct_html_a08df4faf751352f632ff21a963de7846"><div class="ttname"><a href="structparam_struct.html#a08df4faf751352f632ff21a963de7846">paramStruct::alpha</a></div><div class="ttdeci">double alpha</div><div class="ttdoc">step parameter for steepest descent method </div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00123">dualPotential.cpp:123</a></div></div>
-<div class="ttc" id="classsd_optimizer_html_ad83b50717e118863ced681c92f64b28d"><div class="ttname"><a href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">sdOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="sd_optimizer_8h_source.html#l00018">sdOptimizer.h:18</a></div></div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -285,74 +261,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
 <p>Reimplemented from <a class="el" href="classoptimize_base.html">optimizeBase</a>.</p>
 
 <p>Definition at line <a class="el" href="sd_optimizer_8cpp_source.html#l00025">25</a> of file <a class="el" href="sd_optimizer_8cpp_source.html">sdOptimizer.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    //! \brief steepest descent optimize function</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    //!</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    //! \param Niterations: number of iterations to take</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    //! \param Wi: input wavefunction, complex, prod(S)*number_of_wavefunctions components</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::string myFunctionString=<span class="stringliteral">&quot; start of the steepest descent method \\newline &quot;</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    verbosity(_Param,<span class="stringliteral">&quot;optimize Niterations: we do an optimization for &quot;</span>+std::to_string(Niterations)+<span class="stringliteral">&quot; steps!&quot;</span>,2,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">double</span> E;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">//first we orthogonalize</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    verbosity(_Param,<span class="stringliteral">&quot;first set up the wavefunction&quot;</span>,2,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    myFunctionString+=<span class="stringliteral">&quot; start of the steepest descent method \\newline &quot;</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    myFunctionString+=<span class="stringliteral">&quot; orthogonalize the wavefunction $W_{m}$ \\newline &quot;</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    myFunctionString+=<span class="stringliteral">&quot; $W=W \sqrt(W^{t}(O(W)))^{-1}$ \\newline &quot;</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    this-&gt;<a class="code" href="classoptimize_base.html#a82611f23cca0ff951d44dbcd7d9eb8c5">setup</a>(Wi);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    verbosity(_Param,<span class="stringliteral">&quot;calculate the initial electronic configuration energy of the system&quot;</span>,2,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    myFunctionString+=<span class="stringliteral">&quot; compute the current energy of the system  \\newline &quot;</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    myFunctionString+=getELatex(); <span class="comment">//!&lt; get the latex description of the getE energy computation function</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">double</span> E0=getE(this-&gt;_Op,this-&gt;_Param,*Wi.get(),this-&gt;_Vdual);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span> n=1;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    verbosity(_Param,<span class="stringliteral">&quot;now do the sd optimization loop!&quot;</span>,2,__FILE__,__LINE__);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">while</span>(n&lt;Niterations)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">if</span>(n==1) myFunctionString+=getgradLatex(); <span class="comment">//!&lt; get the latex description of the getgrad energy gradient computation function</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span>            arma::cx_mat g0=getgrad(this-&gt;_Op,this-&gt;_Param,*Wi.get(),this-&gt;_Vdual);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">if</span>(n==1) myFunctionString+=<span class="stringliteral">&quot; now update the wavefunction by descending by alpha = &quot;</span> + std::to_string(this-&gt;_Param.<a class="code" href="structparam_struct.html#a08df4faf751352f632ff21a963de7846">alpha</a>) + <span class="stringliteral">&quot; \\newline &quot;</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">if</span>(n==1) myFunctionString+=<span class="stringliteral">&quot; $W=W-\\alpha \\nabla_{W} E$ \\newline &quot;</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            *Wi=*Wi-this-&gt;_alpha*g0;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">if</span>(n==1) myFunctionString+=<span class="stringliteral">&quot; recalculate the energy \\newline &quot;</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            E=getE(this-&gt;_Op,this-&gt;_Param,*Wi,this-&gt;_Vdual);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;====================================&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;sd: step &quot;</span> &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot; of &quot;</span> &lt;&lt; Niterations &lt;&lt; endl;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;sd: energy is:&quot;</span> &lt;&lt; E &lt;&lt; endl;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;sd: energy change is:&quot;</span> &lt;&lt; (E-E0)/E0 &lt;&lt; endl;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;====================================&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">if</span>(n==1) myFunctionString+=<span class="stringliteral">&quot; \\subsubsection{  start the sd descent } &quot;</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordflow">if</span>(n==(Niterations-1))</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                myFunctionString+=<span class="stringliteral">&quot; after&quot;</span> + std::to_string(n) + <span class="stringliteral">&quot; steps &quot;</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                myFunctionString+=<span class="stringliteral">&quot; we have computed an energy of &quot;</span> + std::to_string(E) + <span class="stringliteral">&quot; hartree!&quot;</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            E0=E;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            n++;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">myLatexClass</a>-&gt;<a class="code" href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">setMyFunctionString</a>(myFunctionString);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;sd: final energy after &quot;</span> &lt;&lt; Niterations &lt;&lt; <span class="stringliteral">&quot; iterations is:&quot;</span> &lt;&lt; E &lt;&lt; endl;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> E;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
-<div class="ttc" id="classlatex_comment_html_a5886c955858e04709e325b19e56b87a7"><div class="ttname"><a href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">latexComment::setMyFunctionString</a></div><div class="ttdeci">void setMyFunctionString(std::string inputString)</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00048">latexComment.h:48</a></div></div>
-<div class="ttc" id="classoptimize_base_html_a82611f23cca0ff951d44dbcd7d9eb8c5"><div class="ttname"><a href="classoptimize_base.html#a82611f23cca0ff951d44dbcd7d9eb8c5">optimizeBase::setup</a></div><div class="ttdeci">virtual int setup()</div><div class="ttdoc">Laplace operator for input of values. </div><div class="ttdef"><b>Definition:</b> <a href="optimizer_base_8h_source.html#l00037">optimizerBase.h:37</a></div></div>
-<div class="ttc" id="structparam_struct_html_a08df4faf751352f632ff21a963de7846"><div class="ttname"><a href="structparam_struct.html#a08df4faf751352f632ff21a963de7846">paramStruct::alpha</a></div><div class="ttdeci">double alpha</div><div class="ttdoc">step parameter for steepest descent method </div><div class="ttdef"><b>Definition:</b> <a href="dual_potential_8cpp_source.html#l00123">dualPotential.cpp:123</a></div></div>
-<div class="ttc" id="classsd_optimizer_html_ad83b50717e118863ced681c92f64b28d"><div class="ttname"><a href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">sdOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="sd_optimizer_8h_source.html#l00018">sdOptimizer.h:18</a></div></div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <a class="anchor" id="a8168978b3115c2f6dfcdcd413b48b61f"></a>
@@ -385,22 +294,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
 </dl>
 
 <p>Definition at line <a class="el" href="sd_optimizer_8cpp_source.html#l00003">3</a> of file <a class="el" href="sd_optimizer_8cpp_source.html">sdOptimizer.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    //! \brief orthogonalize the input wavefunction matrix</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    //!</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">    //! \param Wi: input wavefunction matrix, complex, prod(S)*number_of_wavefunctions components</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">    //! computes $W \sqrt(W^{t}(O(W)))^{-1}$, where the square root acts component wise and $W^{t}(O(W))$</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">    //! is the integral value of each $\(\alpha,\beta\)$ component of the wavefunction</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span>    std::string myFunctionString=<span class="stringliteral">&quot; orthogonalize the wavefunction $W_{\\perp}=W \\sqrt(W^{t}(O(W)))^{-1}$ \\newline &quot;</span>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    this-&gt;orthogonalizeWfunc(Wi); <span class="comment">//orthogonalize W and return in W</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">myLatexClass</a>-&gt;<a class="code" href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">setMyFunctionString</a>(myFunctionString);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
-<div class="ttc" id="classlatex_comment_html_a5886c955858e04709e325b19e56b87a7"><div class="ttname"><a href="classlatex_comment.html#a5886c955858e04709e325b19e56b87a7">latexComment::setMyFunctionString</a></div><div class="ttdeci">void setMyFunctionString(std::string inputString)</div><div class="ttdoc">used by classes to return their latex description </div><div class="ttdef"><b>Definition:</b> <a href="latex_comment_8h_source.html#l00048">latexComment.h:48</a></div></div>
-<div class="ttc" id="classsd_optimizer_html_ad83b50717e118863ced681c92f64b28d"><div class="ttname"><a href="classsd_optimizer.html#ad83b50717e118863ced681c92f64b28d">sdOptimizer::myLatexClass</a></div><div class="ttdeci">latexComment * myLatexClass</div><div class="ttdoc">public latex class, to be initialized in construction - used to give latex output stream ...</div><div class="ttdef"><b>Definition:</b> <a href="sd_optimizer_8h_source.html#l00018">sdOptimizer.h:18</a></div></div>
-</div><!-- fragment -->
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -410,7 +304,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>_pccgNit</b></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 9 2016 10:16:22 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 10 2016 10:33:04 for ksdft++ by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>
