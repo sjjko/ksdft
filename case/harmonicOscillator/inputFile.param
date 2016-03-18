@@ -4,7 +4,7 @@ f=1
 atomic coordinates filename=./atoms.param
 [geometry]
 Nx=20
-Ny=25
+Ny=24
 Nz=30
 Rx=6
 Ry=6
@@ -16,5 +16,5 @@ no. iterations steepest descent=300
 no. iterations conjugate gradient=0
 number of electrons (wavefunctions)=4
 [general]
-VerbosityLevel=2
+VerbosityLevel=3
 smoothing iterations=3

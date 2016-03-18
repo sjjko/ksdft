@@ -57,7 +57,7 @@ mat mat_center_of_cell,const arma::cx_mat Sf,arma::mat X,arma::Mat<double> G2)
 
         //Wm=arma::randu<arma::cx_mat>(prodS,Pa.number_of_wavefunctions);
         //std::shared_ptr<arma::cx_mat> W(&Wm);
-        std::shared_ptr<arma::cx_mat> W(new arma::cx_mat(arma::randn<arma::cx_mat>(Pa.prodS,Pa.number_of_wavefunctions)));
+        std::shared_ptr<arma::cx_mat> W(new arma::cx_mat(arma::randn<arma::cx_mat>(Pa.numberOfActiveIndices,Pa.number_of_wavefunctions)));
 
         #endif
         #define SCHROEDINGER_DO_SD

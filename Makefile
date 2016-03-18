@@ -15,7 +15,7 @@ INC = -I src/H -I /usr/local/include/armadillo_bits -I /usr/include
 CFLAGS = -Wall -fexceptions -std=c++11
 RESINC = 
 LIBDIR = 
-LIB = -ldl /usr/local/lib/libarmadillo.so.6.500.5 /usr/lib/libfftw.so  -lboost_iostreams -lboost_system -lboost_filesystem 
+LIB = -ldl /usr/local/lib/libarmadillo.so.6.500.5 /usr/lib/libfftw.so  -lboost_iostreams -lboost_system -lboost_filesystem -lboost_timer
 LDFLAGS = 
 
 INC_DEBUG = $(INC) -I src/H
@@ -29,7 +29,7 @@ OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
 OUT_DEBUG = bin/Debug/ksdft++
 INC_RELEASE = $(INC) -I src/H
-CFLAGS_RELEASE = $(CFLAGS) -O3
+CFLAGS_RELEASE = $(CFLAGS) -O2
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
 LIBDIR_RELEASE = $(LIBDIR)
@@ -39,9 +39,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/ksdft++
 
-OBJ_DEBUG =  $(OBJDIR_DEBUG)/src/C/Linv.o $(OBJDIR_DEBUG)/src/C/O.o $(OBJDIR_DEBUG)/src/C/atomicSystem.o $(OBJDIR_DEBUG)/src/C/cI.o $(OBJDIR_DEBUG)/src/C/cIdag.o $(OBJDIR_DEBUG)/src/C/cJ.o $(OBJDIR_DEBUG)/src/C/cJdag.o $(OBJDIR_DEBUG)/src/C/gnuPlotPlotting.o $(OBJDIR_DEBUG)/src/C/inputParser.o $(OBJDIR_DEBUG)/src/C/ionicPotentialClass.o $(OBJDIR_DEBUG)/src/C/latexComment.o $(OBJDIR_DEBUG)/src/C/main.o $(OBJDIR_DEBUG)/src/C/L.o $(OBJDIR_DEBUG)/src/C/pccgOptimizer.o $(OBJDIR_DEBUG)/src/C/sdOptimizer.o $(OBJDIR_DEBUG)/src/C/testingClass.o
+OBJ_DEBUG =  $(OBJDIR_DEBUG)/src/C/Linv.o $(OBJDIR_DEBUG)/src/C/O.o $(OBJDIR_DEBUG)/src/C/atomicSystem.o $(OBJDIR_DEBUG)/src/C/cI.o $(OBJDIR_DEBUG)/src/C/cIdag.o $(OBJDIR_DEBUG)/src/C/cJ.o $(OBJDIR_DEBUG)/src/C/cJdag.o $(OBJDIR_DEBUG)/src/C/gnuPlotPlotting.o $(OBJDIR_DEBUG)/src/C/inputParser.o $(OBJDIR_DEBUG)/src/C/ionicPotentialClass.o $(OBJDIR_DEBUG)/src/C/latexComment.o $(OBJDIR_DEBUG)/src/C/main.o $(OBJDIR_DEBUG)/src/C/L.o $(OBJDIR_DEBUG)/src/C/pccgOptimizer.o $(OBJDIR_DEBUG)/src/C/sdOptimizer.o $(OBJDIR_DEBUG)/src/C/testingClass.o $(OBJDIR_RELEASE)/src/C/timerClass.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/src/C/Linv.o $(OBJDIR_RELEASE)/src/C/O.o $(OBJDIR_RELEASE)/src/C/atomicSystem.o $(OBJDIR_RELEASE)/src/C/cI.o $(OBJDIR_RELEASE)/src/C/cIdag.o $(OBJDIR_RELEASE)/src/C/cJ.o $(OBJDIR_RELEASE)/src/C/cJdag.o $(OBJDIR_RELEASE)/src/C/gnuPlotPlotting.o $(OBJDIR_RELEASE)/src/C/inputParser.o $(OBJDIR_RELEASE)/src/C/ionicPotentialClass.o $(OBJDIR_RELEASE)/src/C/latexComment.o $(OBJDIR_RELEASE)/src/C/main.o $(OBJDIR_RELEASE)/src/C/L.o $(OBJDIR_RELEASE)/src/C/pccgOptimizer.o $(OBJDIR_RELEASE)/src/C/sdOptimizer.o $(OBJDIR_RELEASE)/src/C/testingClass.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/src/C/Linv.o $(OBJDIR_RELEASE)/src/C/O.o $(OBJDIR_RELEASE)/src/C/atomicSystem.o $(OBJDIR_RELEASE)/src/C/cI.o $(OBJDIR_RELEASE)/src/C/cIdag.o $(OBJDIR_RELEASE)/src/C/cJ.o $(OBJDIR_RELEASE)/src/C/cJdag.o $(OBJDIR_RELEASE)/src/C/gnuPlotPlotting.o $(OBJDIR_RELEASE)/src/C/inputParser.o $(OBJDIR_RELEASE)/src/C/ionicPotentialClass.o $(OBJDIR_RELEASE)/src/C/latexComment.o $(OBJDIR_RELEASE)/src/C/main.o $(OBJDIR_RELEASE)/src/C/L.o $(OBJDIR_RELEASE)/src/C/pccgOptimizer.o $(OBJDIR_RELEASE)/src/C/sdOptimizer.o $(OBJDIR_RELEASE)/src/C/testingClass.o  $(OBJDIR_RELEASE)/src/C/timerClass.o
 
 all: debug release
 
@@ -170,6 +170,9 @@ $(OBJDIR_RELEASE)/src/C/sdOptimizer.o: src/C/sdOptimizer.cpp
 
 $(OBJDIR_RELEASE)/src/C/testingClass.o: src/C/testingClass.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/C/testingClass.cpp -o $(OBJDIR_RELEASE)/src/C/testingClass.o
+
+$(OBJDIR_RELEASE)/src/C/timerClass.o: src/C/timerClass.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c src/C/timerClass.cpp -o $(OBJDIR_RELEASE)/src/C/timerClass.o
 
 clean_release: 
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)

@@ -28,6 +28,7 @@
     #include <sys/stat.h>
 #endif
 #include "latexComment.h"
+#include "structs.h"
 #include "O.h"
 #include "L.h"
 #include "Linv.h"
@@ -42,7 +43,6 @@
 #include "smooth.h"
 #include "ppm.h"
 #include <typeinfo>
-#include "structs.h"
 #include "inputParser.h"
 #include "JItest.h"
 #include "slice.h"
@@ -53,14 +53,13 @@
 using namespace std;
 using namespace arma;
 
+
 int main(int argc, char** argv)
 {
+
 paramStruct Pa;
-
-
-
-
-
+timerClass tC=timerClass(Pa);
+  boost::timer::auto_cpu_timer t;
 
 #include "inputArguments.h"
 
@@ -114,6 +113,7 @@ verbosity(Pa,"Read Input Parameters!",2,__FILE__,__LINE__);
 #endif
 
 
+
 verbosity(Pa,"For reasons of practicality we read X rowwise, but compute now columnwise - take transpose of Xt to get X! ",1,__FILE__,__LINE__);
 
 #ifdef WITH_TEX
@@ -137,15 +137,15 @@ std::shared_ptr<OOp> Oclass(new OOp(Pa.R,&latX));
     latX.startItemize();
     Oclass.get()->myLatexClass->commentMyFunctionAsItem();
 #endif
-std::shared_ptr<Lop> Lclass(new Lop(G2,Pa.R,Pa.number_of_wavefunctions,&latX));
+std::shared_ptr<Lop> Lclass(new Lop(G2,G2comp,Pa.R,Pa.number_of_wavefunctions,&latX));
 Lclass.get()->myLatexClass->commentMyFunctionAsItem();
 std::shared_ptr<Linv> Liclass(new Linv(G2,Pa.R,Pa.number_of_wavefunctions,&latX));
 Liclass.get()->myLatexClass->commentMyFunctionAsItem();
 std::shared_ptr<cJ> cJclass(new cJ(Pa.S,Pa.number_of_wavefunctions,&latX));
 cJclass.get()->myLatexClass->commentMyFunctionAsItem();
-std::shared_ptr<cI> cIclass(new cI(Pa.S,Pa.number_of_wavefunctions,&latX));
+std::shared_ptr<cI> cIclass(new cI(Pa,Pa.S,Pa.number_of_wavefunctions,&latX));
 cIclass.get()->myLatexClass->commentMyFunctionAsItem();
-std::shared_ptr<cIdag> cIdagclass(new cIdag(Pa.S,Pa.number_of_wavefunctions,&latX));
+std::shared_ptr<cIdag> cIdagclass(new cIdag(Pa,Pa.S,Pa.number_of_wavefunctions,&latX));
 cIdagclass.get()->myLatexClass->commentMyFunctionAsItem();
 std::shared_ptr<cJdag> cJdagclass(new cJdag(Pa.S,Pa.number_of_wavefunctions,&latX));
 cJdagclass.get()->myLatexClass->commentMyFunctionAsItem();
@@ -182,7 +182,7 @@ ts->testEwald(Op,Pa,Pa.S,Pa.R,r,mat_center_of_cell,Sf,X);
 ts->testHermitian(Op,Pa,Pa.S,Pa.R,r,mat_center_of_cell,Sf,X);
 ts->testMultiColumn(Op,Pa,Pa.S,Pa.R,r,mat_center_of_cell,Sf,X);
 ts->testDiagOuter();
-ts->testSchroedinger(Op,Pa,Pa.S,Pa.R,r,mat_center_of_cell,Sf,X,G2);
+ts->testSchroedinger(Op,Pa,Pa.S,Pa.R,r,mat_center_of_cell,Sf,X,G2comp);
 verbosity(Pa,"Finished testing - dump the class instance!",0,__FILE__,__LINE__);
 delete ts;
 #endif
@@ -200,6 +200,7 @@ atm.setupWavefunction();
 verbosity(Pa,"main: setup optimizers",1,__FILE__,__LINE__);
 atm.setupOptimizers();
 verbosity(Pa,"main: solve and retrieve the final Solution per string",1,__FILE__,__LINE__);
+
 string finalSolution = atm.solveIt();
 verbosity(Pa,"main: do postprocessing",1,__FILE__,__LINE__);
 finalSolution += atm.doPostProcessing("final density after mininimizing the energy functional","final");

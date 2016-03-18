@@ -12,9 +12,9 @@ Rz=1
 scalefactor geometry=10.68
 [numerical]
 alpha=3e-5
-no. iterations steepest descent=70
-no. iterations conjugate gradient=0
+no. iterations steepest descent=50
+no. iterations conjugate gradient=222
 number of electrons (wavefunctions)=16
 [general]
 VerbosityLevel=1
-smoothing iterations=2
+smoothing iterations=3

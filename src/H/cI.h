@@ -7,15 +7,21 @@
  of quantities from fourier to real space
  */
 
+ #include "main.h"
 #include <armadillo>
 #include "latexComment.h"
+#include "structs.h"
+#include "customAssert.h"
+
+class paramStruct;
 
 class cI
     {
     public:
         latexComment *myLatexClass; //!< public latex class, to be initialized in construction - used to give latex output stream
+        paramStruct *_Pa;
 
-        cI(arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
+        cI(paramStruct Pa, arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
 		//! The constructor
 		/*!
 		 \param Sinp vector containing the number of latticepoints along each dimension
@@ -28,6 +34,8 @@ class cI
         arma::Col<double> _S;
         //checkOperatorSize<T> *_checkPointer;
         arma::cx_mat _outputM;
+        uvec _uv;
+        cx_mat _full;
 };
 
 

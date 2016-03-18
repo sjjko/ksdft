@@ -124,6 +124,50 @@ latX.newLine(" $ G2 = G^{2}$ ");
 arma::Mat<double> G2;
 G2=arma::sum(G%G,1);
 
+
+
+for(int i=0;i<diagS.n_rows;i++)
+{
+double remainder = diagS(i,i)-2.*floor(diagS(i,i)/2.);
+if(remainder!=0.0)
+{
+cout << "in dimension " << (i+1) << " we have an uneven number of gridpoints - error!" << endl;
+return -1;
+}
+}
+
+verbosity(Pa,"compute compressed G2",2,__FILE__,__LINE__);
+
+mat eS=Pa.S/2+0.5;
+
+verbosity(Pa,"Mreduced first",2,__FILE__,__LINE__);
+
+mat Mreduced = abs(M-arma::ones(M.n_rows,1)*eS.t());
+
+verbosity(Pa,"find edges",2,__FILE__,__LINE__);
+
+uvec edges=find(any(Mreduced<1,1));
+
+verbosity(Pa,"get minimal element",2,__FILE__,__LINE__);
+
+//find maximum element for reducing elements in G2
+double G2mx=min(G2(edges));
+
+verbosity(Pa,"get active indices",2,__FILE__,__LINE__);
+
+uvec activeIndices=find(G2<G2mx/4.);
+Pa.activeIndices=activeIndices;
+Pa.activeIndicesPtr=&activeIndices;
+
+Pa.numberOfActiveIndices=activeIndices.n_elem;
+//store compressed G2 in G2 compressed!
+
+verbosity(Pa,"retrieve G2 compressed",2,__FILE__,__LINE__);
+
+mat G2comp=G2(activeIndices);
+
+
+
 verbosity(Pa,"now compute the structure factor",2,__FILE__,__LINE__);
 
 verbosity(Pa,"Compute structure factor using G: "+std::to_string(G.n_rows)+" x "+std::to_string(G.n_cols),2,__FILE__,__LINE__);

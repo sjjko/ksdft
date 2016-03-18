@@ -1,11 +1,14 @@
 # depslib dependency file v1.0
-1456422979 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cI.cpp
+1458273613 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cI.cpp
 	"cI.h"
 	"fft_minidft.h"
 
-1457622398 /home/kos/Code/kos/minidft/ksdft++/src/H/cI.h
+1458273599 /home/kos/Code/kos/minidft/ksdft++/src/H/cI.h
+	"main.h"
 	<armadillo>
 	"latexComment.h"
+	"structs.h"
+	"customAssert.h"
 
 1457529883 /home/kos/Code/kos/minidft/ksdft++/src/H/latexComment.h
 	"main.h"
@@ -20,7 +23,7 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1458219823 /home/kos/Code/kos/minidft/ksdft++/src/H/main.h
+1458304871 /home/kos/Code/kos/minidft/ksdft++/src/H/main.h
 	<iostream>
 	<list>
 	<map>
@@ -33,6 +36,7 @@
 	<armadillo>
 	"fft_minidft.h"
 	<iomanip>
+	"timerClass.h"
 	"customAssert.h"
 	<boost/foreach.hpp>
 	<string>
@@ -47,13 +51,14 @@
 	"main.h"
 	"structs.h"
 
-1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cIdag.cpp
+1458274531 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cIdag.cpp
 	"cIdag.h"
 	"fft_minidft.h"
 
-1456802778 /home/kos/Code/kos/minidft/ksdft++/src/H/cIdag.h
+1458234759 /home/kos/Code/kos/minidft/ksdft++/src/H/cIdag.h
 	<armadillo>
 	"latexComment.h"
+	"structs.h"
 
 1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cJ.cpp
 	"cJ.h"
@@ -63,7 +68,7 @@
 	<armadillo>
 	"latexComment.h"
 
-1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cJdag.cpp
+1458235367 source:/home/kos/Code/kos/minidft/ksdft++/src/C/cJdag.cpp
 	"cJdag.h"
 	"fft_minidft.h"
 
@@ -96,7 +101,7 @@
 	"customAssert.h"
 	"armadillo"
 
-1458141219 /home/kos/Code/kos/minidft/ksdft++/src/H/structs.h
+1458233495 /home/kos/Code/kos/minidft/ksdft++/src/H/structs.h
 	"O.h"
 	"Linv.h"
 	"L.h"
@@ -114,11 +119,11 @@
 	<armadillo>
 	"latexComment.h"
 
-1456422208 /home/kos/Code/kos/minidft/ksdft++/src/H/L.h
+1458304408 /home/kos/Code/kos/minidft/ksdft++/src/H/L.h
 	"main.h"
 	"latexComment.h"
 
-1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/L.cpp
+1458304520 source:/home/kos/Code/kos/minidft/ksdft++/src/C/L.cpp
 	"L.h"
 
 1457535787 source:/home/kos/Code/kos/minidft/ksdft++/src/C/latexComment.cpp
@@ -127,12 +132,13 @@
 1456422181 source:/home/kos/Code/kos/minidft/ksdft++/src/C/Linv.cpp
 	"Linv.h"
 
-1458220349 source:/home/kos/Code/kos/minidft/ksdft++/src/C/main.cpp
+1458303910 source:/home/kos/Code/kos/minidft/ksdft++/src/C/main.cpp
 	"main.h"
 	<texcaller.h>
 	<sys/types.h>
 	<sys/stat.h>
 	"latexComment.h"
+	"structs.h"
 	"O.h"
 	"L.h"
 	"Linv.h"
@@ -147,7 +153,6 @@
 	"smooth.h"
 	"ppm.h"
 	<typeinfo>
-	"structs.h"
 	"inputParser.h"
 	"JItest.h"
 	"slice.h"
@@ -164,7 +169,7 @@
 	"customAssert.h"
 	"structs.h"
 
-1458220465 /home/kos/Code/kos/minidft/ksdft++/src/H/dft_functions.h
+1458303674 /home/kos/Code/kos/minidft/ksdft++/src/H/dft_functions.h
 	"main.h"
 	"excVWN.h"
 	"excpVWN.h"
@@ -233,7 +238,7 @@
 	<opencv2/highgui/highgui.hpp>
 	"structs.h"
 
-1456759155 /home/kos/Code/kos/minidft/ksdft++/src/H/setup.h
+1458233511 /home/kos/Code/kos/minidft/ksdft++/src/H/setup.h
 	"main.h"
 
 1456422209 /home/kos/Code/kos/minidft/ksdft++/src/H/fdtest.h
@@ -252,15 +257,15 @@
 1457650433 source:/home/kos/Code/kos/minidft/ksdft++/src/C/sdOptimizer.cpp
 	"sdOptimizer.h"
 
-1457529962 source:/home/kos/Code/kos/minidft/ksdft++/src/C/testingClass.cpp
+1458230080 source:/home/kos/Code/kos/minidft/ksdft++/src/C/testingClass.cpp
 	"testingClass.h"
 	"slice.h"
 	"smooth.h"
 
-1458215112 source:/home/kos/Code/kos/minidft/ksdft++/src/C/atomicSystem.cpp
+1458270170 source:/home/kos/Code/kos/minidft/ksdft++/src/C/atomicSystem.cpp
 	"atomicSystem.h"
 
-1457706906 /home/kos/Code/kos/minidft/ksdft++/src/H/atomicSystem.h
+1458224343 /home/kos/Code/kos/minidft/ksdft++/src/H/atomicSystem.h
 	"main.h"
 	"customAssert.h"
 	"pccgOptimizer.h"
@@ -281,8 +286,18 @@
 	"gnuPlotPlotting.h"
 	"dft_functions.h"
 
-1458143080 source:/home/kos/Code/kos/minidft/ksdft++/src/C/ionicPotentialClass.cpp
+1458234204 source:/home/kos/Code/kos/minidft/ksdft++/src/C/ionicPotentialClass.cpp
 	"ionicPotentialClass.h"
 
 1456623638 /home/kos/Code/kos/minidft/ksdft++/src/H/schroedinger.h
+
+1458265062 /home/kos/Code/kos/minidft/ksdft++/src/H/timerClass.h
+	<stdio.h>
+	<boost/timer/timer.hpp>
+	<cmath>
+	"customAssert.h"
+	"structs.h"
+
+1458265058 source:/home/kos/Code/kos/minidft/ksdft++/src/C/timerClass.cpp
+	"timerClass.h"
 

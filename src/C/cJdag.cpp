@@ -3,7 +3,7 @@
 
 cJdag::cJdag(arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX)//,checkOperatorSize<T> *chkPointer)
 {
-std::cout << "setup L class" << std::endl;
+std::cout << "setup cJdag class" << std::endl;
 
 this->_S=Sinp;
 this->_outputM=arma::cx_mat(arma::prod(this->_S),Numwavfunc);

@@ -147,7 +147,7 @@ if(_caseName=="harmonicOscillator" || _caseName=="quantumDot")
     }
 else if(_caseName=="Hatom" || _caseName=="Hmolecule")
     {
-    arma::mat Vps(_Pa.prodS,1,fill::zeros);
+    arma::mat Vps(_G2.n_rows,1,fill::zeros);
     Vps.col(0)=(-4.*arma::datum::pi*_Pa.Z/_G2);
     Vps(0)=0;
     this->_Vdual=real(*_Op.J*(Vps%_Sf));

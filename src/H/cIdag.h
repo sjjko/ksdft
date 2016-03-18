@@ -11,6 +11,9 @@ to real space
 //#include "main.h"
 #include <armadillo>
 #include "latexComment.h"
+#include "structs.h"
+
+class paramStruct;
 
 
 class cIdag
@@ -23,7 +26,7 @@ class cIdag
 		 \param Sinp a vector of dimensions of simulation domain
 		 \param Numwavfunc ... number of wavefunctions to use
 		 \param ltX ... pointer to latex class for documentation purposes */
-        cIdag(arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
+        cIdag(const paramStruct Pa,arma::Col<double> Sinp,int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
         ~cIdag();
 		//! Laplace operator for input of values
 		/*!
@@ -34,6 +37,8 @@ class cIdag
     private:
         arma::Col<double> _S;
         arma::cx_mat _outputM;
+        const paramStruct *_Pa;
+        uvec _uv;
 
 };
 

@@ -135,7 +135,7 @@ int atomicSystem::setupOptimizers()
     verbosity(_Pa,"atomicSystem::setupOptimizers documentation !",2,__FILE__,__LINE__);
     _sd->myLatexClass->commentMyFunction();
     verbosity(_Pa,"atomicSystem::setupOptimizers reset pccg and initialize new instance",2,__FILE__,__LINE__);
-    this->_pccg.reset (new pccgOptimizer(_Op,_Pa,_Vdual,_G2,_ltX));
+    this->_pccg.reset (new pccgOptimizer(_Op,_Pa,_Vdual,_G2comp,_ltX));
     verbosity(_Pa,"atomicSystem::setupOptimizers ouput pccg docu",2,__FILE__,__LINE__);
     this->_pccg->myLatexClass->commentMyFunction();
 };
@@ -226,7 +226,7 @@ atomicSystem::atomicSystem(operatorStruct Op,paramStruct Pa,gnuPlotPlotting *gpL
     this->_Op=Op;
     this->_mat_center_of_cell=arma::ones(_Pa.prodS,3);
     this->_ltX=latX;
-    this->_Vdual=arma::zeros(_Pa.prodS,1);
+    this->_Vdual; //=arma::zeros(_Pa.numberOfActiveIndices,1);
 
     _gpLT=gpLT;
 
@@ -334,6 +334,42 @@ _ltX->newLine(" $\\Pi_{k} S_{k} \\times 1 matrix$ ");
 _ltX->newLine(" $ G2 = G^{2}$ ");
 
 _G2=arma::sum(_G%_G,1);
+
+
+for(int i=0;i<diagS.n_rows;i++)
+{
+double remainder = diagS(i,i)-2.*floor(diagS(i,i)/2.);
+if(remainder!=0.0)
+{
+myFunctions::cassert(1<0,ISCRITICAL,"in dimension " + std::to_string(i+1) + " we have an uneven number of gridpoints - error!",__FILE__,__LINE__);
+}
+}
+
+verbosity(_Pa,"compute compressed G2",2,__FILE__,__LINE__);
+
+mat eS=_Pa.S/2+0.5;
+
+verbosity(_Pa,"Mreduced first",2,__FILE__,__LINE__);
+
+mat Mreduced = abs(M-arma::ones(M.n_rows,1)*eS.t());
+
+verbosity(_Pa,"find edges",2,__FILE__,__LINE__);
+
+uvec edges=find(any(Mreduced<1,1));
+
+verbosity(_Pa,"get minimal element",2,__FILE__,__LINE__);
+
+//find maximum element for reducing elements in G2
+double G2mx=min(_G2(edges));
+
+verbosity(_Pa,"get active indices",2,__FILE__,__LINE__);
+
+uvec activeIndices=find(_G2<G2mx/4.);
+//store compressed G2 in G2 compressed!
+
+verbosity(_Pa,"retrieve G2 compressed",2,__FILE__,__LINE__);
+
+_G2comp=_G2(activeIndices);
 
 verbosity(_Pa,"now compute the structure factor",2,__FILE__,__LINE__);
 
@@ -507,6 +543,6 @@ int atomicSystem::setupWavefunction()
 {
 //! \brief generate inital wavefunction as random values
 
-    _W.reset (new arma::cx_mat(arma::randn<arma::cx_mat>(_Pa.prodS,_Pa.number_of_wavefunctions)));
+    _W.reset (new arma::cx_mat(arma::randn<arma::cx_mat>(_Pa.numberOfActiveIndices,_Pa.number_of_wavefunctions)));
 
 }

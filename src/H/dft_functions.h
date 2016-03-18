@@ -193,12 +193,15 @@ const arma::cx_mat Ui,const arma::mat n)
     //arma::cx_mat Veff = Vdual+*O.Jd*(*O.O*phi)+*O.Jd*(*O.O*(*O.J*Exc)) + arma::diagmat(dExc)*(*O.Jd*(*O.O*(*O.J*n)));
     verbosity(P,"H: assemble and return H*W",2,__FILE__,__LINE__);
     cx_mat returnMatrix;
+        verbosity(P,"H:  now compute the hamiltonian ",2,__FILE__,__LINE__);
     #ifdef CALC_KIN_ONLY
     returnMatrix= -0.5*(*O.L*Wi);
     #else
         #ifdef CALC_KIN
+        verbosity(P,"H:  assemble kinetic and potential parts ",2,__FILE__,__LINE__);
         returnMatrix= -0.5*(*O.L*Wi)+*O.Id*(arma::diagmat(Veff)*(*O.I*Wi));
         #else
+
         returnMatrix= *O.Id*(arma::diagmat(Veff)*(*O.I*Wi));
         //returnMatrix= *O.Id*(Veff*(*O.I*Wi));
         #endif

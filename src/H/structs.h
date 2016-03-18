@@ -34,9 +34,12 @@ struct paramStruct
     int pccgNit; //!< number of iterations conjugate gradient
     int globalVL; //!< global verbosity level
     double prodS;
+    double numberOfActiveIndices;
     string caseName;
     int smoothingIterations;
     double scaleFactor; //! multiply dimensions of net and X coordinates by this factor
+    uvec *activeIndicesPtr;
+    uvec activeIndices;
 };
 
 struct operatorStruct

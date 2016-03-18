@@ -35,7 +35,7 @@
     #define CALC_VEE
     #define CALC_EXC
     #define CALC_EION
-    #define CALC_DEXC
+    #undef CALC_DEXC
 #ifdef FDTEST
     #undef CALC_KIN_ONLY
     #define CALC_KIN
@@ -61,6 +61,8 @@
 #include "fft_minidft.h"
 //#include "silo.h"
 #include <iomanip>  // needed to use manipulators with parameters (precision, width)
+#include "timerClass.h"
+
 
 #include "customAssert.h"
 

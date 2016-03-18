@@ -18,7 +18,7 @@ class Lop //: public latexComment
     public:
 
         latexComment *myLatexClass; //!< public latex class, to be initialized in construction - used to give latex output stream
-        Lop(const arma::mat G2inp,const arma::mat Rinp,const int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
+        Lop(const arma::Mat<double> G2inp,const arma::mat G2CompInp,const arma::mat Rinp,const int Numwavfunc,latexComment *ltX);//,checkOperatorSize<T> *chkPointer);
 		//! The constructor
 		/*!
 		 \param G2inp a vector of wave vector squared
@@ -37,7 +37,9 @@ class Lop //: public latexComment
         arma::mat _G2i;
         arma::mat _Ri;
         arma::mat _Faktor;
+        arma::mat _FaktorComp;
         arma::cx_mat _outputM;
+        int _noActiveIndices;
         //checkOperatorSize<T> *_checkPointer;
 
 //        std::auto_ptr<arma::mat> Rint;

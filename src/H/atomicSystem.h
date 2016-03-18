@@ -66,6 +66,7 @@ class atomicSystem
         mat _dr; //!< distance of computational cell from center: prodSx1 matrix
         mat _G; //!< wavenumber: prodSx3 matrix
         mat _G2; //!< squared wavenumber: prodSx1 matrix
+        mat _G2comp; //!< the compressed G2 matrix - stores only a quarter of G2
         mat _Xt; //!< the atomic coordinate matrix
         latexComment *_ltX; //!< pointer to global latex documentation class
         mat _X; //!< atomic coordinates matrix transposed

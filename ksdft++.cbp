@@ -14,7 +14,6 @@
 				<Option parameters="harmonicOscillator" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="include" />
 					<Add directory="src/H" />
 				</Compiler>
 			</Target>
@@ -56,6 +55,7 @@
 		<Unit filename="src/C/pccgOptimizer.cpp" />
 		<Unit filename="src/C/sdOptimizer.cpp" />
 		<Unit filename="src/C/testingClass.cpp" />
+		<Unit filename="src/C/timerClass.cpp" />
 		<Unit filename="src/H/H.h" />
 		<Unit filename="src/H/Hatoms.h" />
 		<Unit filename="src/H/L.h" />
@@ -95,6 +95,7 @@
 		<Unit filename="src/H/smooth.h" />
 		<Unit filename="src/H/structs.h" />
 		<Unit filename="src/H/testingClass.h" />
+		<Unit filename="src/H/timerClass.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
