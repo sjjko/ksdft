@@ -1,21 +1,9 @@
-/** \brief density functional theory code
+/** density functional theory code
  * devised after T. Arias lecture on dft for matlab
  * by Stefan Konzett Stoffl
  * 2015-2016
 
- uses following external libraries:
-
-      for matrix algebra:
- 	  armadillo (http://arma.sourceforge.net/) by Conrad Sanderson,[released under MPL], see below:
-	  (
-	  Conrad Sanderson.
-	  Armadillo: An Open Source C++ Linear Algebra Library for Fast Prototyping and Computationally Intensive Experiments.
-	  Technical Report, NICTA, 2010.
-	  )
-
-	  for the fast fourier transform:
-	  fftw (http://www.fftw.org)
-	  [released under the GNU General Public License]
+ for further info see http://sjjko.github.io/
  */
 
 #include "main.h"
@@ -215,12 +203,11 @@ verbosity(Pa,"Latex part:",2,__FILE__,__LINE__);
 #ifdef WITH_TEX
     std::ofstream latexStringFile("latex.tex");
     latX.closeString();
-    //latexStringFile.precision(2);
     latexStringFile << latX.getString() << endl;
     latexStringFile.close();
 #endif // WITH_TEX
 
-std::cout << "minidft++ is finished!" << std::endl;
+std::cout << "ksdft++ is finished!" << std::endl;
 
 return(0);
 }
